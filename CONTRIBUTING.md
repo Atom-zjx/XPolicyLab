@@ -55,9 +55,16 @@ Two more shared entry points, so adapters do not re-derive them: the importable 
 
 `model.py` never decodes images. The policy server decodes every observation it forwards, so `obs["vision"][<camera>]["color"]` is always a plain image array. This holds for `update_obs` / `update_obs_batch` and for any custom RPC a policy exposes that carries an observation, so an adapter with its own deploy loop still must not decode.
 
-In offline code — conversion scripts and training dataloaders that read trajectory files — **only `decode_image_bit` from `XPolicyLab.utils.process_data` is supported**. Never hand-roll `cv2.imdecode` / `np.frombuffer` / PIL decoding. Image bits carry some inconsistency from earlier data versions: a PIL-style decode returns reversed channels, and hand-rolled buffer handling breaks on the older layouts. Only this function covers every version and returns RGB. The README states the rule in [Standard Data Formats](README.md#decode-only-through-decode_image_bit).
+In offline code — conversion scripts and training dataloaders that read trajectory files — **only `decode_image_bit` from `XPolicyLab.utils.process_data` is supported**, and image bits that get written back out must come from its inverse, `encode_image_bit`. Never hand-roll `cv2.imdecode` / `np.frombuffer` / PIL decoding, and never write stored buffers with a bare `cv2.imencode`. The README states the rule in [Standard Data Formats](README.md#decode-only-through-decode_image_bit).
 
-Images are RGB end to end. `decode_image_bit` returns RGB — treat this as settled and do not re-derive it from the usual "OpenCV returns BGR" rule, which does not apply here: XPolicyLab buffers are encoded from RGB arrays, and `cv2.imencode` / `cv2.imdecode` move channels through JPEG in the order they were given, so the round trip is RGB in, RGB out. No channel conversion belongs in conversion, training, or eval code. Two exceptions: medium adapters — `COLOR_RGB2BGR` immediately before `cv2.VideoWriter.write(...)` and `COLOR_BGR2RGB` immediately after `cv2.VideoCapture.read()` — and a deliberate RGB→BGR conversion for a checkpoint trained on BGR data, which must be opt-in through a documented `deploy.yml` key that defaults to RGB (see `policy/Dexora_1B`'s `input_color_order`). A `cv2.cvtColor(decode_image_bit(...), COLOR_BGR2RGB)` anywhere means training and evaluation disagree on channel order.
+The reason is that stored image bits come in **two byte formats**, and only these two functions know the difference:
+
+- **legacy** — a JPEG written by handing an RGB array straight to `cv2.imencode`, which reads its input as BGR. The stored bytes are channel-reversed with respect to the JPEG standard, so `cv2.imdecode` reverses them a second time and returns the original RGB, while PIL, ffmpeg or a browser show red and blue swapped. Everything collected before the marker existed is this format, and it is never migrated: JPEG cannot swap channels losslessly.
+- **standard** — a conforming RGB JPEG written by `encode_image_bit`, carrying a JPEG `COM` segment with the payload `XPL-RGB1`. Every decoder skips an unknown `COM`, so the marker is free; PIL even surfaces it as `Image.open(...).info["comment"]`. `cv2.imdecode` returns BGR for these bytes, so decoding them owes exactly one swap.
+
+`decode_image_bit` reads the marker and returns RGB for both, which is why callers never swap. Images are RGB end to end, and a `cv2.cvtColor(decode_image_bit(...), COLOR_BGR2RGB)` is always a bug: the two formats are indistinguishable to the eye and from any single sample, so a caller-side swap is right on at most one of them and silently wrong on the other. That trap is easy to fall into — a PIL-based loader tested against fresh data looks perfect and then quietly corrupts older episodes.
+
+No channel conversion belongs in conversion, training, or eval code; only `utils/process_data.py`, which owns the format distinction, may convert. Two exceptions: medium adapters — `COLOR_RGB2BGR` immediately before `cv2.VideoWriter.write(...)` and `COLOR_BGR2RGB` immediately after `cv2.VideoCapture.read()` — and a deliberate RGB→BGR conversion for a checkpoint trained on BGR data, which must be opt-in through a documented `deploy.yml` key that defaults to RGB (see `policy/Dexora_1B`'s `input_color_order`).
 
 ### `deploy.yml`
 
@@ -111,11 +118,13 @@ bash -n policy/<POLICY>/*.sh
 python -m py_compile policy/<POLICY>/model.py policy/<POLICY>/deploy.py
 ```
 
-XPolicyLab data supports only `decode_image_bit` (README, [Standard Data Formats](README.md#decode-only-through-decode_image_bit)). The first grep must return nothing on adapter-owned conversion and training code; vendor files that never see XPolicyLab trajectories can be skipped, but a `cv2.imdecode` on those trajectories is a fail. The second grep surfaces channel swaps that need judging (medium adapters and a documented `input_color_order` are the only allowed hits):
+XPolicyLab data supports only `decode_image_bit` / `encode_image_bit` (README, [Standard Data Formats](README.md#decode-only-through-decode_image_bit)). The first grep must return nothing on adapter-owned conversion and training code; vendor files that never see XPolicyLab trajectories can be skipped, but a `cv2.imdecode` on those trajectories is a fail. The second grep catches image bits written without the format marker — a `cv2.imencode` whose output is stored or published is a fail, one whose output is decoded again in the same process is not. The third surfaces channel swaps that need judging (medium adapters and a documented `input_color_order` are the only allowed hits):
 
 ```bash
 # only decode_image_bit is supported
 grep -rnE 'cv2\.imdecode|np\.frombuffer|Image\.open' policy/<POLICY>/
+# stored buffers must come from encode_image_bit — judge each hit
+grep -rn 'cv2\.imencode' policy/<POLICY>/
 # channel swaps — judge each hit
 grep -rnE 'COLOR_BGR2RGB|COLOR_RGB2BGR|\.\.\., ::-1' policy/<POLICY>/
 ```
@@ -151,7 +160,7 @@ GitHub pre-fills this from [.github/PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUE
 ## Components
 - [ ] install.sh
 - [ ] model.py (+ __init__.py)
-- [ ] images: only decode_image_bit is supported (legacy layouts → RGB), no channel swaps (see README)
+- [ ] images: only decode_image_bit / encode_image_bit are supported (two byte formats → RGB), no channel swaps (see README)
 - [ ] deploy.yml (standard key set incl. protocol: ws / host / port, policy_name matches the directory)
 - [ ] deploy.py aligned with demo_policy (or divergence explained)
 - [ ] eval.sh + setup_eval_policy_server.sh + setup_eval_env_client.sh
@@ -160,7 +169,7 @@ GitHub pre-fills this from [.github/PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUE
 
 ## Testing
 - [ ] bash -n + py_compile pass
-- [ ] decode grep: only decode_image_bit on XPolicyLab data
+- [ ] decode/encode grep: only decode_image_bit and encode_image_bit on XPolicyLab data
 - [ ] EVAL_ENV_TYPE=debug closed loop passes (paste the log tail)
 - [ ] Simulator eval: task=..., success=... (if available)
 

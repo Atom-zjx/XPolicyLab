@@ -295,9 +295,18 @@ XPolicyLab standardizes the observation and trajectory dictionaries passed betwe
 
 ### Decode only through `decode_image_bit`
 
-> **Always decode through `decode_image_bit`.** Image bits carry some inconsistency from earlier data versions, so decoding them yourself is unsupported: a PIL-style decode hands back reversed channels, and hand-rolled `cv2.imdecode` / `np.frombuffer` handling trips over the older layouts. `decode_image_bit` from `XPolicyLab.utils.process_data` absorbs those differences and returns RGB for every version of the data, so its output never needs a channel swap. Offline conversion and training must go through it. Runtime observations arrive already decoded, so `model.py` must not decode at all.
+> **Always decode through `decode_image_bit`, and always encode through `encode_image_bit`.** Both live in `XPolicyLab.utils.process_data`. Decoding image bits yourself is unsupported, because they come in two byte formats and a hand-rolled decoder is right on one and reverses the channels on the other. `decode_image_bit` tells them apart and returns RGB for every version of the data, so its output never needs a channel swap. Offline conversion and training must go through it. Runtime observations arrive already decoded, so `model.py` must not decode at all.
 
-All pose values use `[x, y, z, qw, qx, qy, qz]`. Images are RGB end to end — stored image bits are encoded from RGB frames, and no channel conversion happens anywhere in the pipeline. Note one naming quirk: runtime observations carry camera extrinsics as `extrinsics_matrix`, while trajectory files store `extrinsic_matrix`.
+Stored image bits come in two formats, and both decode to RGB:
+
+| Format | How it was written | What a standard decoder sees |
+| --- | --- | --- |
+| **legacy** | an RGB array handed straight to `cv2.imencode`, which reads its input as BGR | red and blue swapped — the bytes are channel-reversed against the JPEG standard, and `cv2.imdecode` reverses them back |
+| **standard** | `encode_image_bit`, which converts to BGR first and stamps a JPEG `COM` segment with the payload `XPL-RGB1` | correct colors |
+
+Legacy data is never migrated — JPEG cannot swap channels losslessly — so the two formats coexist indefinitely and may appear in the same training run. The marker sits inside the buffer rather than in a file attribute so that a single buffer is self-describing, and `COM` is a standard segment that every decoder skips, so it costs 12 bytes and breaks nothing. If you must read these buffers without OpenCV, you can do it correctly: PIL surfaces the marker as `Image.open(...).info["comment"]`, so check for `b"XPL-RGB1"` and reverse the channels yourself when it is absent. What you cannot do is skip the check — a PIL-based loader tested against fresh data looks perfect and then quietly corrupts older episodes.
+
+All pose values use `[x, y, z, qw, qx, qy, qz]`. Images are RGB end to end — `decode_image_bit` hands back RGB and no channel conversion happens anywhere else in the pipeline. Note one naming quirk: runtime observations carry camera extrinsics as `extrinsics_matrix`, while trajectory files store `extrinsic_matrix`.
 
 <details>
 <summary>Observation Data Format</summary>
@@ -392,10 +401,14 @@ Useful converter helpers:
 
 ```python
 from XPolicyLab.utils.load_file import load_hdf5
-from XPolicyLab.utils.process_data import decode_image_bit, get_robot_action_dim_info
+from XPolicyLab.utils.process_data import (
+    decode_image_bit,
+    encode_image_bit,
+    get_robot_action_dim_info,
+)
 ```
 
-`decode_image_bit` is the only supported decoder for trajectory image bits (see [above](#decode-only-through-decode_image_bit)). Already-decoded values pass through untouched. `get_robot_action_dim_info(env_cfg_type)` returns robot-specific `arm_dim` and `ee_dim` lists, so adapters do not need to hard-code action dimensions.
+`decode_image_bit` and `encode_image_bit` are the only supported codec for trajectory image bits (see [above](#decode-only-through-decode_image_bit)). They mirror each other's input handling — one frame or a sequence, in any of the containers the trajectory files use — and already-converted values pass through untouched. `get_robot_action_dim_info(env_cfg_type)` returns robot-specific `arm_dim` and `ee_dim` lists, so adapters do not need to hard-code action dimensions.
 
 [CONTRIBUTING.md](CONTRIBUTING.md#modelpy) states the RGB exceptions and how a new robot gets registered in both `_robot_info.json` files.
 
@@ -434,8 +447,8 @@ Static checks from the repo root, then the adapter wiring check from `policy/<PO
 git diff --check
 bash -n policy/<POLICY>/*.sh
 python -m py_compile policy/<POLICY>/model.py policy/<POLICY>/deploy.py
-# only decode_image_bit is supported on XPolicyLab data
-grep -rnE 'cv2\.imdecode|np\.frombuffer|Image\.open' policy/<POLICY>/
+# only decode_image_bit / encode_image_bit are supported on XPolicyLab data
+grep -rnE 'cv2\.imdecode|cv2\.imencode|np\.frombuffer|Image\.open' policy/<POLICY>/
 ```
 
 ```bash
@@ -460,7 +473,7 @@ Use policy/demo_policy as the reference.
 2. Create or update policy/<POLICY_NAME>/README.md with install, checkpoint, train, and eval commands.
 3. Implement install.sh and, if needed, process_data.sh and train.sh.
 4. Implement model.py with Model.__init__, update_obs, get_action, reset, and batch methods. model.py never decodes.
-5. Offline conversion/training decodes XPolicyLab images only via decode_image_bit (legacy layouts; returns RGB).
+5. Offline conversion/training decodes XPolicyLab images only via decode_image_bit and writes them only via encode_image_bit. Stored bits come in two byte formats; only these functions tell them apart, and both give you RGB. Never swap channels yourself.
 6. Keep deploy.py aligned with policy/demo_policy/deploy.py.
 7. Put runtime defaults in deploy.yml, keeping the standard key set (protocol: ws, host, port, ...).
 8. Run EVAL_ENV_TYPE=debug eval.sh and fix shape/action-key/server errors.

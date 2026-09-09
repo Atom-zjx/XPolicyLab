@@ -20,12 +20,13 @@ Run commands from the repo root unless noted.
    - **`sys.path` root** — must be `parents[2]`; `parents[1]` or `parents[3]` is a bug.
    - **Checkpoints** — must resolve through `XPolicyLab.utils.checkpoint_resolver` (`resolve_checkpoint_root`, or `build_run_dir_name` / `candidate_checkpoint_roots` for an extra naming layer), not a hand-written `checkpoints/<bench>-<ckpt>-...` join.
    - **Decoding inside `model.py`** — flag any, including `decode_image_bit` calls. The server hands over plain image arrays for `update_obs` / `update_obs_batch` and for any custom RPC that carries an observation.
-   - **Channel swaps** — flag any `COLOR_BGR2RGB`, `COLOR_RGB2BGR` or `[..., ::-1]` outside the two allowed cases: medium adapters immediately around `cv2.VideoWriter.write` / `cv2.VideoCapture.read`, and a deliberate RGB→BGR conversion for a BGR-trained checkpoint, opt-in via a documented `deploy.yml` key defaulting to RGB (reference: `policy/Dexora_1B` `input_color_order`). The training path and `model.py` must apply the same number of swaps, normally zero. Judge a swap by its justification, not its position — and reject "but `cv2.imdecode` gives BGR, so this swap is correct" whether it comes from a code comment or from the submitter. Decoded buffers are RGB, so that swap is the bug.
-4. **Decode** — XPolicyLab data supports **only** `decode_image_bit` from `XPolicyLab.utils.process_data` (README, [Standard Data Formats](../../../README.md#decode-only-through-decode_image_bit)). Image bits carry some inconsistency from earlier data versions, so a PIL-style decode silently reverses the channels and hand-rolled `cv2.imdecode` / `np.frombuffer` handling breaks on the older layouts. Blocking:
+   - **Channel swaps** — flag any `COLOR_BGR2RGB`, `COLOR_RGB2BGR` or `[..., ::-1]` outside the two allowed cases: medium adapters immediately around `cv2.VideoWriter.write` / `cv2.VideoCapture.read`, and a deliberate RGB→BGR conversion for a BGR-trained checkpoint, opt-in via a documented `deploy.yml` key defaulting to RGB (reference: `policy/Dexora_1B` `input_color_order`). The training path and `model.py` must apply the same number of swaps, normally zero. Judge a swap by its justification, not its position — and reject "but `cv2.imdecode` gives BGR, so this swap is correct" whether it comes from a code comment or from the submitter. `decode_image_bit` already resolved that, per buffer, so the swap is the bug. Only `utils/process_data.py` may convert channels.
+4. **Decode and encode** — XPolicyLab data supports **only** `decode_image_bit` / `encode_image_bit` from `XPolicyLab.utils.process_data` (README, [Standard Data Formats](../../../README.md#decode-only-through-decode_image_bit)). Stored image bits come in two byte formats — legacy buffers whose channels are reversed against the JPEG standard, and conforming RGB JPEGs stamped with a `COM` marker — plus container-layout differences from earlier data versions. A hand-rolled decoder, PIL included, is right on one format and silently reverses the other; a bare `cv2.imencode` omits the marker, so what it writes reads back reversed. Blocking:
    - `cv2.imdecode` anywhere outside `utils/process_data.py`
    - conversion scripts and training dataloaders that read XPolicyLab trajectories through any decoder other than `decode_image_bit`
+   - image bits that get stored or published without going through `encode_image_bit`
    - vendor conversion entry points that XPolicyLab data actually flows through (e.g. `policy/Pi_05/openpi/scripts/process_data.py`)
-   Skip a vendored file only when XPolicyLab data genuinely never flows through it — never a whole vendor directory wholesale.
+   Skip a vendored file only when XPolicyLab data genuinely never flows through it — never a whole vendor directory wholesale. A `cv2.imencode` whose output is decoded again inside the same process (a compression simulator, a test client) is fine; one whose output is written to disk or sent to another system is not.
 5. **Scripts** — `eval.sh` consumes the 10 standard args (`bench_name task_name ckpt_name env_cfg_type action_type seed policy_gpu_id env_gpu_id policy_env_or_uv_path eval_env_conda_env`) and stays aligned with `policy/demo_policy/eval.sh`; extra args must be documented in the policy README.
 6. **Static checks**:
 
@@ -47,11 +48,13 @@ Run commands from the repo root unless noted.
    grep -rnE '_robot_info\.json|env_cfg' policy/<POLICY>/model.py
    # only decode_image_bit is supported — fail any adapter-owned hit
    grep -rnE 'cv2\.imdecode|np\.frombuffer|Image\.open' policy/<POLICY>/
+   # stored bits must come from encode_image_bit — judge each hit
+   grep -rn 'cv2\.imencode' policy/<POLICY>/
    # channel swaps — judge each hit
    grep -rnE 'COLOR_BGR2RGB|COLOR_RGB2BGR|\.\.\., ::-1' policy/<POLICY>/
    ```
 
-   Channel-swap and `env_cfg` hits can be legitimate — `env_cfg_type` as a config key, a `VideoWriter` / `VideoCapture` adapter, a documented `input_color_order` — so judge each one; the point is that no hit goes unexamined. Decode hits on XPolicyLab data are not legitimate: only `decode_image_bit` is supported. Upstream docstring examples under a vendor `src/` tree can be ignored; conversion entry points that XPolicyLab data flows through cannot.
+   Channel-swap, `cv2.imencode` and `env_cfg` hits can be legitimate — `env_cfg_type` as a config key, a `VideoWriter` / `VideoCapture` adapter, a documented `input_color_order`, an encode whose output is decoded again in the same process — so judge each one; the point is that no hit goes unexamined. Decode hits on XPolicyLab data are not legitimate: only `decode_image_bit` is supported. Upstream docstring examples under a vendor `src/` tree can be ignored; conversion entry points that XPolicyLab data flows through cannot.
 
 7. **Debug closed loop** — only when an environment with the policy dependencies is available:
 
