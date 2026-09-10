@@ -1,7 +1,17 @@
 import argparse
 import os
-from client_server.tcp.model_client import ModelClient
+import sys
+from pathlib import Path
+
+# client_server/ and the XPolicyLab package are both rooted at the checkout;
+# insert it so this script also works when invoked directly by path.
+_XPOLICYLAB_ROOT = Path(__file__).resolve().parents[1]
+if str(_XPOLICYLAB_ROOT) not in sys.path:
+    sys.path.insert(0, str(_XPOLICYLAB_ROOT))
+
 import numpy as np
+
+from client_server.tcp.model_client import ModelClient
 from XPolicyLab.utils.process_data import encode_image_bit, get_robot_action_dim_info
 
 Batch_Size = 10
