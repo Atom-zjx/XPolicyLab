@@ -397,8 +397,10 @@ def write_video(frames_rgb, out_path: Path, fps: float):
     Frames must be RGB, and both ends of the pipeline say so: imageio's ffmpeg
     writer takes RGB, and training reads these files back through decord in
     `mibot/data/datasets/json_dataset.py`, which returns RGB too. Handing this
-    BGR — as this converter originally did — silently trains on reversed
-    channels while evaluation feeds RGB.
+    BGR would silently train on reversed channels while evaluation feeds RGB.
+    (The earlier hand-rolled cv2.imdecode here happened to yield RGB on the
+    legacy byte format but would yield BGR on marked standard buffers, which is
+    why decoding now goes through decode_image_bit.)
     """
     out_path.parent.mkdir(parents=True, exist_ok=True)
     writer = imageio.get_writer(
