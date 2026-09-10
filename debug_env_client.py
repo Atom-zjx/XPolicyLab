@@ -1,9 +1,8 @@
 import argparse
 import os
-import cv2
 from client_server.tcp.model_client import ModelClient
 import numpy as np
-from XPolicyLab.utils.process_data import get_robot_action_dim_info
+from XPolicyLab.utils.process_data import encode_image_bit, get_robot_action_dim_info
 
 Batch_Size = 10
 
@@ -144,12 +143,13 @@ class TestEnv:
     @staticmethod
     def _encode_obs_colors(obs):
         """Send encoded colors so the server-side decode path gets exercised."""
-        vision = obs["vision"]
-        buffer = cv2.imencode(".jpg", vision["cam_head"]["color"])[1].reshape(-1)
-
-        vision["cam_head"]["color"] = buffer                 # 1-D uint8 buffer
-        vision["cam_left_wrist"]["color"] = buffer.tobytes()  # raw bytes
-        # cam_right_wrist stays a plain array, covering the passthrough branch.
+        for index, camera in enumerate(obs["vision"].values()):
+            encoded = encode_image_bit(camera["color"])
+            # Alternate container types so both server-side decode branches
+            # (raw bytes and 1-D uint8 buffer) stay covered.
+            camera["color"] = (
+                encoded if index % 2 else np.frombuffer(encoded, np.uint8)
+            )
 
     def get_obs_batch(self, env_idx_list):
         demo_obs_list = [self.get_obs(env_idx) for env_idx in env_idx_list] 
