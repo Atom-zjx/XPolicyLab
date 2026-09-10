@@ -106,6 +106,7 @@ All policy READMEs share one template — [policy/demo_policy/README.md](policy/
 2. **Pointer paragraph** (verbatim): shared conventions link to the root README, official results link to the [RoboDojo LeaderBoard](https://robodojo-benchmark.com/LeaderBoard).
 3. **Sections in order**: `Installation`, `Data Processing`, `Training`, `Evaluation`, plus `Model Assets` / `Configuration` / `Notes` only when the adapter needs them. State explicitly when a stage is unsupported (eval-only, upstream-native data, ...).
 4. **Policy-specific content only**: one command template plus one runnable example per stage, extra arguments, required environment variables, `deploy.yml` keys, checkpoint-layout deviations. Do not restate shared argument tables or the split-machine flow — link to the root README instead.
+5. **Declare LeRobot data** when the policy trains on it. Under `Data Processing`, give the dataset version and say whether the keys match the official converters (README, [Official LeRobot conversion](README.md#official-lerobot-conversion)). If they do, name the converter or the prepared export you consume, and say whether `process_data.sh` is absent or only links and normalizes the dataset. If they do not, state the deviation and how to produce that layout — otherwise the next user feeds official output to a trainer that cannot read it.
 
 ## Testing
 

@@ -33,6 +33,7 @@ Start here for repo-level concepts and integration steps. For install commands, 
 - [Deployment Flow](#-deployment-flow)
 - [Standard Data Formats](#-standard-data-formats)
   - [Decode only through `decode_image_bit`](#decode-only-through-decode_image_bit)
+  - [Official LeRobot conversion](#official-lerobot-conversion)
 - [Data And Checkpoints](#-data-and-checkpoints)
 - [Add Your Own Policy](#-add-your-own-policy)
 - [Citation](#-citation)
@@ -187,7 +188,7 @@ demo_env/
 └── XPolicyLab/
 ```
 
-The same script pulls the full exports — `hdf5`, `lerobot_v3.0`, `lerobot_v2.1`, and `real` (real-world HDF5) — each into its own `../data/` folder.
+The same script pulls the full exports — `hdf5`, `lerobot_v3.0`, `lerobot_v2.1`, and `real` (real-world HDF5) — each into its own `../data/` folder. The two LeRobot exports come from the [official converters](#official-lerobot-conversion), so you can regenerate them for your own task subset or resolution.
 
 With this setup, you can test data conversion, model loading, training scripts, and debug-mode evaluation before connecting to a simulator-backed benchmark.
 
@@ -411,6 +412,45 @@ from XPolicyLab.utils.process_data import (
 `decode_image_bit` and `encode_image_bit` are the only supported codec for trajectory image bits (see [above](#decode-only-through-decode_image_bit)). They mirror each other's input handling — one frame or a sequence, in any of the containers the trajectory files use — and already-converted values pass through untouched. `get_robot_action_dim_info(env_cfg_type)` returns robot-specific `arm_dim` and `ee_dim` lists, so adapters do not need to hard-code action dimensions.
 
 [CONTRIBUTING.md](CONTRIBUTING.md#modelpy) states the RGB exceptions and how a new robot gets registered in both `_robot_info.json` files.
+
+### Official LeRobot conversion
+
+Many policies train on LeRobot datasets instead of the trajectory format above. `scripts/transform_lerobot_v21_format.py` and `scripts/transform_lerobot_v30_format.py` are the official converters — one per LeRobot dataset version, both emitting the same keys:
+
+| Key | Shape | Content |
+| --- | --- | --- |
+| `observation.state` | `(D,)` float32 | `left_arm_joint_states` + `left_ee_joint_states` + `right_arm_joint_states` + `right_ee_joint_states`, concatenated in that order |
+| `action` | `(D,)` float32 | same layout, from the trajectory's `action/` group |
+| `observation.images.cam_high` | `(3, H, W)` video | `vision/cam_head/colors` |
+| `observation.images.cam_left_wrist` | `(3, H, W)` video | `vision/cam_left_wrist/colors` |
+| `observation.images.cam_right_wrist` | `(3, H, W)` video | `vision/cam_right_wrist/colors` |
+
+Prepared LeRobot exports published for a benchmark — such as the `lerobot_v2.1` / `lerobot_v3.0` sets in [Quick Start](#-quick-start) — are produced this way, so a policy that consumes one needs no conversion step of its own.
+
+> **A policy that trains on LeRobot data must say so in its own README**, under `Data Processing`: the dataset version, and whether the keys are the ones above. If they are, name the converter and say whether `process_data.sh` is absent or only links and normalizes the dataset. If they are not — an upstream-native layout, extra keys, a latent tree, different camera names — state the differences and how to produce that layout. [policy/RISE](policy/RISE/README.md) and [policy/AHA_WAM](policy/AHA_WAM/README.md) are worked examples of the first case, [policy/LingBot_VA](policy/LingBot_VA/README.md) of the second.
+
+<details>
+<summary>Running a conversion</summary>
+
+Both scripts take `<bench_name>.<task_name>.<env_cfg_type>` glob patterns, read trajectories from `../data/` and robot dimensions from `../env_cfg/`, and merge every matched target into one dataset under `HF_LEROBOT_HOME/<repo_id>`. Run them from the repo root of a checkout that sits beside those two directories ([Quick Start](#-quick-start)).
+
+```bash
+# One robot, every task under it.
+python scripts/transform_lerobot_v30_format.py "<bench_name>.*.<env_cfg_type>" --repo_id my_dataset
+
+# Several robots merged, 50 episodes per task/env, downscaled.
+# Without --resolution the target size comes from the first source frame.
+python scripts/transform_lerobot_v21_format.py "<bench_name>.*.*" \
+  --max_episode 50 --resolution 240x320
+```
+
+- **`D` is padded, not per-robot.** Each arm is zero-padded to the widest dimensions among the matched targets, so one dataset can mix robots; `robot_type` is `unified_robot` and motors are named `left_joint_<i>` / `right_joint_<i>`.
+- **All three camera keys always exist.** A camera missing from the source is filled with black frames, so features stay stable across robots.
+- **Images are RGB**, decoded through `decode_image_bit` and never swapped afterwards ([above](#decode-only-through-decode_image_bit)).
+- **Joint-space bimanual only.** Both read the `*_arm_joint_states` / `*_ee_joint_states` keys and fail on a trajectory that carries only pose or single-arm keys.
+- The two differ beyond dataset version only in encoding throughput: v3.0 writes images from 8 worker processes and streams video at CRF 18.
+
+</details>
 
 ## 💾 Data And Checkpoints
 
