@@ -465,9 +465,10 @@ def decode_image_bit(image_bits):
     channel-reversed streams and the standard RGB JPEGs written by
     `encode_image_bit` — because this function reads the marker that tells them
     apart and swaps only where a swap is owed. Never add a COLOR_BGR2RGB after
-    this function to "correct" the output: the two formats are
-    indistinguishable to the eye and to any single sample, so a caller-side
-    swap is right on at most one of them and silently wrong on the other. This
+    this function to "correct" the output: the decoded pixels are
+    indistinguishable to the eye — only the marker in the encoded buffer tells
+    the formats apart — so a caller-side swap is right on at most one of them
+    and silently wrong on the other. This
     is also why hand-rolled decoding is unsupported, PIL included: PIL reads the
     standard format correctly and the legacy format reversed.
 
@@ -670,7 +671,10 @@ def encode_image_bit(images, quality=None):
     viewer or a browser all show the right colours, and they carry a JPEG COM
     marker so `decode_image_bit` knows not to treat them as legacy
     channel-reversed data. Encoding by hand with `cv2.imencode` skips the
-    marker and produces a buffer that reads back with red and blue swapped.
+    marker, so the buffer can only be read as legacy: channel-reversed on
+    decode if the frame was converted to BGR before encoding, and even when
+    fed RGB it mints more legacy data that every conforming viewer shows
+    reversed.
 
     Dispatch mirrors `decode_image_bit`, on dtype first, then ndim:
         - uint8 ndarray, ndim == 3      -> one (H, W, 3) RGB image  -> bytes

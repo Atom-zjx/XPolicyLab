@@ -26,8 +26,9 @@ inside each buffer to tell them apart and swap only where a swap is owed.
   segment holding `XPL-RGB1`. `cv2.imdecode` returns BGR for it, so it needs exactly one swap.
 
 A `COLOR_BGR2RGB` added to "fix" a decode is therefore still always a bug, and now for a sharper
-reason than before: the two formats are indistinguishable to the eye and from any single sample, so
-a caller-side swap is right on at most one of them and silently wrong on the other. Channel
+reason than before: the decoded pixels are indistinguishable to the eye — only the marker in the
+encoded buffer tells the formats apart — so a caller-side swap is right on at most one of them and
+silently wrong on the other. Channel
 conversion is allowed **only inside `utils/process_data.py`**, which owns the distinction.
 
 No channel conversion belongs in conversion, training, or eval code. Two exceptions only:
@@ -53,7 +54,9 @@ way it is written, and the rest trip over the older layouts.
 Mechanically, `cv2.imdecode` must not appear outside `utils/process_data.py`, and image bits that
 get **stored or published** — trajectory files, converted datasets — must come from
 `encode_image_bit`, never from a bare `cv2.imencode`, which omits the marker and so writes a buffer
-that reads back reversed. The why is in README,
+that can only be read as legacy — channel-reversed on decode if the frame was converted to BGR
+before encoding, and even when fed RGB it mints more legacy data that every conforming viewer shows
+reversed. The why is in README,
 [Standard Data Formats](README.md#decode-only-through-decode_image_bit).
 
 ## Paths and dimensions come from the shared helpers
