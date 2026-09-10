@@ -384,14 +384,22 @@ def next_state_repeat(seq):
 def decode_jpeg_seq(colors_dataset):
     """RoboDojo cam colors: (T,) image bit strings -> list of RGB uint8 frames.
 
-    decode_image_bit resolves both stored byte formats to RGB, which is the
-    order imageio's ffmpeg writer expects.
+    decode_image_bit resolves both stored byte formats to RGB, which is what
+    write_video and the official loader both want, so no channel conversion
+    belongs anywhere in this path.
     """
     return [decode_image_bit(colors_dataset[index]) for index in range(colors_dataset.shape[0])]
 
 
 def write_video(frames_rgb, out_path: Path, fps: float):
-    """Write RGB frames as H.264 with gop=1 so decord can seek to any frame."""
+    """Write RGB frames as H.264 with gop=1 so decord can seek to any frame.
+
+    Frames must be RGB, and both ends of the pipeline say so: imageio's ffmpeg
+    writer takes RGB, and training reads these files back through decord in
+    `mibot/data/datasets/json_dataset.py`, which returns RGB too. Handing this
+    BGR — as this converter originally did — silently trains on reversed
+    channels while evaluation feeds RGB.
+    """
     out_path.parent.mkdir(parents=True, exist_ok=True)
     writer = imageio.get_writer(
         os.fspath(out_path),

@@ -281,6 +281,13 @@ def get_action_dim(env_cfg_type):
 # consult. COM is a standard segment carrying its own length, so every decoder
 # skips it; PIL exposes it as Image.open(...).info["comment"], which lets a
 # non-OpenCV reader tell the two formats apart as well.
+#
+# COM is a JPEG segment, so the two formats are only distinguishable for JPEG,
+# and a buffer in any other container is necessarily read as legacy. That is
+# the right reading for stored data — every non-JPEG buffer in the corpus came
+# from a legacy producer calling cv2.imencode — but it does mean a conforming
+# non-JPEG buffer would decode channel-reversed, which is one more reason
+# encode_image_bit writes JPEG and nothing else.
 _RGB_MARKER_PAYLOAD = b"XPL-RGB1"
 
 _JPEG_PAD = 0xFF
@@ -311,7 +318,10 @@ def _normalize_image_buffer(image_bit):
         image_bit = image_bit.tobytes()
 
     if isinstance(image_bit, (bytes, bytearray)):
-        # Fixed-width HDF5 byte columns pad the tail with NUL.
+        # Fixed-width HDF5 byte columns pad the tail with NUL. Stripping is safe
+        # for what is actually stored: a JPEG ends with FF D9 and a PNG with the
+        # fixed IEND CRC, so neither can end in NUL. A RIFF container such as
+        # WebP pads itself to an even length with NUL and would be damaged.
         image_bit = image_bit.rstrip(b"\0")
     elif isinstance(image_bit, np.ndarray):
         image_bit = np.ascontiguousarray(image_bit)
@@ -465,6 +475,12 @@ def decode_image_bit(image_bits):
     allowed where a checkpoint was trained on BGR data; that must be an opt-in
     documented in the adapter (see Dexora_1B's `input_color_order`), never a
     silent fix applied at the decode site.
+
+    The marker is a JPEG COM segment, so the guarantee above covers the JPEG
+    buffers this corpus stores. A buffer in any other container has no marker to
+    read and is treated as legacy, which is correct for the legacy producers but
+    means a conforming non-JPEG buffer decodes channel-reversed. Store JPEG,
+    which is all `encode_image_bit` writes.
 
     Values that are already decoded are returned unchanged, so this function is
     safe to call on an observation or trajectory field without knowing whether
@@ -626,7 +642,10 @@ def _passthrough_encoded_buffer(image_bit):
     if isinstance(image_bit, (bytes, bytearray)):
         return bytes(image_bit)
 
-    return np.asarray(image_bit).reshape(-1).tobytes()
+    # Strip the same NUL padding _normalize_image_buffer takes off the bytes
+    # form, so a buffer read out of a fixed-width HDF5 column does not carry its
+    # padding into whatever column it is stored in next.
+    return np.asarray(image_bit).reshape(-1).tobytes().rstrip(b"\0")
 
 
 def _encode_image_bit_sequence(images, quality):
