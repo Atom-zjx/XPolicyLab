@@ -1,8 +1,20 @@
 # Contributing a Policy to XPolicyLab
 
-This page is the submission standard for `policy/<POLICY>/` adapters: what a complete adapter contains, how to test it, and what a PR must include. For repo-wide concepts and workflows, see the [README](README.md).
+This page is the submission standard for `policy/<POLICY>/` adapters: what a complete adapter contains, how to test it, and what a PR must include. For repo-wide concepts and workflows, see the [README](README.md) ([中文](README_zh.md)). Root `README.md` and `README_zh.md` must stay in sync — update both in the same change.
 
-Two bundled Agent Skills automate most of this: `xpolicylab-model-integration` builds an adapter, `xpolicylab-adapter-check` audits one before a PR. They live in `.agents/skills/`, which `.cursor/skills` and `.claude/skills` symlink to, so Cursor, Claude Code and Codex all pick them up. [AGENTS.md](AGENTS.md) distills this page into the always-on rules every agent must follow; `CLAUDE.md` just imports it.
+Two bundled Agent Skills automate most of this: `xpolicylab-model-integration` builds an adapter, `xpolicylab-adapter-check` audits one before a PR. They live in `.agents/skills/`, which `.cursor/skills` and `.claude/skills` symlink to, so Cursor, Claude Code and Codex all pick them up. [AGENTS.md](AGENTS.md) distills this page into the always-on rules every agent must follow; `CLAUDE.md` just imports it. See [Using a coding agent](#using-a-coding-agent).
+
+## Getting started
+
+The fastest route is to copy the reference adapter, keep the XPolicyLab boundary small, and debug before touching a simulator:
+
+1. **Read [policy/demo_policy](policy/demo_policy/README.md)** — `model.py`, `deploy.py`, `deploy.yml`, and the `eval.sh` / `setup_eval_policy_server.sh` / `setup_eval_env_client.sh` trio.
+2. **Scaffold** with `bash scripts/create_policy.sh <POLICY_NAME>`, then fill in its README.
+3. **Implement `model.py` first**, keeping `bench_name`, `task_name`, `ckpt_name`, `env_cfg_type`, `action_type`, and `seed` consistent across data, training, and eval (README, [Common Workflow](README.md#-common-workflow)).
+4. **Put deployment defaults in `deploy.yml`** and keep `deploy.py` aligned with `demo_policy/deploy.py` unless the environment loop truly differs.
+5. **Run [Testing](#testing)**, then move to `EVAL_ENV_TYPE=sim` or a split-machine deployment (README, [Deployment Flow](README.md#-deployment-flow)).
+
+Eval-only submissions are accepted when training code cannot be open-sourced yet: say so in the PR, notify the maintainers ([Contact](README.md#-contact)), and share a timeline. For leaderboard evaluation, attach a checkpoint download script (Hugging Face or ModelScope preferred).
 
 ## Adapter Standard
 
@@ -14,19 +26,22 @@ Scaffold with `bash scripts/create_policy.sh <POLICY>` (copies `policy/demo_poli
 policy/<POLICY>/
 ├── README.md                    # required: install / data / train / eval guide
 ├── __init__.py                  # required: keeps XPolicyLab.policy.<POLICY> importable
-├── install.sh                   # required: policy environment setup
+├── install.sh                   # policy environment setup (see exceptions below)
 ├── eval.sh                      # required: same-machine evaluation
 ├── setup_eval_policy_server.sh  # required: policy-side server
 ├── setup_eval_env_client.sh     # required: environment-side client
-├── deploy.yml                   # required: runtime config, protocol: ws
-├── deploy.py                    # required: evaluation loop
+├── deploy.yml                   # required: deployment config, protocol: ws
+├── deploy.py                    # required: deployment loop
 ├── model.py                     # required: Model adapter class
-├── process_data.sh              # data conversion (see eval-only exception below)
-├── train.sh                     # training entry (see eval-only exception below)
+├── process_data.sh              # data conversion (see exceptions below)
+├── train.sh                     # training entry (see exceptions below)
 └── INSTALLATION.md              # optional: extra setup notes
 ```
 
-`process_data.sh` / `train.sh` may be omitted only for an agreed **eval-only** submission: state it in the PR, notify the maintainers ([Contact](README.md#-contact)), and give a timeline for open-sourcing training.
+Three scripts have a narrow exception, and each one has to be **declared**; everything else in the tree is unconditional.
+
+- `process_data.sh` / `train.sh` may be omitted only for an agreed **eval-only** submission: state it in the PR, notify the maintainers ([Contact](README.md#-contact)), and give a timeline for open-sourcing training.
+- `install.sh` may be omitted only when the environment comes entirely from an upstream project's own recipe. Say so under `Installation` in the policy README and give the full manual steps there or in `INSTALLATION.md`, as `policy/Dexora_1B` and `policy/X_WAM` do.
 
 ### `model.py`
 
@@ -115,6 +130,7 @@ Run these in order before opening a PR.
 **1. Static checks** (repo root):
 
 ```bash
+git diff --check
 bash -n policy/<POLICY>/*.sh
 python -m py_compile policy/<POLICY>/model.py policy/<POLICY>/deploy.py
 ```
@@ -138,9 +154,28 @@ export EVAL_ENV_TYPE=debug
 bash eval.sh RoboDojo stack_bowls <ckpt_name> arx_x5 joint 0 0 0 <policy_env> base
 ```
 
-The run must reach `[MAIN] eval finished` with no tracebacks.
+The run must reach `[MAIN] eval finished` with no tracebacks. The debug client sends plain image arrays by default; re-run with `DEBUG_OBS_ENCODED=1` to make it send encoded camera colors instead — a JPEG buffer, raw bytes, and a plain array across the three cameras — which exercises the server-side decode path that real environment clients rely on. For a quick smoke test, `policy/demo_policy` accepts placeholder env names such as `base`.
 
 **3. Simulator evaluation** — recommended for every PR and required before a leaderboard entry is published: run the same `eval.sh` with `EVAL_ENV_TYPE=sim` (or unset) inside a RoboDojo / RoboTwin workspace and record task success rates.
+
+## Using a coding agent
+
+`xpolicylab-model-integration` builds an adapter (a prompt like `Integrate <POLICY_NAME> into XPolicyLab` is enough). `xpolicylab-adapter-check` audits one against this page before a PR (`Check policy/<POLICY_NAME>`). For an agent that supports none of these, paste this checklist:
+
+```text
+Integrate <POLICY_NAME> into XPolicyLab.
+
+Use policy/demo_policy as the reference.
+1. Inspect the upstream model's inference API and dependencies.
+2. Create or update policy/<POLICY_NAME>/README.md with install, checkpoint, train, and eval commands.
+3. Implement install.sh and, if needed, process_data.sh and train.sh. Omitting any of the three requires a declared exception in the README.
+4. Implement model.py with Model.__init__, update_obs, get_action, reset, and batch methods. model.py never decodes.
+5. Offline conversion/training decodes XPolicyLab images only via decode_image_bit and writes them only via encode_image_bit. Stored bits come in two byte formats; only these functions tell them apart, and both give you RGB. Never swap channels yourself.
+6. Keep deploy.py aligned with policy/demo_policy/deploy.py.
+7. Put deployment defaults in deploy.yml, keeping the standard key set (protocol: ws, host, port, ...).
+8. Run EVAL_ENV_TYPE=debug eval.sh and fix shape/action-key/server errors.
+9. Summarize supported action_type, env_cfg_type, checkpoint layout, and remaining limitations.
+```
 
 ## PR Standard
 
@@ -159,7 +194,7 @@ GitHub pre-fills this from [.github/PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUE
 - Training support: full | eval-only (training release ETA: ...)
 
 ## Components
-- [ ] install.sh
+- [ ] install.sh (or upstream-native install, documented in the policy README)
 - [ ] model.py (+ __init__.py)
 - [ ] images: only decode_image_bit / encode_image_bit are supported (two byte formats → RGB), no channel swaps (see README)
 - [ ] deploy.yml (standard key set incl. protocol: ws / host / port, policy_name matches the directory)

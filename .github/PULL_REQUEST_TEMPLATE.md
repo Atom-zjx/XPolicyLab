@@ -7,7 +7,7 @@
 - Training support: full | eval-only (training release ETA: ...)
 
 ## Components
-- [ ] install.sh
+- [ ] install.sh (or upstream-native install, documented in the policy README)
 - [ ] model.py (+ __init__.py)
 - [ ] images: only decode_image_bit / encode_image_bit are supported (two byte formats → RGB), no channel swaps (see README)
 - [ ] deploy.yml (standard key set incl. protocol: ws / host / port, policy_name matches the directory)

@@ -9,6 +9,9 @@ package inside a parent workspace — never as the top-level project.
 - Two skills carry the end-to-end workflows — `xpolicylab-model-integration` (build an adapter) and
   `xpolicylab-adapter-check` (audit one before a PR). They live in `.agents/skills/`, which
   `.cursor/skills` and `.claude/skills` symlink to, so Cursor, Claude Code and Codex all load them.
+- Root docs stay bilingual: when you edit `README.md`, update `README_zh.md` in the same change (and
+  the reverse). Keep structure, anchors, code blocks, and tables aligned; translate prose only.
+  English remains the source of truth on conflict.
 
 The rules below apply to every change in this repo. Their rationale is in CONTRIBUTING.md.
 
