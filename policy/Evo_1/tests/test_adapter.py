@@ -241,6 +241,27 @@ class WebSocketTests(Fixture, unittest.IsolatedAsyncioTestCase):
 
 
 class DataTests(unittest.TestCase):
+    def test_installer_imports_from_documented_policy_directory(self):
+        # Skip dependency installation, but execute the installer's real import
+        # check in a fresh interpreter from the README's working directory.
+        with tempfile.TemporaryDirectory() as temporary:
+            executable = Path(temporary) / "python"
+            executable.write_text(
+                "#!/usr/bin/env python3\n"
+                "import os, sys\n"
+                "if sys.argv[1:3] == ['-m', 'pip']:\n"
+                "    sys.exit(0)\n"
+                "os.execv(os.environ['EVO1_TEST_PYTHON'], "
+                "[os.environ['EVO1_TEST_PYTHON'], *sys.argv[1:]])\n"
+            )
+            executable.chmod(0o755)
+            env = {**os.environ, "PATH": temporary + os.pathsep + os.environ["PATH"],
+                   "EVO1_SOURCE_DIR": str(SOURCE), "EVO1_TEST_PYTHON": sys.executable}
+            result = subprocess.run(["bash", "install.sh"], cwd=adapter.POLICY_DIR,
+                                    env=env, capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertIn("[Evo_1] Imports passed", result.stdout)
+
     def test_statistics_write_only_to_copied_metadata(self):
         import pandas as pd
         from dataset.compute_normstats_streaming import compute_normstats

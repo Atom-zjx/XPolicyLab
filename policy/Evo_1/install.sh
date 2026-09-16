@@ -32,8 +32,13 @@ if [[ $# -ne 0 ]]; then
     echo "Usage: bash install.sh [--source-only] (inside the Evo-1 policy environment)" >&2
     exit 2
 fi
-python -m pip install -r "${SCRIPT_DIR}/requirements.txt"
+# Resolve shared dependencies together so their upgrades retain numpy<2 and
+# the policy's Torch/transformers constraints.
+python -m pip install -r "${SCRIPT_DIR}/requirements.txt" -e "${XPL_ROOT}"
 MAX_JOBS="${EVO1_MAX_JOBS:-4}" python -m pip install flash-attn==2.7.4.post1 --no-build-isolation
-python -m pip install -e "${XPL_ROOT}"
+EVO1_SOURCE_DIR="$(cd "${EVO1_SOURCE_DIR}" && pwd)"
+# A python -c launched in the policy directory would let its model.py shadow
+# upstream's namespace package named model.
+cd "${XPL_ROOT}"
 PYTHONPATH="${EVO1_SOURCE_DIR}/Evo_1:${XPL_ROOT}${PYTHONPATH:+:${PYTHONPATH}}" \
     python -c 'import flash_attn; from scripts.Evo1_server import Normalizer; from XPolicyLab.policy.Evo_1.model import Model; print("[Evo_1] Imports passed")'
