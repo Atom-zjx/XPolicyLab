@@ -1,35 +1,37 @@
 # MoPA
 
 [MoPA: Coordinated Mobile Manipulation via Subsystem-Specific Perception Alignment](https://mopa-policy.github.io/)
-通过子系统专属的视觉 query 与动作专家建模感知和动作。本实现提供机械臂策略：
-保留一套 **8 个 manipulation query**，关闭 base 分支，生成 **4 步关节动作**。
-输入为 RGB 图像、语言指令和机械臂/夹爪状态，无需底盘状态或场景 context。
+models perception and actions through subsystem-specific visual queries and action experts.
+This implementation provides an arm policy with one set of **8 manipulation queries**,
+the base branch disabled, and **4-step joint action chunks**.
+Inputs are RGB images, language instructions, and arm/gripper states; base states and scene context are not required.
 
-## 模型
+## Model
 
-视觉语言骨干为 Qwen3-VL-4B-Instruct-Action，保留 M-RoPE。动作头使用
-16 层 DiT-B，注意力宽度为 768、头数为 12，状态编码和动作解码 MLP
-隐藏维度为 1024。训练采用均匀 flow matching，每个样本重复采样 8 次噪声；
-推理采用 4 步 Euler 积分。默认配置见
-[configs/model.json](configs/model.json)。
+The vision-language backbone is Qwen3-VL-4B-Instruct-Action with M-RoPE retained.
+The action head uses a 16-layer DiT-B with an attention width of 768 and 12 heads.
+The state encoder and action decoder MLPs have a hidden dimension of 1024.
+Training uses flow matching with uniform time sampling and 8 noise samples per training sample;
+inference uses 4 Euler integration steps. See
+[configs/model.json](configs/model.json) for the default configuration.
 
 ```text
 mopa/
 ├── pyproject.toml
 ├── requirements.txt
 ├── README.md
-├── models/                     # Qwen、query 策略和动作头
+├── models/                     # Qwen, query policy, and action head
 ├── configs/model.json
-├── common.py                   # 关节布局、RGB 缩放和归一化
-├── data/                       # 数据准备和训练数据集
-├── training/                   # 训练入口、优化器和 checkpoint
-├── runtime.py                  # 独立 checkpoint 推理
-└── integrations/               # 可选的宿主协议适配
+├── common.py                   # Joint layout, RGB resizing, and normalization
+├── data/                       # Data preparation and training dataset
+├── training/                   # Training entry point, optimizer, and checkpoints
+├── runtime.py                  # Standalone checkpoint inference
+└── integrations/               # Optional host protocol adapters
 ```
 
-## 安装
+## Installation
 
-在本目录创建 Python 3.11 环境并安装：
+Create a Python 3.11 environment in this directory and install:
 
 ```bash
 python -m venv .venv
@@ -37,24 +39,26 @@ source .venv/bin/activate
 python -m pip install -e .
 ```
 
-本目录可独立复制和安装。原生数据准备、训练与推理不依赖宿主项目。
-准备本地 Qwen3-VL-4B-Instruct-Action 目录，包含权重、config、tokenizer、
-processor 和 chat template。训练时通过 `--base-vlm` 或 `MOPA_BASE_VLM` 指定。
-依赖使用 `transformers==4.57.0`，注意力实现为 SDPA。
+This directory can be copied and installed independently. Native data preparation,
+training, and inference do not depend on a host project.
+Prepare a local Qwen3-VL-4B-Instruct-Action directory containing the weights, config,
+tokenizer, processor, and chat template. Specify it during training with `--base-vlm`
+or `MOPA_BASE_VLM`. The dependency is `transformers==4.57.0`, and attention uses SDPA.
 
-## 数据准备
+## Data Preparation
 
-每个原始 episode 为一个 NPZ 文件，字段如下：
+Each raw episode is an NPZ file with the following fields:
 
-| 字段 | 格式 |
+| Field | Format |
 | --- | --- |
-| `state` | float32 `[T,D]`，机械臂/夹爪状态 |
-| `action` | float32 `[T,D]`，关节动作标签 |
-| `instruction` | 非空标量字符串 |
-| `image_0`、`image_1`、… | uint8 RGB `[T,H,W,3]`，按 metadata 的相机顺序排列 |
+| `state` | float32 `[T,D]`, arm/gripper states |
+| `action` | float32 `[T,D]`, joint action targets |
+| `instruction` | Nonempty scalar string |
+| `image_0`, `image_1`, … | uint8 RGB `[T,H,W,3]`, in the camera order specified by metadata |
 
-双臂状态/动作顺序为左臂、左夹爪、右臂、右夹爪。单臂使用机械臂、夹爪。
-`metadata.json` 声明关节维度和相机布局，例如：
+For two arms, states and actions are ordered as left arm, left gripper, right arm,
+and right gripper. For one arm, the order is arm, then gripper.
+`metadata.json` declares the joint dimensions and camera layout, for example:
 
 ```json
 {
@@ -70,30 +74,35 @@ mopa-prepare --source /path/to/raw_episodes \
   --metadata /path/to/metadata.json --output /path/to/dataset
 ```
 
-输出包含 episode NPZ、`metadata.json` 和 `dataset_statistics.json`。
-图像缩放为指定尺寸，保持 RGB。q01/q99 统计仅来自真实帧；训练时将状态和
-动作归一化到 `[-1,1]`，常量维度映射为零。episode 末尾通过重复最后一个动作
-补齐动作块。已有数据目录不会被覆盖。
+The output contains episode NPZ files, `metadata.json`, and `dataset_statistics.json`.
+Images are resized to the specified dimensions and remain RGB. The q01/q99 statistics
+use only actual frames. During training, states and actions are normalized to `[-1,1]`,
+with constant dimensions mapped to zero. Action chunks at the end of an episode are
+padded by repeating the final action. Existing dataset directories are not overwritten.
 
-## 训练
+## Training
 
 ```bash
 mopa-train --dataset /path/to/dataset --output /path/to/checkpoint \
   --base-vlm /path/to/Qwen3-VL-4B-Instruct-Action --seed 0 --device cuda
 ```
 
-也可运行 `python -m mopa.training.cli`。默认训练 100000 步，batch size 为 8，
-骨干学习率为 `1e-5`，其余参数为 `1e-4`。`--config` 接受模型参数 JSON；
-query 数量、动作长度和关闭 base 的约束保持固定。完整选项见 `mopa-train --help`。
-CPU 使用 `--device cpu`，骨干精度自动设为 float32。
+You can also run `python -m mopa.training.cli`. Defaults are 100000 training steps,
+a batch size of 8, a backbone learning rate of `1e-5`, and a learning rate of `1e-4`
+for all other parameters. `--config` accepts a JSON file of model parameters;
+the query count, action horizon, and disabled base branch remain fixed.
+See `mopa-train --help` for all options. Use `--device cpu` for CPU execution;
+the backbone dtype is automatically set to float32.
 
-训练保存解析后的模型配置、关节布局、相机顺序、数据路径、随机种子与训练参数。
-复现时使用相同数据、Qwen 资产、依赖、配置和种子；GPU 数值结果仍可能随硬件变化。
-训练为单进程，不恢复 optimizer/scheduler。非空输出目录不会被覆盖。
+Training saves the resolved model configuration, joint layout, camera order, data paths,
+random seed, and training parameters. To reproduce a run, use the same data, Qwen assets,
+dependencies, configuration, and seed; GPU numerical results may still vary with hardware.
+Training uses a single process and does not restore optimizer or scheduler state.
+Nonempty output directories are not overwritten.
 
-## 推理
+## Inference
 
-checkpoint 包含以下三个文件，须一起保留：
+A checkpoint contains these three files, which must be kept together:
 
 ```text
 config.json
@@ -106,16 +115,18 @@ import numpy as np
 from mopa.runtime import Policy
 
 policy = Policy("/path/to/checkpoint", device="cuda")
-# rgb_views: 按 policy.cameras 排列的 uint8 RGB 图像列表。
-# joint_state: 按关节布局排列的原始状态向量 [D]。
+# rgb_views: List of uint8 RGB images in policy.cameras order.
+# joint_state: Raw state vector [D] in joint layout order.
 actions = policy.predict(
     images=[rgb_views],
     instructions=["Place the bowl on the plate."],
     states=np.asarray([joint_state], dtype=np.float32),
 )
-# actions.shape == (1, 4, policy.action_dim)，已恢复为原始动作量纲。
+# actions.shape == (1, 4, policy.action_dim), restored to the original action units.
 ```
 
-Qwen 资产移动后可设置 `Policy(..., base_vlm="/new/path")`，资产内容须与训练时一致。
-输入支持 batch，推理采用与训练相同的图像预处理和统计量。
-checkpoint 格式为 `xpl-mopa-arm-v1`；包含 base 分支或双套 query 的权重无法直接加载。
+If the Qwen assets are moved, set `Policy(..., base_vlm="/new/path")`; their contents
+must match those used during training. Batched inputs are supported, and inference
+uses the same image preprocessing and statistics as training.
+The checkpoint format is `xpl-mopa-arm-v1`; weights containing a base branch or two
+query sets cannot be loaded directly.
