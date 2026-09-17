@@ -1,5 +1,7 @@
 # MoPA
 
+**Contributor:** ZHUShaolong | **Paper:** [MoPA: Coordinated Mobile Manipulation via Subsystem-Specific Perception Alignment](https://mopa-policy.github.io/) | **arXiv:** [2609.12081](https://arxiv.org/abs/2609.12081) | **Original code:** Not yet released ([project page](https://mopa-policy.github.io/): "Code Coming soon")
+
 [MoPA: Coordinated Mobile Manipulation via Subsystem-Specific Perception Alignment](https://mopa-policy.github.io/)
 is adapted to RoboDojo with one bank of **8 manipulation queries**, the base branch disabled,
 and **4-step joint-action predictions**. Inputs are RGB images, a language instruction,
@@ -118,4 +120,6 @@ Model options in `deploy.yml`:
 | `execute_steps` | null | Actions to execute per chunk, from 1 to 4; defaults to all 4 |
 | `request_timeout_s` | 120 | RPC timeout in seconds |
 
-Language is read from `instruction`, with `instructions` as a fallback. `ee` actions are not supported.
+Language is read from `instruction`, with `instructions` as a fallback when `instruction`
+is missing or empty. Both fields accept a string or a list of strings; when multiple
+variants are provided, the first is used, matching data conversion. `ee` actions are not supported.

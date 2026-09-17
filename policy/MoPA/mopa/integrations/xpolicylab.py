@@ -51,7 +51,7 @@ class ModelAdapter:
             return []
         states = np.stack([pack_joint(obs["state"], self.dim_info) for obs in observations])
         images = [[obs["vision"][camera]["color"] for camera in self.policy.cameras] for obs in observations]
-        instructions = [obs.get("instruction") or obs.get("instructions") for obs in observations]
+        instructions = [instruction_text(obs) for obs in observations]
         actions = self.policy.predict(images, instructions, states)
         return [[unpack_joint(step, self.dim_info) for step in chunk[:self.execute_steps]] for chunk in actions]
 
@@ -86,25 +86,29 @@ class ModelAdapter:
 
 
 def instruction_text(data, fallback=None):
-    value = data.get("instruction", data.get("instructions", fallback))
-    if isinstance(value, np.ndarray):
-        value = value.tolist()
-    if isinstance(value, bytes):
-        value = value.decode("utf-8")
-    if isinstance(value, str):
-        try:
-            parsed = json.loads(value)
-            if isinstance(parsed, list):
-                value = parsed
-        except json.JSONDecodeError:
-            pass
-    if isinstance(value, (list, tuple)):
-        value = value[0] if value else fallback
-    if isinstance(value, bytes):
-        value = value.decode("utf-8")
-    if not isinstance(value, str) or not value.strip():
-        raise ValueError("Episode has no nonempty instruction; supply --instruction explicitly")
-    return value.strip()
+    """Select the first instruction variant for both conversion and inference."""
+    for value in (data.get("instruction"), data.get("instructions"), fallback):
+        if isinstance(value, np.ndarray):
+            value = value.tolist()
+        if isinstance(value, bytes):
+            value = value.decode("utf-8")
+        if isinstance(value, str):
+            try:
+                parsed = json.loads(value)
+                if isinstance(parsed, list):
+                    value = parsed
+            except json.JSONDecodeError:
+                pass
+        if isinstance(value, (list, tuple)):
+            value = value[0] if value else None
+        if isinstance(value, bytes):
+            value = value.decode("utf-8")
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+    raise ValueError(
+        "No nonempty instruction; provide instruction or instructions "
+        "(or --instruction during data conversion)"
+    )
 
 
 def convert_episode(source, dim_info, cameras, instruction=None):
