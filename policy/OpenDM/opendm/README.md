@@ -22,6 +22,8 @@ OpenDM provides DM0.5 model weights, training and inference scripts, dataset reg
 
 ## News
 
+- [2026-08-26] Released [DM05-MEM-Robodojo-Sim](https://huggingface.co/Dexmal/DM05-MEM-Robodojo-Sim), a fine-tuned model for ARX X5 bimanual manipulation tasks in RoboDojo-Sim. See [XPolicyLab PR #101](https://github.com/XPolicyLab/XPolicyLab/pull/101) for evaluation integration.
+- [2026-08-03] Published the [physical robot modification guide](docs/en/robot_platforms.md) for AgileX COBOT Magic and DOS-W1, documenting camera changes and the robot-name mapping used by the algorithm.
 - [2026-07-24] DM0.5 has added the SO101 pick cube fine-tuned checkpoint and the LoRA SFT workflow. See the [DM05 SO101 LoRA Training Guide](docs/en/dm05_so101_lora_training.md).
 - [2026-07-17] DM0.5 has open-sourced the RoboTwin2.0 generalist model checkpoint, along with the supervised fine-tuning (SFT) code built upon the DM0.5 pretrained model. See the [DM05 RoboTwin2.0 Training and Evaluation Guide](docs/en/dm05_robotwin2.md).
 - [2026-07-09] DM0.5 is officially released. Read the [technical blog](https://www.dexmal.com/blog/dm0.5/index_en.html) for more details.
@@ -35,6 +37,9 @@ OpenDM provides DM0.5 model weights, training and inference scripts, dataset reg
 | DM05-libero | LIBERO fine-tuned DM0.5 model for evaluation | [🤗 Hugging Face](https://huggingface.co/Dexmal/DM05-libero) / [🤖 ModelScope](https://modelscope.cn/models/Dexmal/DM05-libero) |
 | DM05-robotwin2 | RoboTwin2.0 fine-tuned DM0.5 model for evaluation | [🤗 Hugging Face](https://huggingface.co/Dexmal/DM05-robotwin2) / [🤖 ModelScope](https://modelscope.cn/models/Dexmal/DM05-robotwin2) |
 | DM05-SO101-Pick-Cube | SO101 fine-tuned DM0.5 model for evaluation | [🤗 Hugging Face](https://huggingface.co/Dexmal/DM05-SO101-Pick-Cube) / [🤖 ModelScope](https://modelscope.cn/models/Dexmal/DM05-SO101-Pick-Cube) |
+| DM05-VLA-Arena | VLA-Arena fine-tuned DM0.5 model for evaluation | [🤗 Hugging Face](https://huggingface.co/Dexmal/DM05-Vla-Arena) / [🤖 ModelScope](https://modelscope.cn/models/Dexmal/DM05-Vla-Arena) |
+| DM05-Table30v2 | RoboChallenge Table 30 v2 DM0.5 model collection for evaluation | [🤗 Hugging Face](https://huggingface.co/collections/Dexmal/dm05-table30v2) / [🤖 ModelScope](https://www.modelscope.cn/collections/Dexmal/DM05-Table30v2) |
+| DM05-MEM-Robodojo-Sim | RoboDojo-Sim fine-tuned DM0.5 model for ARX X5 bimanual manipulation tasks | [🤗 Hugging Face](https://huggingface.co/Dexmal/DM05-MEM-Robodojo-Sim) / [🤖 ModelScope](https://modelscope.cn/models/Dexmal/DM05-MEM-Robodojo-Sim) |
 
 Example checkpoint download:
 
@@ -44,18 +49,100 @@ huggingface-cli download Dexmal/DM05 --local-dir ./checkpoints/DM05
 
 ## Benchmark Results
 
-### LIBERO Results
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Benchmark</th>
+      <th>Metric</th>
+      <th>DM0.5</th>
+      <th>Pi0</th>
+      <th>Pi0.5</th>
+      <th>GROOT-N1.7</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="8"><strong>Simulated Tasks</strong></td>
+      <td><strong><a href="docs/en/dm05_libero.md">LIBERO</a></strong></td>
+      <td><strong>SR</strong></td>
+      <td align="right"><strong>99.0%</strong></td>
+      <td align="right">94.4%</td>
+      <td align="right">96.9%</td>
+      <td align="right">97.0%</td>
+    </tr>
+    <tr>
+      <td rowspan="2"><strong><a href="docs/en/dm05_robotwin2.md">RoboTwin2.0</a></strong></td>
+      <td><strong>Clean</strong></td>
+      <td align="right"><strong>93.6%</strong></td>
+      <td align="right">65.9%</td>
+      <td align="right">82.7%</td>
+      <td align="right">-</td>
+    </tr>
+    <tr>
+      <td><strong>Rand</strong></td>
+      <td align="right"><strong>93.3%</strong></td>
+      <td align="right">58.4%</td>
+      <td align="right">76.8%</td>
+      <td align="right">-</td>
+    </tr>
+    <tr>
+      <td rowspan="3"><strong><a href="docs/en/dm05_vla_arena.md">VLA-Arena</a></strong></td>
+      <td><strong>L0</strong></td>
+      <td align="right"><strong>89.0%</strong></td>
+      <td align="right">82.3%</td>
+      <td align="right">64.3%</td>
+      <td align="right">-</td>
+    </tr>
+    <tr>
+      <td><strong>L1</strong></td>
+      <td align="right"><strong>53.6%</strong></td>
+      <td align="right">32.2%</td>
+      <td align="right">35.6%</td>
+      <td align="right">-</td>
+    </tr>
+    <tr>
+      <td><strong>L2</strong></td>
+      <td align="right"><strong>44.1%</strong></td>
+      <td align="right">11.4%</td>
+      <td align="right">24.5%</td>
+      <td align="right">-</td>
+    </tr>
+    <tr>
+      <td rowspan="2"><strong><a href="docs/en/dm05_robodojo.md">RoboDojo-Sim</a></strong></td>
+      <td><strong>Score</strong></td>
+      <td align="right"><strong>24.90</strong></td>
+      <td align="right">3.48</td>
+      <td align="right">11.41</td>
+      <td align="right">2.85</td>
+    </tr>
+    <tr>
+      <td><strong>SR</strong></td>
+      <td align="right"><strong>19.34%</strong></td>
+      <td align="right">1.53%</td>
+      <td align="right">6.91%</td>
+      <td align="right">1.31%</td>
+    </tr>
+    <tr>
+      <td rowspan="2"><strong>Real-World Tasks</strong></td>
+      <td rowspan="2"><strong><a href="docs/en/dm05_robochallenge.md">RoboChallenge<br>Table30V2</a></strong></td>
+      <td><strong>Score</strong></td>
+      <td align="right"><strong>54.42</strong></td>
+      <td align="right">-</td>
+      <td align="right">31.48</td>
+      <td align="right">-</td>
+    </tr>
+    <tr>
+      <td><strong>SR</strong></td>
+      <td align="right"><strong>43.0%</strong></td>
+      <td align="right">-</td>
+      <td align="right">14.3%</td>
+      <td align="right">-</td>
+    </tr>
+  </tbody>
+</table>
 
-| Method | Spatial | Object | Goal | Long | Average | Reference |
-| --- | ---: | ---: | ---: | ---: | ---: | --- |
-| DM0.5 | 99.0 | 99.8 | 99.6 | 97.4 | 99.0 | [Training & Evaluation](docs/en/dm05_libero.md) |
-
-
-### RoboTwin 2.0 Results
-
-| Method | Clean | Randomized | Average | Reference |
-| --- | ---: | ---: | ---: | --- |
-| DM0.5 | 93.6 | 93.3 | 93.5 | [Training & Evaluation](docs/en/dm05_robotwin2.md) |
+Click a benchmark name to view the corresponding DM05 training/evaluation guide or evaluation integration. The RoboDojo-Sim leaderboard numbers are for the released [DM05-MEM-Robodojo-Sim](https://huggingface.co/Dexmal/DM05-MEM-Robodojo-Sim) generalist. The linked guide is the `cover_blocks` single-task SFT reference; its training settings do not reproduce the table scores.
 
 
 ## Quick Start
@@ -76,7 +163,12 @@ Conda (optional, only required for local pip installation)
 Recommended GPUs:
 RTX 4090, A100, H100, H20
 8 GPUs are recommended for training, and 1 GPU is sufficient for deployment inference.
+On lower-memory GPUs such as RTX 4090, Full SFT may fail due to peak memory use during FSDP initialization; LoRA fine-tuning is recommended.
 ```
+
+The base environment below covers training and the default inference backend.
+The fast backend additionally requires TensorRT Python/runtime, Triton, and
+PyTorch FlexAttention support.
 
 ### Docker Installation
 
@@ -96,6 +188,10 @@ conda activate opendm
 pip install -e .
 ```
 
+The commands above create the base OpenDM environment. Before using
+`--inference-config.backend fast`, continue with the fast-backend environment
+layer below.
+
 ### Local Installation
 
 ```bash
@@ -113,67 +209,69 @@ cd opendm
 pip install -e .
 ```
 
+### Fast Backend Environment Layer
+
+The Docker and local installation steps above are not enough for
+`--inference-config.backend fast`. Activate the same `opendm` environment and
+install the fast inference dependency layer:
+
+```bash
+pip install -e ".[fast-infer]"
+```
+
+The `fast-infer` extra installs `onnx`, `triton==3.6.0`, and `tensorrt`. Fast
+startup is not a best-effort acceleration toggle: OpenDM builds or loads a
+TensorRT vision engine, dispatches Triton prefix/suffix kernels, and forces the
+LLM attention backend to `flex_attention`. TensorRT, Triton, and PyTorch
+FlexAttention support are therefore required prerequisites for fast inference.
+
+Before launching the fast backend, verify the active environment:
+
+```bash
+python -c "import tensorrt"
+python -c "import triton"
+python -c "import torch.nn.attention.flex_attention"
+```
+
+Use a PyTorch build that provides `torch.nn.attention.flex_attention` (for
+example `torch>=2.5`). Also expect the first fast launch for each
+checkpoint/image layout to spend extra time exporting ONNX and building the
+TensorRT engine before the HTTP service becomes ready.
+
 ## Inference
 
-After installing the environment and initializing the source code, you can start the model inference service. The service loads the specified checkpoint and exposes an HTTP endpoint for benchmark clients or other applications to request action predictions. Use a checkpoint that contains `norm_stats.json`, or make sure the matching stats already exist under `./norm_stats/`.
+After downloading the DM05 base pretrained checkpoint, start its default
+inference service with:
 
 ```bash
 script/dm05_launcher.sh \
+  --exp opendm/exp/dm05_exp.py \
   --task inference \
-  --nproc_per_node 1 \
   --model-config.model-name-or-path ./checkpoints/DM05 \
   --model-config.chunk-size 50 \
+  --inference-config.output-action-dim 14 \
+  --inference-config.image-prompts "Head" "Left wrist" "Right wrist" \
   --inference-config.port 7891
 ```
 
-Arguments:
-
-- `--task`: task type. Use `inference` for inference.
-- `--nproc_per_node`: number of GPUs on a single node. 1 GPU is sufficient for inference.
-- `--model-config.model-name-or-path`: model checkpoint path.
-- `--model-config.chunk-size`: action chunk length.
-- `--inference-config.port`: inference service port.
-
-During inference, the service first looks for `norm_stats.json` in the checkpoint directory. If it is not found, it falls back to the matching file under `./norm_stats/`, which is normally generated during training for the same dataset, action mode, and chunk size.
-
-After the service starts, send a test request to verify that the endpoint returns a valid response:
-
-```bash
-bash tests/curl_demo.sh http://SERVER_IP:7891/process_frame
-```
-
-`/process_frame` accepts a `multipart/form-data` request:
-
-- `text`: task instruction.
-- `states`: JSON array of the current robot state. The dimension and order must match the model's training and normalization statistics.
-- `image`: image files, one field per configured image key. The order must match `--inference-config.image-keys`.
-- `robot_type`: optional built-in robot type. Currently only `DOS W1` is supported. It provides the robot state description when relative actions need to be converted back to absolute actions.
-- `control_mode` and `speed`: text conditioning fields required when directly serving the pretrained `Dexmal/DM05` model. They are normally not required for SFT checkpoints unless your SFT data was trained with the same fields.
-
-A successful response has the following shape.
-
-```text
-{
-  "response": [
-    [0.012, -0.034, 0.18, "..."],
-    [0.015, -0.031, 0.17, "..."],
-    ...
-  ]
-}
-```
+This example uses three images and a 14-dimensional state/action. See the
+[DM05 Inference Guide](docs/en/dm05_inference.md) for robot profile selection,
+HTTP request fields, fine-tuned checkpoint commands, fast backend setup,
+runtime constraints, and troubleshooting.
+Use `/v1/infer` for new integrations. The older `/process_frame` multipart API remains available as a legacy compatibility path and will be phased out over time.
 
 ## Training
 
 ### Data Preparation
 
-Prepare data files and dataset configuration according to the dexbotic [Data Guide](https://github.com/dexmal/dexbotic/blob/main/docs/Data.md). Make sure `--data-config.dataset-name` in the training command matches the registered dataset name.
+Prepare data files and register the dataset according to the OpenDM [Data Guide](docs/en/data.md). Make sure `--data-config.dataset-name` in the training command matches the registered dataset name.
 
 The training script selects a dataset through `--data-config.dataset-name`. Before training, register your dataset in the project dataset registry. We recommend using an existing file such as `opendm/dataset/demo.py` as a reference, then creating a new dataset config file such as `opendm/dataset/my_robot.py` and updating the dataset name, data paths, image keys, and state description.
 
 ```python
 # opendm/dataset/my_robot.py
 
-from opendm.constants.robot import RobotStateDesc
+from opendm.constants.robot import RobotStateDesc, RobotType
 from opendm.dataset.register import register_dataset
 
 MY_ROBOT_STATE_DESC = (
@@ -189,6 +287,8 @@ register_dataset(
             "jsonl_dir": "./assets/my_robot/",
             "image_dir": "./assets/my_robot/",
             "image_keys": ["images_1", "images_2", "images_3"],
+            "image_prompts": ["Head", "Left wrist", "Right wrist"],
+            "robot_type": RobotType.ALOHA,
             "state_desc": MY_ROBOT_STATE_DESC,
         },
     }
@@ -201,9 +301,11 @@ Field descriptions:
 - `jsonl_dir`: directory containing training `jsonl` files.
 - `image_dir`: directory containing image files.
 - `image_keys`: image field names to load from the dataset.
+- `image_prompts`: prompt labels zipped with loaded images in order (e.g. Head / Left wrist).
+- `robot_type`: robot embodiment used to select the state description and matching normalization profile.
 - `state_desc`: semantic description of each state/action dimension, such as robot joints and grippers.
 
-During training, if the corresponding normalization statistics file does not exist, the script automatically computes it from the current dataset, action mode, and chunk size, then saves it under `./norm_stats/`.
+During training, if the corresponding normalization statistics file does not exist, the script automatically computes it from the current experiment data, action mode, and chunk size, then saves it under `./norm_stats/`. Data sources for the same robot type share one profile within an experiment; different robot types are stored separately in the same file.
 
 ### Start Training
 
@@ -211,42 +313,71 @@ After environment setup, source initialization, and data preparation, start mode
 
 ```bash
 script/dm05_launcher.sh \
+  --exp playground/dm05_sft_demo.py \
   --task train \
   --nproc_per_node 8 \
   --data-config.dataset-name my_robot \
   --model-config.model-name-or-path ./checkpoints/DM05 \
-  --model-config.chunk-size 50
+  --model-config.chunk-size 50 \
+  --trainer-config.num-train-steps 50000
 ```
 
 Arguments:
 
+- `--exp playground/dm05_sft_demo.py`: this example uses the DM05 SFT demo configuration as its training entry point. Copy and adapt this configuration when your dataset requires different settings.
 - `--task train`: run in training mode.
 - `--nproc_per_node 8`: number of training processes on a single node, usually matching the number of GPUs.
 - `--data-config.dataset-name my_robot`: dataset name for training. It must match the project dataset configuration.
 - `--model-config.model-name-or-path ./checkpoints/DM05`: initial model checkpoint path.
 - `--model-config.chunk-size 50`: action chunk length predicted by the model.
+- `--trainer-config.num-train-steps 50000`: total number of training steps.
+
+#### Enable Weights & Biases Logging
+
+W&B logging is optional and is enabled only when a project name is provided. OpenDM already includes the `wandb` dependency.
+
+1. Authenticate on the training machine:
+
+   ```bash
+   wandb login
+   ```
+
+   For a non-interactive job, set `WANDB_API_KEY` instead. Do not commit the API key to the repository.
+
+2. Add the following option to the existing training command:
+
+   ```text
+   --trainer-config.wandb-project <project-name>
+   ```
+
+   Replace `<project-name>` with the W&B project to use, for example `dm05-sft`. Remove this option to disable W&B logging.
 
 Training logs will include data loading, model initialization, loss values, and checkpoint saving. Before running a full training job, verify that the data path, model checkpoint path, and GPU count are correctly configured.
 
 ## DM05 SFT with Demo and Custom Data
 
-Start by running a complete DM05 SFT workflow with the built-in demo data and `playground/dm05_sft_demo.py`. After you are familiar with the data format, normalization statistics, training, inference, and service validation flow, replace the demo dataset with your own robot data for SFT. See [DM05 SFT and Validation Guide](docs/en/dm05_finetuning.md).
+Start by running a complete DM05 SFT workflow with the built-in demo data and `playground/dm05_sft_demo.py`. After you are familiar with the data format, normalization statistics, training, inference, and service validation flow, replace the demo dataset with your own robot data for SFT. See [DM05 SFT and Validation Guide](docs/en/dm05_finetuning.md). For DM05-MEM demo SFT, use `playground/dm05_mem_sft_demo.py` and see the [DM05-MEM SFT and Validation Guide](docs/en/dm05_mem_sft.md).
 
 ## Benchmark Fine-Tuning Reference
 
-Use the benchmark fine-tuning guides as end-to-end references for fine-tuning DM05. They cover data and model preparation, SFT training, inference service startup, and benchmark evaluation.
+Use the benchmark fine-tuning guides as end-to-end references for data preparation, SFT training, and benchmark evaluation. Start the service with the [DM05 Inference Guide](docs/en/dm05_inference.md).
 
 - LIBERO: [DM05 LIBERO Training and Evaluation Guide](docs/en/dm05_libero.md)
 - RoboTwin2.0: [DM05 RoboTwin2.0 Training and Evaluation Guide](docs/en/dm05_robotwin2.md)
+- VLA-Arena: [DM05 VLA-Arena Training and Evaluation Guide](docs/en/dm05_vla_arena.md)
+- RoboDojo-Sim: [DM05 RoboDojo-Sim Training and Evaluation Guide](docs/en/dm05_robodojo.md)
 - SO101: [DM05 SO101 LoRA Training Guide](docs/en/dm05_so101_lora_training.md)
+- RoboChallenge Table 30 v2: [DM05 RoboChallenge Table 30 v2 Inference Guide](docs/en/dm05_robochallenge.md)
 
 ## Guides
 
 - Download models: see [Models](#models) or visit [Dexmal Hugging Face](https://huggingface.co/Dexmal).
-- Prepare data: see the [Data Guide](https://github.com/dexmal/dexbotic/blob/main/docs/Data.md).
-- Start inference service: see [Inference](#inference).
+- Review physical robot changes: see the [AgileX COBOT Magic and DOS-W1 Modification Guide](docs/en/robot_platforms.md).
+- Prepare data: see the [OpenDM Data Guide](docs/en/data.md).
+- Start inference service: see the [DM05 Inference Guide](docs/en/dm05_inference.md).
 - DM05 SFT with demo or custom data: see [DM05 SFT and Validation Guide](docs/en/dm05_finetuning.md).
-- Benchmark training and evaluation: see the [DM05 LIBERO Training and Evaluation Guide](docs/en/dm05_libero.md) and [DM05 RoboTwin2.0 Training and Evaluation Guide](docs/en/dm05_robotwin2.md); for LoRA SFT, see [DM05 LIBERO LoRA Training](docs/en/dm05_libero_lora_training.md) and [DM05 SO101 LoRA Training Guide](docs/en/dm05_so101_lora_training.md).
+- DM05-MEM SFT with demo data: see [DM05-MEM SFT and Validation Guide](docs/en/dm05_mem_sft.md).
+- Benchmark training and evaluation: see the [DM05 LIBERO Training and Evaluation Guide](docs/en/dm05_libero.md), [DM05 RoboTwin2.0 Training and Evaluation Guide](docs/en/dm05_robotwin2.md), [DM05 RoboDojo-Sim Training and Evaluation Guide](docs/en/dm05_robodojo.md), and [DM05 RoboChallenge Table 30 v2 Inference Guide](docs/en/dm05_robochallenge.md); for LoRA SFT, see [DM05 LIBERO LoRA Training](docs/en/dm05_libero_lora_training.md) and [DM05 SO101 LoRA Training Guide](docs/en/dm05_so101_lora_training.md).
 
 ## Community and Support
 
