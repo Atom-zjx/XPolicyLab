@@ -947,22 +947,8 @@ class DM05ForConditionalGeneration(DMPreTrainedModel):
         history_mask: torch.BoolTensor | None = None,
         **kwargs,
     ) -> torch.Tensor:
-        if self._can_use_suffix_graph(input_ids):
-            with self._suffix_graph_lock:
-                return self._inference_action_impl(
-                    input_ids=input_ids,
-                    attention_mask=attention_mask,
-                    pixel_values=pixel_values,
-                    token_type_ids=token_type_ids,
-                    states=states,
-                    image_masks=image_masks,
-                    diffusion_steps=diffusion_steps,
-                    past_key_values=past_key_values,
-                    action_mask=action_mask,
-                    history_pixel_values=history_pixel_values,
-                    history_mask=history_mask,
-                    **kwargs,
-                )
+        # Cached suffix graphs can retain autocast weight buffers beyond their lifetime.
+        # Keep SDPA and the FP32/BF16 precision policy, without graph replay.
         return self._inference_action_impl(
             input_ids=input_ids,
             attention_mask=attention_mask,
@@ -1016,18 +1002,6 @@ class DM05ForConditionalGeneration(DMPreTrainedModel):
             device=device,
             dtype=dtype,
         )
-        if self._can_use_suffix_graph(x_t):
-            graph_result = self._run_suffix_graph(
-                input_ids=input_ids,
-                kv_cache=kv_cache,
-                prefix_len=prefix_len,
-                initial_noise=x_t,
-                diffusion_steps=diffusion_steps,
-                action_mask=action_mask,
-            )
-            if graph_result is not None:
-                return graph_result
-
         time_val = 1.0
         dt = -1.0 / diffusion_steps
         for _ in range(diffusion_steps):
@@ -1397,7 +1371,8 @@ class DM05ForConditionalGeneration(DMPreTrainedModel):
         x_t = profile.state
         if profile.action_mask is not None:
             x_t = x_t * profile.action_mask
-        suffix_embeds = self.model.action_in_proj(x_t)
+        # Match eager inference: keep action projections outside BF16 autocast.
+        suffix_embeds = self._action_input_proj(x_t)
         adarms_cond = self._build_adarms_cond(profile.time, suffix_embeds.dtype)
         suffix_out = self.model.action_expert(
             suffix_embeds=suffix_embeds,
@@ -1407,7 +1382,7 @@ class DM05ForConditionalGeneration(DMPreTrainedModel):
             prefix_cache_values=profile.prefix_cache_values,
             adarms_cond=adarms_cond,
         )
-        updated = x_t + self.model.action_out_proj(suffix_out) * (
+        updated = x_t + self._action_output_proj(suffix_out) * (
             -1.0 / profile.diffusion_steps
         )
         profile.state.copy_(updated)
