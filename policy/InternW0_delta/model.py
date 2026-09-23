@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 import sys
+from functools import partial
 from pathlib import Path
 from typing import Any
 
@@ -104,13 +105,16 @@ def build_training_exact_canvas(
 
 
 class Model(ModelTemplate):
-    """XPolicyLab model adapter for one stateful RoboDojo environment."""
+    """XPolicyLab model adapter with one stateful WAM session per RoboDojo environment."""
 
     __init__ = StatefulWAMAdapter.__init__
     _adapt_obs = StatefulWAMAdapter._adapt_obs
+    _ingest = StatefulWAMAdapter._ingest
     update_obs = StatefulWAMAdapter.update_obs
+    _session_for = StatefulWAMAdapter._session_for
     update_obs_batch = StatefulWAMAdapter.update_obs_batch
     _dummy_actions = StatefulWAMAdapter._dummy_actions
+    _predict = StatefulWAMAdapter._predict
     get_action = StatefulWAMAdapter.get_action
     get_action_batch = StatefulWAMAdapter.get_action_batch
     get_timing_rollout = StatefulWAMAdapter.get_timing_rollout
@@ -257,7 +261,8 @@ class Model(ModelTemplate):
                     non_blocking=True,
                 )
 
-        self.session = TrainingExactSession(self.runtime, session_cfg)
+        self.session_factory = partial(TrainingExactSession, self.runtime, session_cfg)
+        self.session = self.session_factory()
         print(
             "[InternW0_delta] initialized "
             f"checkpoint={checkpoint_path} horizon={self.action_horizon} "

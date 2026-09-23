@@ -1,4 +1,4 @@
-"""One-forward real-weight smoke test for the packaged evaluation runtime."""
+"""Real-weight smoke test for the single-environment and batched evaluation paths."""
 
 from __future__ import annotations
 
@@ -62,21 +62,27 @@ def main() -> None:
         "right_ee_joint_state": np.zeros(1, dtype=np.float32),
     }
     image = np.zeros((480, 640, 3), dtype=np.uint8)
-    model.update_obs(
-        {
-            "vision": {
-                "cam_head": {"color": image},
-                "cam_left_wrist": {"color": image},
-                "cam_right_wrist": {"color": image},
-            },
-            "state": state,
-            "instruction": "stack the bowls",
-        }
-    )
+    obs = {
+        "vision": {
+            "cam_head": {"color": image},
+            "cam_left_wrist": {"color": image},
+            "cam_right_wrist": {"color": image},
+        },
+        "state": state,
+        "instruction": "stack the bowls",
+    }
+    model.update_obs(obs)
     actions = model.get_action()
     if len(actions) != 10:
         raise RuntimeError(f"Expected 10 executed actions, got {len(actions)}")
     print("REAL_WEIGHT_SMOKE_OK actions=10", flush=True)
+
+    model.reset()
+    model.update_obs_batch([{**obs, "env_idx": 0}, {**obs, "env_idx": 1}])
+    chunk_lengths = [len(chunk) for chunk in model.get_action_batch([0, 1])]
+    if chunk_lengths != [10, 10]:
+        raise RuntimeError(f"Expected two 10-action chunks, got {chunk_lengths}")
+    print("REAL_WEIGHT_BATCH_SMOKE_OK envs=2 actions=10", flush=True)
 
 
 if __name__ == "__main__":

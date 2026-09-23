@@ -2,7 +2,7 @@
 
 **Contributor:** Xingyu Miao | **Paper:** Not released | **arXiv:** Not released | **Original code:** evaluation-only inference closure in `wam_runtime/`
 
-This adapter reproduces the RoboDojo evaluation of InternW0_delta. It uses a 32-step action horizon, replans after 10 executed actions, and runs 10 denoising steps. Training code and training datasets are intentionally not included. The vendored `wam_runtime/` contains only the model and online-inference modules required by this evaluation.
+This adapter reproduces the RoboDojo evaluation of InternW0_delta for `env_cfg_type=arx_x5` with `action_type=joint`, using a 32-step action horizon, replanning after 10 executed actions, and 10 denoising steps. Training code and training datasets are intentionally not included; the vendored `wam_runtime/` contains only the model and online-inference modules required by this evaluation.
 
 Shared conventions — argument meanings, checkpoint naming, split-machine deployment, `EVAL_ENV_TYPE` — are documented in the [XPolicyLab README](../../README.md). Official results: [RoboDojo LeaderBoard](https://robodojo-benchmark.com/LeaderBoard).
 
@@ -33,13 +33,21 @@ Training code is scheduled for release before the end of October 2026.
 ## Evaluation
 
 ```bash
-bash eval.sh RoboDojo stack_bowls robodojo arx_x5 joint 0 \
-  0 0 internw0-delta <robodojo_env>
+bash eval.sh <bench_name> <task_name> <ckpt_name> <env_cfg_type> <action_type> <seed> \
+  <policy_gpu_id> <env_gpu_id> <policy_conda_env> <eval_env_conda_env>
+
+# Example: evaluate checkpoints/robodojo.pt on stack_bowls
+bash eval.sh RoboDojo stack_bowls robodojo arx_x5 joint 0 0 0 internw0-delta <eval_env_conda_env>
 ```
 
-Use `EVAL_ENV_TYPE=debug` for the offline XPolicyLab wiring test. Use the
-standard XPolicyLab split-machine scripts in this directory when the policy
-server and simulator run on different hosts.
+The checkpoint comes from `checkpoint_path` in `deploy.yml` (or
+`WAM_CHECKPOINT_PATH`), so `ckpt_name` only labels the run. For the offline
+wiring check without model weights, run
+`EVAL_ENV_TYPE=debug WAM_ALLOW_DUMMY_POLICY=true bash eval.sh ...` with the
+same arguments; leave `EVAL_ENV_TYPE` unset or set `EVAL_ENV_TYPE=sim` for
+RoboDojo simulation. For split-machine deployment via
+`setup_eval_policy_server.sh` / `setup_eval_env_client.sh`, follow the
+[Deployment Flow](../../README.md#-deployment-flow).
 
 ## Model Assets
 
@@ -88,9 +96,18 @@ exact expected artifact paths and hashes are recorded in
 ## Configuration
 
 All model locations are resolved from this policy directory by default.
-`deploy.yml` exposes
-the checkpoint, base-model and RynnBrain paths for installations that need to
-override the default relative layout.
+Adapter-specific `deploy.yml` keys:
+
+- Artifact paths: `checkpoint_path`, `base_model_dir`, `vlm_model_path`,
+  `dataset_stats_path`, `train_config_path`.
+- Inference contract of the checkpoint (keep the defaults to reproduce the
+  reported result): `device`, `mixed_precision`, `action_horizon`,
+  `replan_steps`, `num_inference_steps`, `action_hz`, `text_cfg_scale`,
+  `negative_prompt`, `rand_device`, `tiled`.
+- Diagnostics: `timing_enabled`, `default_instruction` (used when an
+  observation carries no instruction), `allow_dummy_policy`.
+
+`setup_eval_policy_server.sh` reads these environment variables:
 
 | Environment variable | Override |
 | --- | --- |
@@ -104,10 +121,16 @@ override the default relative layout.
 Evaluation uses the checkpoint's z-score `global_mean` / `global_std`
 statistics, RGB input without training-time color jitter, discrete Action
 RoPE, physical-time RoPE disabled, fan-in calibration disabled, and the
-recent-KV-cache mask fix. The policy is stateful and therefore uses one
-environment per policy server (`eval_batch: false`).
+recent-KV-cache mask fix.
 
-## Reference Result
+## Notes
 
-The 54-task, 6,300-episode reference run completed 1,444 successful episodes:
-22.92% success rate and 30.35 mean score.
+- Batched evaluation (`eval_batch: true`): the policy is stateful, so the
+  adapter keeps one WAM session (memory frames, pending actions, step counter)
+  per `env_idx`, and every environment replans through the same single-sample
+  inference path as `eval_batch: false`; GPU inference runs one environment
+  at a time. Batched observations must carry `env_idx`, as the RoboDojo and
+  debug environment clients do.
+- Reference result: a self-run, single-environment evaluation over 54 tasks
+  and 6,300 episodes completed 1,444 successful episodes — 22.92% success rate
+  and 30.35 mean score.

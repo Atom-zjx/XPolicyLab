@@ -52,8 +52,25 @@ def rgb(value: Any, name: str) -> np.ndarray:
     return np.ascontiguousarray(image)
 
 
+def env_index(obs: dict[str, Any]) -> int:
+    if "env_idx" not in obs:
+        raise ValueError("Batched observations must carry env_idx")
+    return int(obs["env_idx"])
+
+
+def env_indices(value: Any) -> list[int]:
+    indices = [int(item) for item in np.asarray(value).reshape(-1)]
+    if len(set(indices)) != len(indices):
+        raise ValueError(f"Duplicate env_idx values: {indices}")
+    return indices
+
+
 class StatefulWAMAdapter(ModelTemplate):
-    """Single-environment WAM adapter; subclasses provide model loading."""
+    """Stateful WAM adapter; subclasses provide model loading.
+
+    Batched evaluation keeps one session per env_idx, so memory frames,
+    pending actions and step counters never cross environments.
+    """
 
     def __init__(self, model_cfg: dict[str, Any]):
         self.model_cfg = dict(model_cfg)
@@ -63,10 +80,19 @@ class StatefulWAMAdapter(ModelTemplate):
             raise ValueError("This checkpoint was trained for joint actions")
 
         self.robot_action_dim_info = get_robot_action_dim_info(self.env_cfg_type)
-        if list(self.robot_action_dim_info.get("arm_dim", [])) != [6, 6]:
+        arm_dim = list(self.robot_action_dim_info.get("arm_dim", []))
+        ee_dim = list(self.robot_action_dim_info.get("ee_dim", []))
+        if arm_dim != [6, 6]:
             raise ValueError(f"Checkpoint requires dual ARX-X5 arms: {self.robot_action_dim_info}")
-        if list(self.robot_action_dim_info.get("ee_dim", [])) != [1, 1]:
+        if ee_dim != [1, 1]:
             raise ValueError(f"Checkpoint requires one gripper scalar per arm: {self.robot_action_dim_info}")
+        self.gripper_slices = []
+        offset = 0
+        for arm, ee in zip(arm_dim, ee_dim):
+            offset += arm
+            self.gripper_slices.append(slice(offset, offset + ee))
+            offset += ee
+        self.action_dim = offset
 
         self.default_instruction = str(
             self.model_cfg.get("default_instruction") or "follow the instruction"
@@ -75,6 +101,10 @@ class StatefulWAMAdapter(ModelTemplate):
         self.last_instruction = self.default_instruction
         self.allow_dummy_policy = as_bool(self.model_cfg.get("allow_dummy_policy", False))
         self.session = None
+        self.session_factory = None
+        self.env_sessions: dict[int, Any] = {}
+        self.env_obs: dict[int, tuple[dict[str, Any], str]] = {}
+        self.env_order: list[int] = []
         self.runtime = None
         self.action_horizon = int(self.model_cfg.get("action_horizon") or 32)
         self.replan_steps = int(self.model_cfg.get("replan_steps") or 10)
@@ -97,8 +127,10 @@ class StatefulWAMAdapter(ModelTemplate):
             source_type="obs",
             state_type="state",
         ).astype(np.float32)
-        if state.shape != (14,) or not np.isfinite(state).all():
-            raise ValueError(f"Expected a finite 14D RoboDojo state, got {state.shape}")
+        if state.shape != (self.action_dim,) or not np.isfinite(state).all():
+            raise ValueError(
+                f"Expected a finite {self.action_dim}D RoboDojo state, got {state.shape}"
+            )
         return {
             "observation": {
                 "head_camera": {"rgb": rgb(vision["cam_head"]["color"], "cam_head")},
@@ -112,53 +144,91 @@ class StatefulWAMAdapter(ModelTemplate):
             "joint_action": {"vector": state},
         }
 
-    def update_obs(self, obs):
+    def _ingest(self, session, obs: dict[str, Any]) -> tuple[dict[str, Any], str]:
         adapted = self._adapt_obs(obs)
-        self.last_obs = adapted
-        self.last_instruction = instruction(obs, self.default_instruction)
-        if self.session is not None and self.session.pending_model_actions:
-            self.session.update_obs(adapted)
+        if session is not None and session.pending_model_actions:
+            session.update_obs(adapted)
+        return adapted, instruction(obs, self.default_instruction)
+
+    def update_obs(self, obs):
+        self.last_obs, self.last_instruction = self._ingest(self.session, obs)
+
+    def _session_for(self, env_idx: int):
+        if self.allow_dummy_policy:
+            return None
+        if env_idx not in self.env_sessions:
+            self.env_sessions[env_idx] = self.session_factory()
+        return self.env_sessions[env_idx]
 
     def update_obs_batch(self, obs_list):
-        del obs_list
-        raise NotImplementedError("Use eval_batch=false for stateful WAM inference")
+        if isinstance(obs_list, dict):
+            obs_list = [obs_list]
+        order = env_indices([env_index(obs) for obs in obs_list])
+        if not order:
+            raise ValueError("update_obs_batch requires at least one observation")
+        for env_idx, obs in zip(order, obs_list):
+            self.env_obs[env_idx] = self._ingest(self._session_for(env_idx), obs)
+        self.env_order = order
 
     def _dummy_actions(self) -> list[dict[str, np.ndarray]]:
-        zeros = np.zeros((self.replan_steps, 14), dtype=np.float32)
+        zeros = np.zeros((self.replan_steps, self.action_dim), dtype=np.float32)
         return unpack_robot_state(
             zeros, self.action_type, self.robot_action_dim_info, source_type="obs"
+        )
+
+    def _predict(self, session, observation: dict[str, Any], instruction_text: str):
+        if self.allow_dummy_policy:
+            return self._dummy_actions()
+        if session.pending_model_actions:
+            raise RuntimeError("Previous actions have not all been acknowledged")
+        packed = np.asarray(
+            session.get_action(
+                {"observation": observation, "instruction": instruction_text}
+            ),
+            dtype=np.float32,
+        )
+        if (
+            packed.ndim != 2
+            or packed.shape[1] != self.action_dim
+            or not np.isfinite(packed).all()
+        ):
+            raise ValueError(f"WAM returned an invalid action chunk: {packed.shape}")
+        for gripper in self.gripper_slices:
+            packed[:, gripper] = np.clip(packed[:, gripper], 0.0, 1.0)
+        return unpack_robot_state(
+            packed, self.action_type, self.robot_action_dim_info, source_type="obs"
         )
 
     def get_action(self):
         if self.last_obs is None:
             raise ValueError("Call update_obs before get_action")
-        if self.allow_dummy_policy:
-            return self._dummy_actions()
-        if self.session.pending_model_actions:
-            raise RuntimeError("Previous actions have not all been acknowledged")
-        packed = np.asarray(
-            self.session.get_action(
-                {"observation": self.last_obs, "instruction": self.last_instruction}
-            ),
-            dtype=np.float32,
-        )
-        if packed.ndim != 2 or packed.shape[1] != 14 or not np.isfinite(packed).all():
-            raise ValueError(f"WAM returned an invalid action chunk: {packed.shape}")
-        packed[:, 6] = np.clip(packed[:, 6], 0.0, 1.0)
-        packed[:, 13] = np.clip(packed[:, 13], 0.0, 1.0)
-        return unpack_robot_state(
-            packed, self.action_type, self.robot_action_dim_info, source_type="obs"
-        )
+        return self._predict(self.session, self.last_obs, self.last_instruction)
 
     def get_action_batch(self, env_idx_list=None):
-        del env_idx_list
-        raise NotImplementedError("Batched stateful WAM inference is disabled")
+        order = self.env_order if env_idx_list is None else env_indices(env_idx_list)
+        missing = [env_idx for env_idx in order if env_idx not in self.env_obs]
+        if not order or missing:
+            raise ValueError(
+                f"Call update_obs_batch before get_action_batch (missing env_idx: {missing})"
+            )
+        return [
+            self._predict(self._session_for(env_idx), *self.env_obs[env_idx])
+            for env_idx in order
+        ]
 
     def get_timing_rollout(self):
+        if self.env_sessions:
+            return {
+                str(env_idx): session.get_timing_rollout()
+                for env_idx, session in sorted(self.env_sessions.items())
+            }
         return {} if self.session is None else self.session.get_timing_rollout()
 
     def reset(self):
         self.last_obs = None
         self.last_instruction = self.default_instruction
-        if self.session is not None:
-            self.session.reset_model()
+        self.env_obs.clear()
+        self.env_order = []
+        for session in (self.session, *self.env_sessions.values()):
+            if session is not None:
+                session.reset_model()

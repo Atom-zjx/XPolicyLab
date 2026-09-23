@@ -14,8 +14,8 @@ policy_server_host=${10:-localhost}
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 XPL_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
-BENCH_ROOT="$(cd "${XPL_ROOT}/.." && pwd)"
 UTILS_DIR="${XPL_ROOT}/utils"
+
 policy_name="$(basename "${SCRIPT_DIR}")"
 yaml_file="${SCRIPT_DIR}/deploy.yml"
 
@@ -28,7 +28,6 @@ allow_dummy_policy="${WAM_ALLOW_DUMMY_POLICY:-false}"
 
 source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate "${policy_conda_env}"
-action_dim=$(bash "${UTILS_DIR}/get_action_dim.sh" "${BENCH_ROOT}" "${env_cfg_type}")
 
 echo "[SERVER] policy=${policy_name} task=${task_name} replan=10"
 echo "[SERVER] checkpoint=${checkpoint_path}"
@@ -52,7 +51,6 @@ exec env \
       seed="${seed}" \
       policy_name="${policy_name}" \
       action_type="${action_type}" \
-      action_dim="${action_dim}" \
       checkpoint_path="${checkpoint_path}" \
       dataset_stats_path="${stats_path}" \
       train_config_path="${config_path}" \
