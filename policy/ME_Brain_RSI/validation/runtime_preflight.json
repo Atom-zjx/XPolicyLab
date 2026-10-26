@@ -1,0 +1,392 @@
+{
+  "passed": false,
+  "tasks": 54,
+  "scripted_routes": 39,
+  "unique_modules": 607,
+  "module_references": 1402,
+  "errors": [],
+  "runtime_checks": [
+    {
+      "task": "stack_bowls",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "stack_bowls_random",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "push_T",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "push_T_random",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "pack_objects_into_box",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "pack_objects_into_box_random",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "fold_clothes",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "fold_clothes_random",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "hang_mugs",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "hang_mugs_random",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "sweep_blocks",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "sweep_blocks_random",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "pour_liquid_into_cup",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "pour_liquid_into_cup_random",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "make_toast",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "make_toast_random",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "arrange_largest_number",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "arrange_largest_number_random",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "sort_nesting_dolls_by_size",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "sort_nesting_dolls_by_size_random",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "store_laptop_and_headphones",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "store_laptop_and_headphones_random",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "stack_blocks",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "stack_blocks_random",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "fasten_screws",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "insert_tubes",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "plug_in_charger",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "pour_balls_into_vase",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "play_Xylophone",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "deposit_coin",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "insert_key",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "build_tower",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "put_bottles_into_dustbin",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "play_tic_tac_toe",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "classify_objects",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "fill_pen_holder",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "fill_egg_holder",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "organize_table",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "play_stacking_toy",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "make_kong",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "cover_blocks",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "match_and_pick_from_conveyor",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "swap_T",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "press_by_number",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "imitate_sorting_sequence",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "swap_blocks",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "align_blocks",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "solve_equation",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [
+        "Missing equation module: pinocchio",
+        "Missing equation module: ftfy"
+      ],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "stack_blocks_by_language",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "general_pickup",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "classify_objects_by_language",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "pick_from_conveyor_by_image",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "store_tools_in_toolbox",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    },
+    {
+      "task": "pour_by_language",
+      "source_verified": true,
+      "runtime_checked": true,
+      "issues": [],
+      "limit": "File/module presence only; does not certify GPU compatibility, all transitive assets, simulator or scores"
+    }
+  ],
+  "verification_stage": "structural_refactor_before_privacy_cleanup"
+}

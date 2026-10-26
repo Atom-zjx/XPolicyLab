@@ -1,0 +1,148 @@
+{
+  "python_files_compiled": 910,
+  "syntax_errors": [],
+  "whitespace_checked": 633,
+  "whitespace_findings": [],
+  "vla_source_files": 60,
+  "vla_source_identical": true,
+  "inherited_codec_calls": [
+    {
+      "file": "capabilities/observation/classify_language_source_material_evidence.py",
+      "line": 31,
+      "code": "cameras[camera] = dict(image=cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR),"
+    },
+    {
+      "file": "capabilities/observation/classify_language_source_material_evidence.py",
+      "line": 51,
+      "code": "current_crop = cv2.cvtColor(image[y:y + height, x:x + width], cv2.COLOR_BGR2RGB)"
+    },
+    {
+      "file": "capabilities/observation/classify_language_global_assignment_evidence.py",
+      "line": 31,
+      "code": "cameras[camera] = dict(image=cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR),"
+    },
+    {
+      "file": "capabilities/observation/classify_language_global_assignment_evidence.py",
+      "line": 51,
+      "code": "current_crop = cv2.cvtColor(image[y:y + height, x:x + width], cv2.COLOR_BGR2RGB)"
+    },
+    {
+      "file": "capabilities/control/classify_language_source_material_hexa.py",
+      "line": 9,
+      "code": "image = cv2.imdecode(np.frombuffer(obs['png'][source], np.uint8), cv2.IMREAD_COLOR)"
+    },
+    {
+      "file": "capabilities/control/xylophone_astra.py",
+      "line": 78,
+      "code": "ok,encoded=cv2.imencode('.png',cv2.cvtColor(rgb,cv2.COLOR_RGB2BGR))"
+    },
+    {
+      "file": "capabilities/control/model_for_general_pickup.py",
+      "line": 45,
+      "code": "cv2.cvtColor(obs['vision']['cam_head']['color'], cv2.COLOR_RGB2BGR))"
+    },
+    {
+      "file": "capabilities/control/model_for_general_pickup.py",
+      "line": 53,
+      "code": "cv2.imwrite(str(folder/(stem+'-'+camera+'.png')),cv2.cvtColor(frame['color'],cv2.COLOR_RGB2BGR))"
+    },
+    {
+      "file": "capabilities/control/model_for_general_pickup.py",
+      "line": 62,
+      "code": "cv2.imwrite(str(stem)+'.png', cv2.cvtColor(obs['vision']['cam_head']['color'], cv2.COLOR_RGB2BGR))"
+    },
+    {
+      "file": "capabilities/control/model_for_insert_key.py",
+      "line": 413,
+      "code": "cv2.imwrite(str(OUT / f'env{i}/{n:03d}_{name}.jpg'), cv2.cvtColor(np.asarray(v['color']), cv2.COLOR_RGB2BGR))"
+    },
+    {
+      "file": "capabilities/control/xylophone_x32.py",
+      "line": 33,
+      "code": "fits=[];reasons=[];bgr=cv2.cvtColor(rgb,cv2.COLOR_RGB2BGR)"
+    },
+    {
+      "file": "capabilities/control/xylophone_hexashell.py",
+      "line": 55,
+      "code": "fit = hx.silhouette(cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR), k, [x, y])"
+    },
+    {
+      "file": "capabilities/control/xylophone_astra33.py",
+      "line": 54,
+      "code": "ok,encoded=cv2.imencode('.png',cv2.cvtColor(rgb,cv2.COLOR_RGB2BGR))"
+    },
+    {
+      "file": "capabilities/control/io_utils.py",
+      "line": 329,
+      "code": "frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)"
+    },
+    {
+      "file": "capabilities/perception/model_for_solve_equation.py",
+      "line": 212,
+      "code": "cv2.imwrite(str(self.out / f'{self.step:03d}_{self.phase}_{cam}.png'), cv2.cvtColor(v['color'], cv2.COLOR_RGB2BGR))"
+    },
+    {
+      "file": "capabilities/perception/model.py",
+      "line": 108,
+      "code": "cv2.imwrite(str(self.output / f'{self.trace.stem}_{self.step}_{self.phase}_{cam}.png'), cv2.cvtColor(v['color'], cv2.COLOR_RGB2BGR))"
+    },
+    {
+      "file": "capabilities/perception/rgb_sequence.py",
+      "line": 80,
+      "code": "im = cv2.imdecode(np.frombuffer(obs['png'][source], np.uint8), cv2.IMREAD_COLOR)"
+    },
+    {
+      "file": "capabilities/perception/rgb_sequence.py",
+      "line": 346,
+      "code": "im = cv2.imdecode(np.frombuffer(obs['png'][CAMERAS[other]], np.uint8), cv2.IMREAD_COLOR)"
+    },
+    {
+      "file": "capabilities/perception/rgb_sequence.py",
+      "line": 390,
+      "code": "im = cv2.imdecode(np.frombuffer(obs['png'][source], np.uint8), cv2.IMREAD_COLOR)"
+    },
+    {
+      "file": "capabilities/perception/rgb_sequence.py",
+      "line": 480,
+      "code": "im = cv2.imdecode(np.frombuffer(obs['png'][CAMERAS[camera]], np.uint8), cv2.IMREAD_COLOR)"
+    },
+    {
+      "file": "capabilities/perception/plug_in_charger.py",
+      "line": 60,
+      "code": "cv2.imwrite(str(root/f'env{index}_initial_{camera}_{counter}.png'),cv2.cvtColor(rgb,cv2.COLOR_RGB2BGR))"
+    },
+    {
+      "file": "capabilities/perception/plug_in_charger.py",
+      "line": 89,
+      "code": "cv2.imwrite(str(root/f'env{index}_missing{count}_{camera}.png'),cv2.cvtColor(np.asarray(view['color']),cv2.COLOR_RGB2BGR))"
+    },
+    {
+      "file": "capabilities/perception/plug_in_charger.py",
+      "line": 121,
+      "code": "cv2.imwrite(str(root/f'env{index}_ep{episode}_step{elapsed}_{camera}.png'),cv2.cvtColor(np.asarray(view['color']),cv2.COLOR_RGB2BGR))"
+    },
+    {
+      "file": "capabilities/perception/reader.py",
+      "line": 102,
+      "code": "cv2.imwrite(str(out/'top.png'),cv2.cvtColor(top,cv2.COLOR_RGB2BGR))"
+    },
+    {
+      "file": "capabilities/perception/reader.py",
+      "line": 238,
+      "code": "pid=len(pieces);cv2.imwrite(str(out/f'piece_{pid}_crop.png'),cv2.cvtColor(top[by:by+bh,bx:bx+bw],cv2.COLOR_RGB2BGR))"
+    },
+    {
+      "file": "capabilities/perception/reader.py",
+      "line": 244,
+      "code": "cv2.imwrite(str(out/f'slot_{i}_crop.png'),cv2.cvtColor(top[y0:cy+46,x0:cx+46],cv2.COLOR_RGB2BGR))"
+    },
+    {
+      "file": "capabilities/perception/perception_for_sort_nesting_dolls_by_size.py",
+      "line": 129,
+      "code": "cv2.imwrite(str(prefix)+'.png',cv2.cvtColor(crop,cv2.COLOR_RGB2BGR))"
+    }
+  ],
+  "adapter_entrypoint_decodes_images": false,
+  "formatting_only_files": 13,
+  "verification_stage": "structural_refactor_before_privacy_cleanup"
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "task": "classify_objects",
+    "symlink_is_relative": true,
+    "same_resource": true
+  },
+  {
+    "task": "classify_objects_by_language",
+    "symlink_is_relative": true,
+    "same_resource": true
+  },
+  {
+    "task": "imitate_sorting_sequence",
+    "symlink_is_relative": true,
+    "same_resource": true
+  }
+]

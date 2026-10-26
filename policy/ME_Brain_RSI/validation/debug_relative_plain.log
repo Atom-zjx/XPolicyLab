@@ -1,0 +1,1045 @@
+[33m[INFO] Using socket port: 56233[0m
+[MAIN] start server, policy_server_port=56233
+[34m[1m[CONNECTING][0m Policy server -> localhost:56233 (PID=664497, timeout=1200s)
+[SERVER] policy=ME_Brain_RSI_2_1, task=press_by_number, port=56233, action_dim=14
+2026-10-26 16:40:43,338 INFO websockets.server: server listening on 127.0.0.1:56233
+2026-10-26 16:40:43,339 INFO websockets.server: server listening on [::1]:56233
+2026-10-26 16:40:43,339 INFO client_server.ws.model_server: websocket policy server listening on ws://localhost:56233
+[32m[1m[CONNECTED][0m Policy server ready on localhost:56233 (PID=664497)
+[MAIN] start client, server=localhost:56233
+[CLIENT] policy=ME_Brain_RSI_2_1, task=press_by_number, server=localhost:56233
+[34m[1m[CONNECTING][0m websocket policy server ws://localhost:56233 (attempt 1/180, timeout=30s)
+2026-10-26 16:40:49,159 INFO websockets.server: connection open
+[32m[1m[CONNECTED][0m websocket policy server connected: ws://localhost:56233
+2026-10-26 16:40:49,268 INFO client_server.ws.model_server: infer received request_id=467e3f7b-6f35-42ae-8b7c-294b1c65eac9 step=0
+2026-10-26 16:40:49,394 INFO client_server.ws.model_server: infer completed request_id=467e3f7b-6f35-42ae-8b7c-294b1c65eac9 step=0 latency_ms=126.2
+2026-10-26 16:40:49,402 INFO client_server.ws.model_server: infer received request_id=a950b760-8c72-4736-ac79-095d1558bf57 step=1
+2026-10-26 16:40:49,407 INFO client_server.ws.model_server: infer completed request_id=a950b760-8c72-4736-ac79-095d1558bf57 step=1 latency_ms=5.1
+2026-10-26 16:40:49,412 INFO client_server.ws.model_server: infer received request_id=96f264e2-985f-4c00-ad42-a571a90749ec step=2
+2026-10-26 16:40:49,416 INFO client_server.ws.model_server: infer completed request_id=96f264e2-985f-4c00-ad42-a571a90749ec step=2 latency_ms=4.5
+2026-10-26 16:40:49,421 INFO client_server.ws.model_server: infer received request_id=8c446be4-b138-4443-84c4-9a0919c0fe7b step=3
+2026-10-26 16:40:49,426 INFO client_server.ws.model_server: infer completed request_id=8c446be4-b138-4443-84c4-9a0919c0fe7b step=3 latency_ms=4.5
+2026-10-26 16:40:49,429 INFO client_server.ws.model_server: infer received request_id=f9eda21c-0f41-489c-8abb-082fd24961b6 step=4
+2026-10-26 16:40:49,433 INFO client_server.ws.model_server: infer completed request_id=f9eda21c-0f41-489c-8abb-082fd24961b6 step=4 latency_ms=4.4
+2026-10-26 16:40:49,436 INFO client_server.ws.model_server: infer received request_id=a036a976-9c71-4493-ba4e-ffa5c6d8b567 step=5
+2026-10-26 16:40:49,440 INFO client_server.ws.model_server: infer completed request_id=a036a976-9c71-4493-ba4e-ffa5c6d8b567 step=5 latency_ms=4.4
+2026-10-26 16:40:49,444 INFO client_server.ws.model_server: infer received request_id=f36a744f-3be7-4c09-8994-1187770effad step=6
+2026-10-26 16:40:49,449 INFO client_server.ws.model_server: infer completed request_id=f36a744f-3be7-4c09-8994-1187770effad step=6 latency_ms=4.8
+2026-10-26 16:40:49,451 INFO client_server.ws.model_server: infer received request_id=b0f948d3-3d58-45fb-b8c4-b832f588345e step=7
+2026-10-26 16:40:49,456 INFO client_server.ws.model_server: infer completed request_id=b0f948d3-3d58-45fb-b8c4-b832f588345e step=7 latency_ms=4.3
+2026-10-26 16:40:49,459 INFO client_server.ws.model_server: infer received request_id=94613c63-9af0-402e-a7f6-d449d81de949 step=8
+2026-10-26 16:40:49,463 INFO client_server.ws.model_server: infer completed request_id=94613c63-9af0-402e-a7f6-d449d81de949 step=8 latency_ms=4.3
+2026-10-26 16:40:49,466 INFO client_server.ws.model_server: infer received request_id=67c78692-d733-4343-ae7a-e86e6a996e4d step=9
+2026-10-26 16:40:49,470 INFO client_server.ws.model_server: infer completed request_id=67c78692-d733-4343-ae7a-e86e6a996e4d step=9 latency_ms=4.6
+2026-10-26 16:40:49,473 INFO client_server.ws.model_server: infer received request_id=c91e6812-220d-441a-bb1a-5055db655389 step=10
+2026-10-26 16:40:49,487 INFO client_server.ws.model_server: infer completed request_id=c91e6812-220d-441a-bb1a-5055db655389 step=10 latency_ms=14.1
+2026-10-26 16:40:49,490 INFO client_server.ws.model_server: infer received request_id=f8b341d0-3acc-441b-b658-0e7d528e314a step=11
+2026-10-26 16:40:49,495 INFO client_server.ws.model_server: infer completed request_id=f8b341d0-3acc-441b-b658-0e7d528e314a step=11 latency_ms=4.6
+2026-10-26 16:40:49,497 INFO client_server.ws.model_server: infer received request_id=e26c30e3-9240-4193-8361-0556b75ffd44 step=12
+2026-10-26 16:40:49,502 INFO client_server.ws.model_server: infer completed request_id=e26c30e3-9240-4193-8361-0556b75ffd44 step=12 latency_ms=4.3
+2026-10-26 16:40:49,504 INFO client_server.ws.model_server: infer received request_id=c18efbbc-d573-4e75-bc95-218b198fe450 step=13
+2026-10-26 16:40:49,509 INFO client_server.ws.model_server: infer completed request_id=c18efbbc-d573-4e75-bc95-218b198fe450 step=13 latency_ms=4.1
+2026-10-26 16:40:49,511 INFO client_server.ws.model_server: infer received request_id=3c9f2c1a-af25-45de-a9df-04b5b0243848 step=14
+2026-10-26 16:40:49,516 INFO client_server.ws.model_server: infer completed request_id=3c9f2c1a-af25-45de-a9df-04b5b0243848 step=14 latency_ms=4.5
+2026-10-26 16:40:49,519 INFO client_server.ws.model_server: infer received request_id=980ffa31-fad5-422b-82a4-d68cb04d46bc step=15
+2026-10-26 16:40:49,523 INFO client_server.ws.model_server: infer completed request_id=980ffa31-fad5-422b-82a4-d68cb04d46bc step=15 latency_ms=4.2
+2026-10-26 16:40:49,526 INFO client_server.ws.model_server: infer received request_id=75b6ee4d-e60b-4fae-94cb-edb8f81a256b step=16
+2026-10-26 16:40:49,530 INFO client_server.ws.model_server: infer completed request_id=75b6ee4d-e60b-4fae-94cb-edb8f81a256b step=16 latency_ms=4.3
+2026-10-26 16:40:49,533 INFO client_server.ws.model_server: infer received request_id=53c75d77-d6e8-4df8-baf6-cbb793822f80 step=17
+2026-10-26 16:40:49,542 INFO client_server.ws.model_server: infer completed request_id=53c75d77-d6e8-4df8-baf6-cbb793822f80 step=17 latency_ms=8.8
+2026-10-26 16:40:49,544 INFO client_server.ws.model_server: infer received request_id=f0091b6e-1944-4ce9-9d7b-82ea86a7d868 step=18
+2026-10-26 16:40:49,549 INFO client_server.ws.model_server: infer completed request_id=f0091b6e-1944-4ce9-9d7b-82ea86a7d868 step=18 latency_ms=4.4
+2026-10-26 16:40:49,552 INFO client_server.ws.model_server: infer received request_id=2b5b9684-d925-4f28-adfa-37f12031a4bf step=19
+2026-10-26 16:40:49,557 INFO client_server.ws.model_server: infer completed request_id=2b5b9684-d925-4f28-adfa-37f12031a4bf step=19 latency_ms=4.7
+2026-10-26 16:40:49,571 INFO client_server.ws.model_server: infer received request_id=859e9708-314e-40a9-a9cd-d857416c5117 step=0
+2026-10-26 16:40:49,633 INFO client_server.ws.model_server: infer completed request_id=859e9708-314e-40a9-a9cd-d857416c5117 step=0 latency_ms=61.2
+2026-10-26 16:40:49,637 INFO client_server.ws.model_server: infer received request_id=09ebae73-5382-4d74-a598-3006f09ed494 step=1
+2026-10-26 16:40:49,642 INFO client_server.ws.model_server: infer completed request_id=09ebae73-5382-4d74-a598-3006f09ed494 step=1 latency_ms=4.7
+2026-10-26 16:40:49,646 INFO client_server.ws.model_server: infer received request_id=f54bc356-c3a3-4cc3-949a-fb63472ed766 step=2
+2026-10-26 16:40:49,650 INFO client_server.ws.model_server: infer completed request_id=f54bc356-c3a3-4cc3-949a-fb63472ed766 step=2 latency_ms=4.6
+2026-10-26 16:40:49,653 INFO client_server.ws.model_server: infer received request_id=0c563f8f-8bd0-4179-bec8-995916341f9b step=3
+2026-10-26 16:40:49,658 INFO client_server.ws.model_server: infer completed request_id=0c563f8f-8bd0-4179-bec8-995916341f9b step=3 latency_ms=4.6
+2026-10-26 16:40:49,661 INFO client_server.ws.model_server: infer received request_id=49872ade-fcb3-4e04-bf58-7f5a3693a9c7 step=4
+2026-10-26 16:40:49,665 INFO client_server.ws.model_server: infer completed request_id=49872ade-fcb3-4e04-bf58-7f5a3693a9c7 step=4 latency_ms=4.6
+2026-10-26 16:40:49,668 INFO client_server.ws.model_server: infer received request_id=87fe0cf6-d9a3-4381-bb92-053bb73993de step=5
+2026-10-26 16:40:49,673 INFO client_server.ws.model_server: infer completed request_id=87fe0cf6-d9a3-4381-bb92-053bb73993de step=5 latency_ms=4.5
+2026-10-26 16:40:49,675 INFO client_server.ws.model_server: infer received request_id=952aa016-5c53-45ea-9bca-035e4f773249 step=6
+2026-10-26 16:40:49,680 INFO client_server.ws.model_server: infer completed request_id=952aa016-5c53-45ea-9bca-035e4f773249 step=6 latency_ms=4.4
+2026-10-26 16:40:49,683 INFO client_server.ws.model_server: infer received request_id=a10729f1-3745-40b4-b90d-18464e9b41a5 step=7
+2026-10-26 16:40:49,687 INFO client_server.ws.model_server: infer completed request_id=a10729f1-3745-40b4-b90d-18464e9b41a5 step=7 latency_ms=4.4
+2026-10-26 16:40:49,690 INFO client_server.ws.model_server: infer received request_id=ead9ff8a-24c2-4550-aa92-723f821d5a23 step=8
+2026-10-26 16:40:49,694 INFO client_server.ws.model_server: infer completed request_id=ead9ff8a-24c2-4550-aa92-723f821d5a23 step=8 latency_ms=4.4
+2026-10-26 16:40:49,697 INFO client_server.ws.model_server: infer received request_id=5b072d0c-4882-4cc6-9f29-45d3966b8f03 step=9
+2026-10-26 16:40:49,702 INFO client_server.ws.model_server: infer completed request_id=5b072d0c-4882-4cc6-9f29-45d3966b8f03 step=9 latency_ms=4.5
+2026-10-26 16:40:49,704 INFO client_server.ws.model_server: infer received request_id=9a9ca465-1c7c-4063-8f11-e9b123f5d25b step=10
+2026-10-26 16:40:49,717 INFO client_server.ws.model_server: infer completed request_id=9a9ca465-1c7c-4063-8f11-e9b123f5d25b step=10 latency_ms=12.9
+2026-10-26 16:40:49,720 INFO client_server.ws.model_server: infer received request_id=cb3c9286-4890-4fd1-8fdf-cb8d766edd99 step=11
+2026-10-26 16:40:49,725 INFO client_server.ws.model_server: infer completed request_id=cb3c9286-4890-4fd1-8fdf-cb8d766edd99 step=11 latency_ms=4.6
+2026-10-26 16:40:49,728 INFO client_server.ws.model_server: infer received request_id=50b8f6b2-6b64-400e-b743-adcefbcfd7d3 step=12
+2026-10-26 16:40:49,732 INFO client_server.ws.model_server: infer completed request_id=50b8f6b2-6b64-400e-b743-adcefbcfd7d3 step=12 latency_ms=4.6
+2026-10-26 16:40:49,735 INFO client_server.ws.model_server: infer received request_id=76b8fb4f-4869-447a-80e5-7d501ef382ee step=13
+2026-10-26 16:40:49,740 INFO client_server.ws.model_server: infer completed request_id=76b8fb4f-4869-447a-80e5-7d501ef382ee step=13 latency_ms=4.6
+2026-10-26 16:40:49,742 INFO client_server.ws.model_server: infer received request_id=8d67bdeb-5c4d-4011-a7e7-0b2171184a8a step=14
+2026-10-26 16:40:49,747 INFO client_server.ws.model_server: infer completed request_id=8d67bdeb-5c4d-4011-a7e7-0b2171184a8a step=14 latency_ms=4.7
+2026-10-26 16:40:49,750 INFO client_server.ws.model_server: infer received request_id=e216bf30-2af7-441f-b906-463de1b3c738 step=15
+2026-10-26 16:40:49,755 INFO client_server.ws.model_server: infer completed request_id=e216bf30-2af7-441f-b906-463de1b3c738 step=15 latency_ms=4.7
+2026-10-26 16:40:49,757 INFO client_server.ws.model_server: infer received request_id=3a920405-bde8-49f0-9a6b-d63f9cb8b7fd step=16
+2026-10-26 16:40:49,762 INFO client_server.ws.model_server: infer completed request_id=3a920405-bde8-49f0-9a6b-d63f9cb8b7fd step=16 latency_ms=4.6
+2026-10-26 16:40:49,765 INFO client_server.ws.model_server: infer received request_id=dbe43ece-b0dd-4189-8ed3-55953d1d61ee step=17
+2026-10-26 16:40:49,769 INFO client_server.ws.model_server: infer completed request_id=dbe43ece-b0dd-4189-8ed3-55953d1d61ee step=17 latency_ms=4.5
+2026-10-26 16:40:49,772 INFO client_server.ws.model_server: infer received request_id=e9393059-bee1-4e2f-ac1f-53e922baac26 step=18
+2026-10-26 16:40:49,776 INFO client_server.ws.model_server: infer completed request_id=e9393059-bee1-4e2f-ac1f-53e922baac26 step=18 latency_ms=4.5
+2026-10-26 16:40:49,779 INFO client_server.ws.model_server: infer received request_id=a4cbc70a-1cb7-4661-9100-b92e4a09f25a step=19
+2026-10-26 16:40:49,784 INFO client_server.ws.model_server: infer completed request_id=a4cbc70a-1cb7-4661-9100-b92e4a09f25a step=19 latency_ms=4.7
+2026-10-26 16:40:49,799 INFO client_server.ws.model_server: infer received request_id=b0871da1-7d2c-45eb-933f-d8058f7160f2 step=0
+2026-10-26 16:40:49,860 INFO client_server.ws.model_server: infer completed request_id=b0871da1-7d2c-45eb-933f-d8058f7160f2 step=0 latency_ms=61.5
+2026-10-26 16:40:49,865 INFO client_server.ws.model_server: infer received request_id=cd680900-2c0d-4217-871e-1157b7680205 step=1
+2026-10-26 16:40:49,869 INFO client_server.ws.model_server: infer completed request_id=cd680900-2c0d-4217-871e-1157b7680205 step=1 latency_ms=4.3
+2026-10-26 16:40:49,872 INFO client_server.ws.model_server: infer received request_id=1cf4e36b-00bb-4d97-afea-23723d08780b step=2
+2026-10-26 16:40:49,877 INFO client_server.ws.model_server: infer completed request_id=1cf4e36b-00bb-4d97-afea-23723d08780b step=2 latency_ms=4.3
+2026-10-26 16:40:49,880 INFO client_server.ws.model_server: infer received request_id=6110bf93-303b-4771-ac3c-902684a1de76 step=3
+2026-10-26 16:40:49,885 INFO client_server.ws.model_server: infer completed request_id=6110bf93-303b-4771-ac3c-902684a1de76 step=3 latency_ms=4.6
+2026-10-26 16:40:49,888 INFO client_server.ws.model_server: infer received request_id=9f293c5a-03df-40aa-8a72-2b0c6f9966a7 step=4
+2026-10-26 16:40:49,892 INFO client_server.ws.model_server: infer completed request_id=9f293c5a-03df-40aa-8a72-2b0c6f9966a7 step=4 latency_ms=4.1
+2026-10-26 16:40:49,895 INFO client_server.ws.model_server: infer received request_id=04b8cf3d-88ac-46dd-b9c4-2a4e08dca586 step=5
+2026-10-26 16:40:49,899 INFO client_server.ws.model_server: infer completed request_id=04b8cf3d-88ac-46dd-b9c4-2a4e08dca586 step=5 latency_ms=4.5
+2026-10-26 16:40:49,902 INFO client_server.ws.model_server: infer received request_id=b28d6b76-6289-4b64-ac67-fd2969f88a6d step=6
+2026-10-26 16:40:49,907 INFO client_server.ws.model_server: infer completed request_id=b28d6b76-6289-4b64-ac67-fd2969f88a6d step=6 latency_ms=4.7
+2026-10-26 16:40:49,909 INFO client_server.ws.model_server: infer received request_id=a995f58b-0dd3-4979-a2ff-5617cfecc142 step=7
+2026-10-26 16:40:49,914 INFO client_server.ws.model_server: infer completed request_id=a995f58b-0dd3-4979-a2ff-5617cfecc142 step=7 latency_ms=4.5
+2026-10-26 16:40:49,917 INFO client_server.ws.model_server: infer received request_id=cdb0ab90-8c03-41a3-ae29-b9122d8ed5b6 step=8
+2026-10-26 16:40:49,921 INFO client_server.ws.model_server: infer completed request_id=cdb0ab90-8c03-41a3-ae29-b9122d8ed5b6 step=8 latency_ms=4.5
+2026-10-26 16:40:49,924 INFO client_server.ws.model_server: infer received request_id=2796bd59-e0d1-4bff-b237-84af22042bb0 step=9
+2026-10-26 16:40:49,929 INFO client_server.ws.model_server: infer completed request_id=2796bd59-e0d1-4bff-b237-84af22042bb0 step=9 latency_ms=4.6
+2026-10-26 16:40:49,932 INFO client_server.ws.model_server: infer received request_id=9e26204e-0395-4229-a25c-a9499e40fa05 step=10
+2026-10-26 16:40:49,945 INFO client_server.ws.model_server: infer completed request_id=9e26204e-0395-4229-a25c-a9499e40fa05 step=10 latency_ms=13.4
+2026-10-26 16:40:49,948 INFO client_server.ws.model_server: infer received request_id=abdbc414-b9a2-4c97-a1ec-8bf88735c455 step=11
+2026-10-26 16:40:49,953 INFO client_server.ws.model_server: infer completed request_id=abdbc414-b9a2-4c97-a1ec-8bf88735c455 step=11 latency_ms=4.6
+2026-10-26 16:40:49,955 INFO client_server.ws.model_server: infer received request_id=a74325ba-048d-42b7-848e-1f18d5931b72 step=12
+2026-10-26 16:40:49,960 INFO client_server.ws.model_server: infer completed request_id=a74325ba-048d-42b7-848e-1f18d5931b72 step=12 latency_ms=4.2
+2026-10-26 16:40:49,962 INFO client_server.ws.model_server: infer received request_id=8b034f22-c15c-4e07-9063-db8776d5d033 step=13
+2026-10-26 16:40:49,967 INFO client_server.ws.model_server: infer completed request_id=8b034f22-c15c-4e07-9063-db8776d5d033 step=13 latency_ms=4.5
+2026-10-26 16:40:49,970 INFO client_server.ws.model_server: infer received request_id=d7a9c03d-d32f-4814-8f69-8c49a1755508 step=14
+2026-10-26 16:40:49,974 INFO client_server.ws.model_server: infer completed request_id=d7a9c03d-d32f-4814-8f69-8c49a1755508 step=14 latency_ms=4.2
+2026-10-26 16:40:49,977 INFO client_server.ws.model_server: infer received request_id=26852591-34fd-4b20-9cf4-79f6c3f11ffb step=15
+2026-10-26 16:40:49,981 INFO client_server.ws.model_server: infer completed request_id=26852591-34fd-4b20-9cf4-79f6c3f11ffb step=15 latency_ms=4.3
+2026-10-26 16:40:49,984 INFO client_server.ws.model_server: infer received request_id=86c2e2be-e711-4ca0-976e-c8705888321c step=16
+2026-10-26 16:40:49,989 INFO client_server.ws.model_server: infer completed request_id=86c2e2be-e711-4ca0-976e-c8705888321c step=16 latency_ms=4.6
+2026-10-26 16:40:49,992 INFO client_server.ws.model_server: infer received request_id=8338b8af-8b81-4ba7-9f66-2d7a4d28e3ef step=17
+2026-10-26 16:40:49,996 INFO client_server.ws.model_server: infer completed request_id=8338b8af-8b81-4ba7-9f66-2d7a4d28e3ef step=17 latency_ms=4.5
+2026-10-26 16:40:49,999 INFO client_server.ws.model_server: infer received request_id=f01ba167-9acd-41ca-b1ec-a838f2d67ad9 step=18
+2026-10-26 16:40:50,003 INFO client_server.ws.model_server: infer completed request_id=f01ba167-9acd-41ca-b1ec-a838f2d67ad9 step=18 latency_ms=4.5
+2026-10-26 16:40:50,006 INFO client_server.ws.model_server: infer received request_id=9b7ce6aa-fc7d-4215-8776-a94652cf912d step=19
+2026-10-26 16:40:50,011 INFO client_server.ws.model_server: infer completed request_id=9b7ce6aa-fc7d-4215-8776-a94652cf912d step=19 latency_ms=4.4
+2026-10-26 16:40:50,025 INFO client_server.ws.model_server: infer received request_id=ac0fc80b-8a58-4728-8a71-949d1d24e021 step=0
+2026-10-26 16:40:50,087 INFO client_server.ws.model_server: infer completed request_id=ac0fc80b-8a58-4728-8a71-949d1d24e021 step=0 latency_ms=61.7
+2026-10-26 16:40:50,091 INFO client_server.ws.model_server: infer received request_id=2762f6c0-6037-405f-8e41-2f4c3f87e093 step=1
+2026-10-26 16:40:50,096 INFO client_server.ws.model_server: infer completed request_id=2762f6c0-6037-405f-8e41-2f4c3f87e093 step=1 latency_ms=4.4
+2026-10-26 16:40:50,099 INFO client_server.ws.model_server: infer received request_id=c1528412-1639-4ae2-a542-e73a65312c13 step=2
+2026-10-26 16:40:50,103 INFO client_server.ws.model_server: infer completed request_id=c1528412-1639-4ae2-a542-e73a65312c13 step=2 latency_ms=4.4
+2026-10-26 16:40:50,107 INFO client_server.ws.model_server: infer received request_id=deda0237-bb53-446e-964c-f411ec86a80e step=3
+2026-10-26 16:40:50,111 INFO client_server.ws.model_server: infer completed request_id=deda0237-bb53-446e-964c-f411ec86a80e step=3 latency_ms=4.2
+2026-10-26 16:40:50,114 INFO client_server.ws.model_server: infer received request_id=41b8f8df-2c7f-4f05-b4f8-2c7d0ec991e3 step=4
+2026-10-26 16:40:50,118 INFO client_server.ws.model_server: infer completed request_id=41b8f8df-2c7f-4f05-b4f8-2c7d0ec991e3 step=4 latency_ms=4.1
+2026-10-26 16:40:50,121 INFO client_server.ws.model_server: infer received request_id=360505b1-b1b3-46db-a26a-5f0ce627ec71 step=5
+2026-10-26 16:40:50,125 INFO client_server.ws.model_server: infer completed request_id=360505b1-b1b3-46db-a26a-5f0ce627ec71 step=5 latency_ms=4.4
+2026-10-26 16:40:50,128 INFO client_server.ws.model_server: infer received request_id=130aa7b2-9d12-4226-99b3-6c41b1dee658 step=6
+2026-10-26 16:40:50,132 INFO client_server.ws.model_server: infer completed request_id=130aa7b2-9d12-4226-99b3-6c41b1dee658 step=6 latency_ms=4.4
+2026-10-26 16:40:50,135 INFO client_server.ws.model_server: infer received request_id=a2a9c136-197f-445a-af09-9c982a91133a step=7
+2026-10-26 16:40:50,139 INFO client_server.ws.model_server: infer completed request_id=a2a9c136-197f-445a-af09-9c982a91133a step=7 latency_ms=4.3
+2026-10-26 16:40:50,142 INFO client_server.ws.model_server: infer received request_id=f453545c-ccba-4019-a5e4-3474e0336476 step=8
+2026-10-26 16:40:50,146 INFO client_server.ws.model_server: infer completed request_id=f453545c-ccba-4019-a5e4-3474e0336476 step=8 latency_ms=4.4
+2026-10-26 16:40:50,149 INFO client_server.ws.model_server: infer received request_id=cfb33a9e-92c2-42f0-890b-2cddb2bc6c65 step=9
+2026-10-26 16:40:50,154 INFO client_server.ws.model_server: infer completed request_id=cfb33a9e-92c2-42f0-890b-2cddb2bc6c65 step=9 latency_ms=4.4
+[94m🚀 Running Episode 0[0m
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 0 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 1 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 2 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 3 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 4 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 5 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 6 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 7 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 8 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 9 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 10 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 11 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 12 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 13 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 14 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 15 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 16 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 17 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 18 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 19 / 20 (step_limit)
+[TestEnv] Check Episode End: True
+[TestEnv] Check Episode End: True
+[TestEnv] Episode finished
+[94m🚀 Running Episode 1[0m
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 0 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 1 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 2 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 3 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 4 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 5 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 6 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 7 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 8 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 9 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 10 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 11 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 12 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 13 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 14 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 15 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 16 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 17 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 18 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 19 / 20 (step_limit)
+[TestEnv] Check Episode End: True
+[TestEnv] Check Episode End: True
+[TestEnv] Episode finished
+[94m🚀 Running Episode 2[0m
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 0 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 1 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 2 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 3 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 4 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 5 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 6 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 7 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 8 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 9 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 10 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 11 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 12 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 13 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 14 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 15 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 16 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 17 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 18 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 19 / 20 (step_limit)
+[TestEnv] Check Episode End: True
+[TestEnv] Check Episode End: True
+[TestEnv] Episode finished
+[94m🚀 Running Episode 3[0m
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 0 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 1 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 2 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 3 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 4 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 5 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 6 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 7 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 8 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 9 / 20 (step_limit)2026-10-26 16:40:50,156 INFO client_server.ws.model_server: infer received request_id=b062e007-03e2-452b-b0f2-6cb30665e184 step=10
+2026-10-26 16:40:50,168 INFO client_server.ws.model_server: infer completed request_id=b062e007-03e2-452b-b0f2-6cb30665e184 step=10 latency_ms=12.0
+2026-10-26 16:40:50,171 INFO client_server.ws.model_server: infer received request_id=c11fb217-0060-44fb-a3b7-cd401d5f6eea step=11
+2026-10-26 16:40:50,175 INFO client_server.ws.model_server: infer completed request_id=c11fb217-0060-44fb-a3b7-cd401d5f6eea step=11 latency_ms=4.2
+2026-10-26 16:40:50,178 INFO client_server.ws.model_server: infer received request_id=b935cb59-f594-4c6d-87db-ebaefb1f1858 step=12
+2026-10-26 16:40:50,182 INFO client_server.ws.model_server: infer completed request_id=b935cb59-f594-4c6d-87db-ebaefb1f1858 step=12 latency_ms=4.0
+2026-10-26 16:40:50,185 INFO client_server.ws.model_server: infer received request_id=3c56689a-4226-4903-b1eb-ccff44588722 step=13
+2026-10-26 16:40:50,189 INFO client_server.ws.model_server: infer completed request_id=3c56689a-4226-4903-b1eb-ccff44588722 step=13 latency_ms=4.0
+2026-10-26 16:40:50,192 INFO client_server.ws.model_server: infer received request_id=7b577eaf-9e68-41d7-9029-bb84bcbf21aa step=14
+2026-10-26 16:40:50,196 INFO client_server.ws.model_server: infer completed request_id=7b577eaf-9e68-41d7-9029-bb84bcbf21aa step=14 latency_ms=4.5
+2026-10-26 16:40:50,199 INFO client_server.ws.model_server: infer received request_id=9f12ddfb-f1b0-4c04-9b13-6c369498f1d9 step=15
+2026-10-26 16:40:50,203 INFO client_server.ws.model_server: infer completed request_id=9f12ddfb-f1b0-4c04-9b13-6c369498f1d9 step=15 latency_ms=4.4
+2026-10-26 16:40:50,206 INFO client_server.ws.model_server: infer received request_id=33bcee02-847f-4328-b5b8-1ec5056539f8 step=16
+2026-10-26 16:40:50,210 INFO client_server.ws.model_server: infer completed request_id=33bcee02-847f-4328-b5b8-1ec5056539f8 step=16 latency_ms=4.2
+2026-10-26 16:40:50,213 INFO client_server.ws.model_server: infer received request_id=85689167-8881-40f4-af4f-f7600cb12164 step=17
+2026-10-26 16:40:50,218 INFO client_server.ws.model_server: infer completed request_id=85689167-8881-40f4-af4f-f7600cb12164 step=17 latency_ms=4.5
+2026-10-26 16:40:50,220 INFO client_server.ws.model_server: infer received request_id=140aee5e-40e6-4a28-a987-63d59a1c8207 step=18
+2026-10-26 16:40:50,225 INFO client_server.ws.model_server: infer completed request_id=140aee5e-40e6-4a28-a987-63d59a1c8207 step=18 latency_ms=4.5
+2026-10-26 16:40:50,228 INFO client_server.ws.model_server: infer received request_id=d0d49c8b-090b-4254-bc72-13ca6ea67e9a step=19
+2026-10-26 16:40:50,232 INFO client_server.ws.model_server: infer completed request_id=d0d49c8b-090b-4254-bc72-13ca6ea67e9a step=19 latency_ms=4.5
+2026-10-26 16:40:50,246 INFO client_server.ws.model_server: infer received request_id=154301a7-080e-46ed-b644-e011ae24dde9 step=0
+2026-10-26 16:40:50,309 INFO client_server.ws.model_server: infer completed request_id=154301a7-080e-46ed-b644-e011ae24dde9 step=0 latency_ms=62.5
+2026-10-26 16:40:50,313 INFO client_server.ws.model_server: infer received request_id=d09942d1-0f2b-4b9a-bf2c-8f98fb1025a3 step=1
+2026-10-26 16:40:50,317 INFO client_server.ws.model_server: infer completed request_id=d09942d1-0f2b-4b9a-bf2c-8f98fb1025a3 step=1 latency_ms=4.4
+2026-10-26 16:40:50,320 INFO client_server.ws.model_server: infer received request_id=a7378a1f-8f11-4833-a3e2-d41d5dfbc405 step=2
+2026-10-26 16:40:50,325 INFO client_server.ws.model_server: infer completed request_id=a7378a1f-8f11-4833-a3e2-d41d5dfbc405 step=2 latency_ms=4.4
+2026-10-26 16:40:50,329 INFO client_server.ws.model_server: infer received request_id=8b0a4b01-f911-4663-81ab-80ca478bd073 step=3
+2026-10-26 16:40:50,333 INFO client_server.ws.model_server: infer completed request_id=8b0a4b01-f911-4663-81ab-80ca478bd073 step=3 latency_ms=4.1
+2026-10-26 16:40:50,336 INFO client_server.ws.model_server: infer received request_id=28cbe917-5481-44af-aa8e-42b35979fb0a step=4
+2026-10-26 16:40:50,340 INFO client_server.ws.model_server: infer completed request_id=28cbe917-5481-44af-aa8e-42b35979fb0a step=4 latency_ms=4.0
+2026-10-26 16:40:50,343 INFO client_server.ws.model_server: infer received request_id=c5003a35-94d0-47e4-b718-c5f9cab8821e step=5
+2026-10-26 16:40:50,347 INFO client_server.ws.model_server: infer completed request_id=c5003a35-94d0-47e4-b718-c5f9cab8821e step=5 latency_ms=4.5
+2026-10-26 16:40:50,350 INFO client_server.ws.model_server: infer received request_id=0f25c379-c0f2-418c-bd09-48e0bcb3b7b6 step=6
+2026-10-26 16:40:50,355 INFO client_server.ws.model_server: infer completed request_id=0f25c379-c0f2-418c-bd09-48e0bcb3b7b6 step=6 latency_ms=4.4
+2026-10-26 16:40:50,357 INFO client_server.ws.model_server: infer received request_id=bcc45a32-ce97-47bd-8f96-3811766230d1 step=7
+2026-10-26 16:40:50,362 INFO client_server.ws.model_server: infer completed request_id=bcc45a32-ce97-47bd-8f96-3811766230d1 step=7 latency_ms=4.4
+2026-10-26 16:40:50,365 INFO client_server.ws.model_server: infer received request_id=cb7999d9-778c-44bb-940a-0af63bc68fca step=8
+2026-10-26 16:40:50,369 INFO client_server.ws.model_server: infer completed request_id=cb7999d9-778c-44bb-940a-0af63bc68fca step=8 latency_ms=4.1
+2026-10-26 16:40:50,372 INFO client_server.ws.model_server: infer received request_id=903f58aa-9ec8-479c-82a2-abf11ca5e4ec step=9
+2026-10-26 16:40:50,376 INFO client_server.ws.model_server: infer completed request_id=903f58aa-9ec8-479c-82a2-abf11ca5e4ec step=9 latency_ms=4.3
+2026-10-26 16:40:50,379 INFO client_server.ws.model_server: infer received request_id=383c67b2-3aed-4c4a-8d22-f463fa0b2b69 step=10
+2026-10-26 16:40:50,391 INFO client_server.ws.model_server: infer completed request_id=383c67b2-3aed-4c4a-8d22-f463fa0b2b69 step=10 latency_ms=12.2
+2026-10-26 16:40:50,394 INFO client_server.ws.model_server: infer received request_id=9e682f4b-2f94-44ae-9894-29607b3bb019 step=11
+2026-10-26 16:40:50,398 INFO client_server.ws.model_server: infer completed request_id=9e682f4b-2f94-44ae-9894-29607b3bb019 step=11 latency_ms=4.4
+2026-10-26 16:40:50,401 INFO client_server.ws.model_server: infer received request_id=3bc3bc00-cbee-46db-9220-65532827d108 step=12
+2026-10-26 16:40:50,406 INFO client_server.ws.model_server: infer completed request_id=3bc3bc00-cbee-46db-9220-65532827d108 step=12 latency_ms=4.4
+2026-10-26 16:40:50,409 INFO client_server.ws.model_server: infer received request_id=104941eb-608d-4523-8401-69e2cdf88876 step=13
+2026-10-26 16:40:50,413 INFO client_server.ws.model_server: infer completed request_id=104941eb-608d-4523-8401-69e2cdf88876 step=13 latency_ms=4.4
+2026-10-26 16:40:50,416 INFO client_server.ws.model_server: infer received request_id=5e60aa30-2279-4e98-9e13-4158fa0cdf06 step=14
+2026-10-26 16:40:50,420 INFO client_server.ws.model_server: infer completed request_id=5e60aa30-2279-4e98-9e13-4158fa0cdf06 step=14 latency_ms=4.4
+2026-10-26 16:40:50,423 INFO client_server.ws.model_server: infer received request_id=e926e0e2-6609-4857-92f4-d6ea65a49cab step=15
+2026-10-26 16:40:50,427 INFO client_server.ws.model_server: infer completed request_id=e926e0e2-6609-4857-92f4-d6ea65a49cab step=15 latency_ms=4.1
+2026-10-26 16:40:50,430 INFO client_server.ws.model_server: infer received request_id=4374b35b-c180-4bf1-94c3-afecb40e216e step=16
+2026-10-26 16:40:50,435 INFO client_server.ws.model_server: infer completed request_id=4374b35b-c180-4bf1-94c3-afecb40e216e step=16 latency_ms=4.4
+2026-10-26 16:40:50,437 INFO client_server.ws.model_server: infer received request_id=e2f4e16b-b3af-4ab6-af68-fbd475ab4037 step=17
+2026-10-26 16:40:50,441 INFO client_server.ws.model_server: infer completed request_id=e2f4e16b-b3af-4ab6-af68-fbd475ab4037 step=17 latency_ms=4.0
+2026-10-26 16:40:50,444 INFO client_server.ws.model_server: infer received request_id=c3b90818-736f-49ea-82c0-f4bbda5afd51 step=18
+2026-10-26 16:40:50,449 INFO client_server.ws.model_server: infer completed request_id=c3b90818-736f-49ea-82c0-f4bbda5afd51 step=18 latency_ms=4.3
+2026-10-26 16:40:50,451 INFO client_server.ws.model_server: infer received request_id=041fdaf4-72ab-4ec3-a3b9-7f2421106f9b step=19
+2026-10-26 16:40:50,456 INFO client_server.ws.model_server: infer completed request_id=041fdaf4-72ab-4ec3-a3b9-7f2421106f9b step=19 latency_ms=4.3
+2026-10-26 16:40:50,470 INFO client_server.ws.model_server: infer received request_id=df6e9b0a-4506-48ed-b0ab-84d70086b857 step=0
+2026-10-26 16:40:50,532 INFO client_server.ws.model_server: infer completed request_id=df6e9b0a-4506-48ed-b0ab-84d70086b857 step=0 latency_ms=62.5
+2026-10-26 16:40:50,537 INFO client_server.ws.model_server: infer received request_id=884563a9-7854-42cb-be6a-aec5616c2920 step=1
+2026-10-26 16:40:50,541 INFO client_server.ws.model_server: infer completed request_id=884563a9-7854-42cb-be6a-aec5616c2920 step=1 latency_ms=4.5
+2026-10-26 16:40:50,545 INFO client_server.ws.model_server: infer received request_id=54293627-db61-4e40-a140-19c3d814e6fe step=2
+2026-10-26 16:40:50,549 INFO client_server.ws.model_server: infer completed request_id=54293627-db61-4e40-a140-19c3d814e6fe step=2 latency_ms=4.4
+2026-10-26 16:40:50,552 INFO client_server.ws.model_server: infer received request_id=130f77cd-7ba2-4c33-919d-10db6530510a step=3
+2026-10-26 16:40:50,556 INFO client_server.ws.model_server: infer completed request_id=130f77cd-7ba2-4c33-919d-10db6530510a step=3 latency_ms=4.4
+2026-10-26 16:40:50,559 INFO client_server.ws.model_server: infer received request_id=a39067fd-6fef-43f0-8c05-b8247cb39748 step=4
+2026-10-26 16:40:50,563 INFO client_server.ws.model_server: infer completed request_id=a39067fd-6fef-43f0-8c05-b8247cb39748 step=4 latency_ms=4.4
+2026-10-26 16:40:50,566 INFO client_server.ws.model_server: infer received request_id=c5ad38f7-5c4c-4eb9-b9a4-b178813141a0 step=5
+2026-10-26 16:40:50,570 INFO client_server.ws.model_server: infer completed request_id=c5ad38f7-5c4c-4eb9-b9a4-b178813141a0 step=5 latency_ms=4.1
+2026-10-26 16:40:50,573 INFO client_server.ws.model_server: infer received request_id=9ca5ff5c-fead-4540-8794-c5752ec517c8 step=6
+2026-10-26 16:40:50,578 INFO client_server.ws.model_server: infer completed request_id=9ca5ff5c-fead-4540-8794-c5752ec517c8 step=6 latency_ms=4.4
+2026-10-26 16:40:50,580 INFO client_server.ws.model_server: infer received request_id=2b81f69c-e3c2-45b1-8f3f-206b8e12e491 step=7
+2026-10-26 16:40:50,585 INFO client_server.ws.model_server: infer completed request_id=2b81f69c-e3c2-45b1-8f3f-206b8e12e491 step=7 latency_ms=4.4
+2026-10-26 16:40:50,587 INFO client_server.ws.model_server: infer received request_id=eeada5b8-5caf-45ca-98f2-131220318356 step=8
+2026-10-26 16:40:50,592 INFO client_server.ws.model_server: infer completed request_id=eeada5b8-5caf-45ca-98f2-131220318356 step=8 latency_ms=4.2
+2026-10-26 16:40:50,594 INFO client_server.ws.model_server: infer received request_id=58d27b49-bbbd-48be-8fc7-e6c134e525d9 step=9
+2026-10-26 16:40:50,599 INFO client_server.ws.model_server: infer completed request_id=58d27b49-bbbd-48be-8fc7-e6c134e525d9 step=9 latency_ms=4.7
+2026-10-26 16:40:50,602 INFO client_server.ws.model_server: infer received request_id=8035e8bd-9496-439c-8bbe-4828d47327cb step=10
+2026-10-26 16:40:50,614 INFO client_server.ws.model_server: infer completed request_id=8035e8bd-9496-439c-8bbe-4828d47327cb step=10 latency_ms=12.3
+2026-10-26 16:40:50,617 INFO client_server.ws.model_server: infer received request_id=f97c69c2-b0a7-4b21-8c59-75d6d7c51978 step=11
+2026-10-26 16:40:50,621 INFO client_server.ws.model_server: infer completed request_id=f97c69c2-b0a7-4b21-8c59-75d6d7c51978 step=11 latency_ms=4.5
+2026-10-26 16:40:50,624 INFO client_server.ws.model_server: infer received request_id=e16ff2ec-b1b7-4f75-a8f0-78207a8d991c step=12
+2026-10-26 16:40:50,628 INFO client_server.ws.model_server: infer completed request_id=e16ff2ec-b1b7-4f75-a8f0-78207a8d991c step=12 latency_ms=4.4
+2026-10-26 16:40:50,631 INFO client_server.ws.model_server: infer received request_id=b6df713e-fecb-464d-90b4-5531b309480d step=13
+2026-10-26 16:40:50,635 INFO client_server.ws.model_server: infer completed request_id=b6df713e-fecb-464d-90b4-5531b309480d step=13 latency_ms=4.3
+2026-10-26 16:40:50,638 INFO client_server.ws.model_server: infer received request_id=6188ffda-1887-433f-80d8-db4cc4518d63 step=14
+2026-10-26 16:40:50,642 INFO client_server.ws.model_server: infer completed request_id=6188ffda-1887-433f-80d8-db4cc4518d63 step=14 latency_ms=4.3
+2026-10-26 16:40:50,645 INFO client_server.ws.model_server: infer received request_id=fe3e53c7-9fd8-4f96-8d71-8bc5abd8e285 step=15
+2026-10-26 16:40:50,649 INFO client_server.ws.model_server: infer completed request_id=fe3e53c7-9fd8-4f96-8d71-8bc5abd8e285 step=15 latency_ms=3.9
+2026-10-26 16:40:50,652 INFO client_server.ws.model_server: infer received request_id=9f26e178-cf62-4e39-9799-f52f46fd27d0 step=16
+2026-10-26 16:40:50,656 INFO client_server.ws.model_server: infer completed request_id=9f26e178-cf62-4e39-9799-f52f46fd27d0 step=16 latency_ms=4.1
+2026-10-26 16:40:50,659 INFO client_server.ws.model_server: infer received request_id=2a90828f-025a-4f58-98a3-1e4e658ffc87 step=17
+2026-10-26 16:40:50,663 INFO client_server.ws.model_server: infer completed request_id=2a90828f-025a-4f58-98a3-1e4e658ffc87 step=17 latency_ms=4.3
+2026-10-26 16:40:50,666 INFO client_server.ws.model_server: infer received request_id=5ab9c5fd-c021-413d-9a5e-fca784e8450d step=18
+2026-10-26 16:40:50,670 INFO client_server.ws.model_server: infer completed request_id=5ab9c5fd-c021-413d-9a5e-fca784e8450d step=18 latency_ms=4.3
+2026-10-26 16:40:50,673 INFO client_server.ws.model_server: infer received request_id=8c379df3-06a9-4406-8dc5-a5607a66fb9b step=19
+2026-10-26 16:40:50,677 INFO client_server.ws.model_server: infer completed request_id=8c379df3-06a9-4406-8dc5-a5607a66fb9b step=19 latency_ms=4.3
+2026-10-26 16:40:50,692 INFO client_server.ws.model_server: infer received request_id=7e3570e3-1c0d-451c-8ff5-ee3a99e35f0f step=0
+2026-10-26 16:40:50,754 INFO client_server.ws.model_server: infer completed request_id=7e3570e3-1c0d-451c-8ff5-ee3a99e35f0f step=0 latency_ms=61.6
+2026-10-26 16:40:50,758 INFO client_server.ws.model_server: infer received request_id=eda817ab-e51b-4408-a91e-c7cb3c9d3ee0 step=1
+2026-10-26 16:40:50,763 INFO client_server.ws.model_server: infer completed request_id=eda817ab-e51b-4408-a91e-c7cb3c9d3ee0 step=1 latency_ms=5.5
+2026-10-26 16:40:50,767 INFO client_server.ws.model_server: infer received request_id=218077ff-5af0-4200-81b4-b6c9c5f80ab3 step=2
+2026-10-26 16:40:50,772 INFO client_server.ws.model_server: infer completed request_id=218077ff-5af0-4200-81b4-b6c9c5f80ab3 step=2 latency_ms=5.1
+2026-10-26 16:40:50,775 INFO client_server.ws.model_server: infer received request_id=95055d4f-383f-4992-9038-88edb2bc89e4 step=3
+2026-10-26 16:40:50,781 INFO client_server.ws.model_server: infer completed request_id=95055d4f-383f-4992-9038-88edb2bc89e4 step=3 latency_ms=6.3
+2026-10-26 16:40:50,784 INFO client_server.ws.model_server: infer received request_id=b6e4e8a3-9c46-4111-8aea-b6afdacc25f1 step=4
+2026-10-26 16:40:50,788 INFO client_server.ws.model_server: infer completed request_id=b6e4e8a3-9c46-4111-8aea-b6afdacc25f1 step=4 latency_ms=4.3
+2026-10-26 16:40:50,791 INFO client_server.ws.model_server: infer received request_id=8a0e765d-c7b2-421f-97e0-c8f41ba2fadf step=5
+2026-10-26 16:40:50,795 INFO client_server.ws.model_server: infer completed request_id=8a0e765d-c7b2-421f-97e0-c8f41ba2fadf step=5 latency_ms=4.3
+2026-10-26 16:40:50,798 INFO client_server.ws.model_server: infer received request_id=8c911d16-1a1d-4d04-a32c-6a79886fcee2 step=6
+2026-10-26 16:40:50,803 INFO client_server.ws.model_server: infer completed request_id=8c911d16-1a1d-4d04-a32c-6a79886fcee2 step=6 latency_ms=4.6
+2026-10-26 16:40:50,806 INFO client_server.ws.model_server: infer received request_id=c588e35a-de4b-4dd2-9604-5f7d5231e6ff step=7
+2026-10-26 16:40:50,810 INFO client_server.ws.model_server: infer completed request_id=c588e35a-de4b-4dd2-9604-5f7d5231e6ff step=7 latency_ms=4.4
+2026-10-26 16:40:50,813 INFO client_server.ws.model_server: infer received request_id=9af345cd-5946-43e6-b3b2-372846fd962b step=8
+2026-10-26 16:40:50,818 INFO client_server.ws.model_server: infer completed request_id=9af345cd-5946-43e6-b3b2-372846fd962b step=8 latency_ms=5.3
+2026-10-26 16:40:50,821 INFO client_server.ws.model_server: infer received request_id=3d750791-bd05-44b6-bf1f-e44140601ae0 step=9
+2026-10-26 16:40:50,826 INFO client_server.ws.model_server: infer completed request_id=3d750791-bd05-44b6-bf1f-e44140601ae0 step=9 latency_ms=4.4
+2026-10-26 16:40:50,829 INFO client_server.ws.model_server: infer received request_id=93212a19-462b-4162-82c4-1235780dcdf6 step=10
+2026-10-26 16:40:50,841 INFO client_server.ws.model_server: infer completed request_id=93212a19-462b-4162-82c4-1235780dcdf6 step=10 latency_ms=12.5
+2026-10-26 16:40:50,844 INFO client_server.ws.model_server: infer received request_id=f2a69d3c-618b-4250-8bb3-ca6ca9ad528d step=11
+2026-10-26 16:40:50,849 INFO client_server.ws.model_server: infer completed request_id=f2a69d3c-618b-4250-8bb3-ca6ca9ad528d step=11 latency_ms=4.7
+2026-10-26 16:40:50,851 INFO client_server.ws.model_server: infer received request_id=b1119e31-1967-4273-98b2-8adbdded40e6 step=12
+2026-10-26 16:40:50,856 INFO client_server.ws.model_server: infer completed request_id=b1119e31-1967-4273-98b2-8adbdded40e6 step=12 latency_ms=4.7
+2026-10-26 16:40:50,859 INFO client_server.ws.model_server: infer received request_id=3f0b579e-b624-4ba1-b84c-cc55d0601ce5 step=13
+2026-10-26 16:40:50,864 INFO client_server.ws.model_server: infer completed request_id=3f0b579e-b624-4ba1-b84c-cc55d0601ce5 step=13 latency_ms=4.6
+2026-10-26 16:40:50,866 INFO client_server.ws.model_server: infer received request_id=5446e8f4-4220-403a-a06e-1ded5d1f6d71 step=14
+2026-10-26 16:40:50,871 INFO client_server.ws.model_server: infer completed request_id=5446e8f4-4220-403a-a06e-1ded5d1f6d71 step=14 latency_ms=4.8
+2026-10-26 16:40:50,874 INFO client_server.ws.model_server: infer received request_id=73a682ea-4e3a-40b9-939b-455bdd8eb07f step=15
+2026-10-26 16:40:50,879 INFO client_server.ws.model_server: infer completed request_id=73a682ea-4e3a-40b9-939b-455bdd8eb07f step=15 latency_ms=4.7
+2026-10-26 16:40:50,882 INFO client_server.ws.model_server: infer received request_id=710dfb6f-8349-4990-885e-4eef5d6ca397 step=16
+2026-10-26 16:40:50,886 INFO client_server.ws.model_server: infer completed request_id=710dfb6f-8349-4990-885e-4eef5d6ca397 step=16 latency_ms=4.7
+2026-10-26 16:40:50,889 INFO client_server.ws.model_server: infer received request_id=2e566bbf-e1c4-4131-a6ee-78e574e78b2f step=17
+2026-10-26 16:40:50,893 INFO client_server.ws.model_server: infer completed request_id=2e566bbf-e1c4-4131-a6ee-78e574e78b2f step=17 latency_ms=4.1
+2026-10-26 16:40:50,896 INFO client_server.ws.model_server: infer received request_id=370c96ea-9c4e-4e9f-b97e-d6ff57026fdf step=18
+2026-10-26 16:40:50,900 INFO client_server.ws.model_server: infer completed request_id=370c96ea-9c4e-4e9f-b97e-d6ff57026fdf step=18 latency_ms=4.2
+2026-10-26 16:40:50,903 INFO client_server.ws.model_server: infer received request_id=0c3024c9-a584-40ca-ab3d-9bd2a4e7ef99 step=19
+2026-10-26 16:40:50,908 INFO client_server.ws.model_server: infer completed request_id=0c3024c9-a584-40ca-ab3d-9bd2a4e7ef99 step=19 latency_ms=4.5
+
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 10 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 11 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 12 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 13 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 14 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 15 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 16 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 17 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 18 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 19 / 20 (step_limit)
+[TestEnv] Check Episode End: True
+[TestEnv] Check Episode End: True
+[TestEnv] Episode finished
+[94m🚀 Running Episode 4[0m
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 0 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 1 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 2 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 3 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 4 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 5 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 6 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 7 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 8 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 9 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 10 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 11 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 12 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 13 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 14 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 15 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 16 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 17 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 18 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 19 / 20 (step_limit)
+[TestEnv] Check Episode End: True
+[TestEnv] Check Episode End: True
+[TestEnv] Episode finished
+[94m🚀 Running Episode 5[0m
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 0 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 1 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 2 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 3 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 4 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 5 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 6 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 7 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 8 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 9 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 10 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 11 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 12 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 13 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 14 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 15 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 16 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 17 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 18 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 19 / 20 (step_limit)
+[TestEnv] Check Episode End: True
+[TestEnv] Check Episode End: True
+[TestEnv] Episode finished
+[94m🚀 Running Episode 6[0m
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 0 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 1 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 2 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 3 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 4 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 5 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 6 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 7 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 8 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 9 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 10 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 11 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 12 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 13 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 14 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 15 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 16 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 17 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 18 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 19 / 20 (step_limit)2026-10-26 16:40:50,925 INFO client_server.ws.model_server: infer received request_id=91c7c124-33cc-4950-b4d6-26338891b54c step=0
+2026-10-26 16:40:50,999 INFO client_server.ws.model_server: infer completed request_id=91c7c124-33cc-4950-b4d6-26338891b54c step=0 latency_ms=73.6
+2026-10-26 16:40:51,002 INFO client_server.ws.model_server: infer received request_id=01338a25-db1f-492c-9dfb-eb3327054523 step=1
+2026-10-26 16:40:51,007 INFO client_server.ws.model_server: infer completed request_id=01338a25-db1f-492c-9dfb-eb3327054523 step=1 latency_ms=4.3
+2026-10-26 16:40:51,010 INFO client_server.ws.model_server: infer received request_id=3178a056-a4c6-4843-8a72-c10111819c98 step=2
+2026-10-26 16:40:51,014 INFO client_server.ws.model_server: infer completed request_id=3178a056-a4c6-4843-8a72-c10111819c98 step=2 latency_ms=3.9
+2026-10-26 16:40:51,017 INFO client_server.ws.model_server: infer received request_id=d4b50196-1b71-4c59-a643-af8a25fe1a4d step=3
+2026-10-26 16:40:51,021 INFO client_server.ws.model_server: infer completed request_id=d4b50196-1b71-4c59-a643-af8a25fe1a4d step=3 latency_ms=4.1
+2026-10-26 16:40:51,024 INFO client_server.ws.model_server: infer received request_id=b36d4d2a-9c76-46a7-80fe-40a6b9e2821c step=4
+2026-10-26 16:40:51,028 INFO client_server.ws.model_server: infer completed request_id=b36d4d2a-9c76-46a7-80fe-40a6b9e2821c step=4 latency_ms=4.3
+2026-10-26 16:40:51,031 INFO client_server.ws.model_server: infer received request_id=5cfb907d-64eb-40eb-ad30-9d84fd79cbc1 step=5
+2026-10-26 16:40:51,036 INFO client_server.ws.model_server: infer completed request_id=5cfb907d-64eb-40eb-ad30-9d84fd79cbc1 step=5 latency_ms=4.4
+2026-10-26 16:40:51,039 INFO client_server.ws.model_server: infer received request_id=bd6153c7-2be2-41a0-adac-084262eed141 step=6
+2026-10-26 16:40:51,043 INFO client_server.ws.model_server: infer completed request_id=bd6153c7-2be2-41a0-adac-084262eed141 step=6 latency_ms=4.0
+2026-10-26 16:40:51,045 INFO client_server.ws.model_server: infer received request_id=b3f30a55-c84f-4b3c-97be-15beebb6d599 step=7
+2026-10-26 16:40:51,050 INFO client_server.ws.model_server: infer completed request_id=b3f30a55-c84f-4b3c-97be-15beebb6d599 step=7 latency_ms=4.3
+2026-10-26 16:40:51,053 INFO client_server.ws.model_server: infer received request_id=1cc6a586-faf5-4f37-9b46-2c90fb90b102 step=8
+2026-10-26 16:40:51,057 INFO client_server.ws.model_server: infer completed request_id=1cc6a586-faf5-4f37-9b46-2c90fb90b102 step=8 latency_ms=4.4
+2026-10-26 16:40:51,060 INFO client_server.ws.model_server: infer received request_id=00d87fc6-9d4e-4454-b2f7-4e1758105c95 step=9
+2026-10-26 16:40:51,064 INFO client_server.ws.model_server: infer completed request_id=00d87fc6-9d4e-4454-b2f7-4e1758105c95 step=9 latency_ms=4.0
+2026-10-26 16:40:51,067 INFO client_server.ws.model_server: infer received request_id=dea689fb-0de3-462b-b03c-97fddc8a5a71 step=10
+2026-10-26 16:40:51,079 INFO client_server.ws.model_server: infer completed request_id=dea689fb-0de3-462b-b03c-97fddc8a5a71 step=10 latency_ms=12.3
+2026-10-26 16:40:51,082 INFO client_server.ws.model_server: infer received request_id=265b62af-fa3a-44d7-ba65-b2b6cf8b416a step=11
+2026-10-26 16:40:51,086 INFO client_server.ws.model_server: infer completed request_id=265b62af-fa3a-44d7-ba65-b2b6cf8b416a step=11 latency_ms=4.6
+2026-10-26 16:40:51,089 INFO client_server.ws.model_server: infer received request_id=549c97fb-47d4-4437-9478-5d47595ff306 step=12
+2026-10-26 16:40:51,093 INFO client_server.ws.model_server: infer completed request_id=549c97fb-47d4-4437-9478-5d47595ff306 step=12 latency_ms=4.2
+2026-10-26 16:40:51,096 INFO client_server.ws.model_server: infer received request_id=bfca1af2-a88d-4ef1-b89e-c47851d6aab3 step=13
+2026-10-26 16:40:51,100 INFO client_server.ws.model_server: infer completed request_id=bfca1af2-a88d-4ef1-b89e-c47851d6aab3 step=13 latency_ms=4.2
+2026-10-26 16:40:51,103 INFO client_server.ws.model_server: infer received request_id=67118d9e-cb28-41df-aeee-c03940071091 step=14
+2026-10-26 16:40:51,108 INFO client_server.ws.model_server: infer completed request_id=67118d9e-cb28-41df-aeee-c03940071091 step=14 latency_ms=4.6
+2026-10-26 16:40:51,111 INFO client_server.ws.model_server: infer received request_id=a80d395d-baf3-4c96-9f48-4cf7212d9a7b step=15
+2026-10-26 16:40:51,115 INFO client_server.ws.model_server: infer completed request_id=a80d395d-baf3-4c96-9f48-4cf7212d9a7b step=15 latency_ms=4.2
+2026-10-26 16:40:51,118 INFO client_server.ws.model_server: infer received request_id=c13abf9b-1432-48db-b7a2-0b73a817461a step=16
+2026-10-26 16:40:51,122 INFO client_server.ws.model_server: infer completed request_id=c13abf9b-1432-48db-b7a2-0b73a817461a step=16 latency_ms=4.5
+2026-10-26 16:40:51,125 INFO client_server.ws.model_server: infer received request_id=001053ef-9986-4256-b8cc-123ea7956386 step=17
+2026-10-26 16:40:51,130 INFO client_server.ws.model_server: infer completed request_id=001053ef-9986-4256-b8cc-123ea7956386 step=17 latency_ms=4.7
+2026-10-26 16:40:51,133 INFO client_server.ws.model_server: infer received request_id=807f7d8f-8acd-4521-94af-abab36d98275 step=18
+2026-10-26 16:40:51,137 INFO client_server.ws.model_server: infer completed request_id=807f7d8f-8acd-4521-94af-abab36d98275 step=18 latency_ms=4.5
+2026-10-26 16:40:51,140 INFO client_server.ws.model_server: infer received request_id=42a12d5f-d9b0-4eea-b36d-fa0830a69810 step=19
+2026-10-26 16:40:51,144 INFO client_server.ws.model_server: infer completed request_id=42a12d5f-d9b0-4eea-b36d-fa0830a69810 step=19 latency_ms=4.4
+2026-10-26 16:40:51,160 INFO client_server.ws.model_server: infer received request_id=b4f0b2a5-df54-4e31-9a7b-883ea96e6483 step=0
+2026-10-26 16:40:51,221 INFO client_server.ws.model_server: infer completed request_id=b4f0b2a5-df54-4e31-9a7b-883ea96e6483 step=0 latency_ms=61.8
+2026-10-26 16:40:51,225 INFO client_server.ws.model_server: infer received request_id=4af837b0-ddc3-4fb0-8117-8172147fc3d2 step=1
+2026-10-26 16:40:51,230 INFO client_server.ws.model_server: infer completed request_id=4af837b0-ddc3-4fb0-8117-8172147fc3d2 step=1 latency_ms=4.7
+2026-10-26 16:40:51,234 INFO client_server.ws.model_server: infer received request_id=67be13c2-ee8b-4a52-825d-16c94f3d1046 step=2
+2026-10-26 16:40:51,238 INFO client_server.ws.model_server: infer completed request_id=67be13c2-ee8b-4a52-825d-16c94f3d1046 step=2 latency_ms=4.8
+2026-10-26 16:40:51,241 INFO client_server.ws.model_server: infer received request_id=ef7104b3-0bde-4c32-a17a-c0b51294986b step=3
+2026-10-26 16:40:51,245 INFO client_server.ws.model_server: infer completed request_id=ef7104b3-0bde-4c32-a17a-c0b51294986b step=3 latency_ms=4.2
+2026-10-26 16:40:51,248 INFO client_server.ws.model_server: infer received request_id=e307871d-75f3-4e98-b121-a08c15519e3e step=4
+2026-10-26 16:40:51,253 INFO client_server.ws.model_server: infer completed request_id=e307871d-75f3-4e98-b121-a08c15519e3e step=4 latency_ms=4.4
+2026-10-26 16:40:51,255 INFO client_server.ws.model_server: infer received request_id=430a9071-bb2e-41e1-8375-37eb42f78a24 step=5
+2026-10-26 16:40:51,260 INFO client_server.ws.model_server: infer completed request_id=430a9071-bb2e-41e1-8375-37eb42f78a24 step=5 latency_ms=4.2
+2026-10-26 16:40:51,263 INFO client_server.ws.model_server: infer received request_id=986e63ee-8b68-4cd7-8e37-d19e142c43f4 step=6
+2026-10-26 16:40:51,267 INFO client_server.ws.model_server: infer completed request_id=986e63ee-8b68-4cd7-8e37-d19e142c43f4 step=6 latency_ms=4.2
+2026-10-26 16:40:51,269 INFO client_server.ws.model_server: infer received request_id=c3ab66dd-0f90-4d53-af70-18d31fe45345 step=7
+2026-10-26 16:40:51,274 INFO client_server.ws.model_server: infer completed request_id=c3ab66dd-0f90-4d53-af70-18d31fe45345 step=7 latency_ms=4.1
+2026-10-26 16:40:51,276 INFO client_server.ws.model_server: infer received request_id=da5846f1-5aa5-4e26-994c-e0b4eb668d5d step=8
+2026-10-26 16:40:51,281 INFO client_server.ws.model_server: infer completed request_id=da5846f1-5aa5-4e26-994c-e0b4eb668d5d step=8 latency_ms=4.4
+2026-10-26 16:40:51,284 INFO client_server.ws.model_server: infer received request_id=564ed158-b222-4b76-97c1-39dadf7f5f3d step=9
+2026-10-26 16:40:51,288 INFO client_server.ws.model_server: infer completed request_id=564ed158-b222-4b76-97c1-39dadf7f5f3d step=9 latency_ms=4.4
+2026-10-26 16:40:51,291 INFO client_server.ws.model_server: infer received request_id=3fd02861-c9fd-4b5f-bae1-f7d6c54d4f88 step=10
+2026-10-26 16:40:51,303 INFO client_server.ws.model_server: infer completed request_id=3fd02861-c9fd-4b5f-bae1-f7d6c54d4f88 step=10 latency_ms=12.1
+2026-10-26 16:40:51,306 INFO client_server.ws.model_server: infer received request_id=80e9fde6-c577-4eeb-afb5-53d554dc886b step=11
+2026-10-26 16:40:51,310 INFO client_server.ws.model_server: infer completed request_id=80e9fde6-c577-4eeb-afb5-53d554dc886b step=11 latency_ms=4.6
+2026-10-26 16:40:51,313 INFO client_server.ws.model_server: infer received request_id=dbf6b813-5bbc-4c58-ab0a-2368f542b692 step=12
+2026-10-26 16:40:51,318 INFO client_server.ws.model_server: infer completed request_id=dbf6b813-5bbc-4c58-ab0a-2368f542b692 step=12 latency_ms=4.2
+2026-10-26 16:40:51,320 INFO client_server.ws.model_server: infer received request_id=b490ba4b-2bf0-4204-a9ac-a521a3040eb3 step=13
+2026-10-26 16:40:51,325 INFO client_server.ws.model_server: infer completed request_id=b490ba4b-2bf0-4204-a9ac-a521a3040eb3 step=13 latency_ms=4.2
+2026-10-26 16:40:51,327 INFO client_server.ws.model_server: infer received request_id=ec52ed00-5ee5-4573-ba3b-1cf9f6f7afbc step=14
+2026-10-26 16:40:51,332 INFO client_server.ws.model_server: infer completed request_id=ec52ed00-5ee5-4573-ba3b-1cf9f6f7afbc step=14 latency_ms=4.5
+2026-10-26 16:40:51,335 INFO client_server.ws.model_server: infer received request_id=bf16c515-ad34-44c7-8cb5-ebc7d291af94 step=15
+2026-10-26 16:40:51,339 INFO client_server.ws.model_server: infer completed request_id=bf16c515-ad34-44c7-8cb5-ebc7d291af94 step=15 latency_ms=4.6
+2026-10-26 16:40:51,342 INFO client_server.ws.model_server: infer received request_id=198b0591-b00d-4056-ae17-9d23d57b3bfe step=16
+2026-10-26 16:40:51,347 INFO client_server.ws.model_server: infer completed request_id=198b0591-b00d-4056-ae17-9d23d57b3bfe step=16 latency_ms=5.0
+2026-10-26 16:40:51,350 INFO client_server.ws.model_server: infer received request_id=8c5e7cdc-f4e1-4526-80f9-a969463ebcca step=17
+2026-10-26 16:40:51,355 INFO client_server.ws.model_server: infer completed request_id=8c5e7cdc-f4e1-4526-80f9-a969463ebcca step=17 latency_ms=4.8
+2026-10-26 16:40:51,358 INFO client_server.ws.model_server: infer received request_id=0f50f065-ad8d-405d-8038-7a680f7447f3 step=18
+2026-10-26 16:40:51,362 INFO client_server.ws.model_server: infer completed request_id=0f50f065-ad8d-405d-8038-7a680f7447f3 step=18 latency_ms=4.3
+2026-10-26 16:40:51,365 INFO client_server.ws.model_server: infer received request_id=15f83d6c-5990-4608-90cf-dc54db7cd500 step=19
+2026-10-26 16:40:51,369 INFO client_server.ws.model_server: infer completed request_id=15f83d6c-5990-4608-90cf-dc54db7cd500 step=19 latency_ms=4.5
+2026-10-26 16:40:51,384 INFO client_server.ws.model_server: infer received request_id=6fba5245-6300-49f4-97e9-3bafdaacfd9b step=0
+2026-10-26 16:40:51,445 INFO client_server.ws.model_server: infer completed request_id=6fba5245-6300-49f4-97e9-3bafdaacfd9b step=0 latency_ms=60.9
+2026-10-26 16:40:51,449 INFO client_server.ws.model_server: infer received request_id=009c532d-0451-4a6c-bfad-7af6c143835e step=1
+2026-10-26 16:40:51,453 INFO client_server.ws.model_server: infer completed request_id=009c532d-0451-4a6c-bfad-7af6c143835e step=1 latency_ms=4.5
+2026-10-26 16:40:51,457 INFO client_server.ws.model_server: infer received request_id=39c33a7f-fac9-4d61-8621-8843a6500e8b step=2
+2026-10-26 16:40:51,462 INFO client_server.ws.model_server: infer completed request_id=39c33a7f-fac9-4d61-8621-8843a6500e8b step=2 latency_ms=4.5
+2026-10-26 16:40:51,464 INFO client_server.ws.model_server: infer received request_id=0dbe0582-31a9-4b9a-adaa-c75b424f1b8b step=3
+2026-10-26 16:40:51,469 INFO client_server.ws.model_server: infer completed request_id=0dbe0582-31a9-4b9a-adaa-c75b424f1b8b step=3 latency_ms=4.9
+2026-10-26 16:40:51,472 INFO client_server.ws.model_server: infer received request_id=516dd49d-7ce6-4a97-8f28-5d0895961f06 step=4
+2026-10-26 16:40:51,477 INFO client_server.ws.model_server: infer completed request_id=516dd49d-7ce6-4a97-8f28-5d0895961f06 step=4 latency_ms=4.5
+2026-10-26 16:40:51,480 INFO client_server.ws.model_server: infer received request_id=b1a83b60-c727-4711-ae92-0671369c6f5c step=5
+2026-10-26 16:40:51,484 INFO client_server.ws.model_server: infer completed request_id=b1a83b60-c727-4711-ae92-0671369c6f5c step=5 latency_ms=4.3
+2026-10-26 16:40:51,487 INFO client_server.ws.model_server: infer received request_id=d29de84d-bdf9-4bb3-909a-62b2b6fd22bf step=6
+2026-10-26 16:40:51,491 INFO client_server.ws.model_server: infer completed request_id=d29de84d-bdf9-4bb3-909a-62b2b6fd22bf step=6 latency_ms=4.3
+2026-10-26 16:40:51,494 INFO client_server.ws.model_server: infer received request_id=5526e23b-8bae-4775-a870-9728bcf878f4 step=7
+2026-10-26 16:40:51,498 INFO client_server.ws.model_server: infer completed request_id=5526e23b-8bae-4775-a870-9728bcf878f4 step=7 latency_ms=4.2
+2026-10-26 16:40:51,501 INFO client_server.ws.model_server: infer received request_id=7060369a-0179-490c-b2cc-1073aecf97c8 step=8
+2026-10-26 16:40:51,506 INFO client_server.ws.model_server: infer completed request_id=7060369a-0179-490c-b2cc-1073aecf97c8 step=8 latency_ms=4.6
+2026-10-26 16:40:51,508 INFO client_server.ws.model_server: infer received request_id=84f98b03-6f01-400e-ad36-1732c6ca1062 step=9
+2026-10-26 16:40:51,513 INFO client_server.ws.model_server: infer completed request_id=84f98b03-6f01-400e-ad36-1732c6ca1062 step=9 latency_ms=5.0
+2026-10-26 16:40:51,516 INFO client_server.ws.model_server: infer received request_id=aa9bb2d7-9406-40d3-972f-d7df922d5c08 step=10
+2026-10-26 16:40:51,530 INFO client_server.ws.model_server: infer completed request_id=aa9bb2d7-9406-40d3-972f-d7df922d5c08 step=10 latency_ms=13.8
+2026-10-26 16:40:51,533 INFO client_server.ws.model_server: infer received request_id=bc3c4e2f-05ef-4035-b056-becc9f1c762d step=11
+2026-10-26 16:40:51,538 INFO client_server.ws.model_server: infer completed request_id=bc3c4e2f-05ef-4035-b056-becc9f1c762d step=11 latency_ms=5.2
+2026-10-26 16:40:51,541 INFO client_server.ws.model_server: infer received request_id=5e83bd9d-9e7a-4fe1-85f0-168c4388dc79 step=12
+2026-10-26 16:40:51,545 INFO client_server.ws.model_server: infer completed request_id=5e83bd9d-9e7a-4fe1-85f0-168c4388dc79 step=12 latency_ms=4.3
+2026-10-26 16:40:51,548 INFO client_server.ws.model_server: infer received request_id=5ed76327-de2e-4b9a-81e2-812821a56ead step=13
+2026-10-26 16:40:51,552 INFO client_server.ws.model_server: infer completed request_id=5ed76327-de2e-4b9a-81e2-812821a56ead step=13 latency_ms=4.4
+2026-10-26 16:40:51,555 INFO client_server.ws.model_server: infer received request_id=4ab00dc0-e697-4b63-bc86-cd6747b7f38d step=14
+2026-10-26 16:40:51,559 INFO client_server.ws.model_server: infer completed request_id=4ab00dc0-e697-4b63-bc86-cd6747b7f38d step=14 latency_ms=4.4
+2026-10-26 16:40:51,562 INFO client_server.ws.model_server: infer received request_id=37dc7650-a334-409e-8d8a-b88d2596d510 step=15
+2026-10-26 16:40:51,567 INFO client_server.ws.model_server: infer completed request_id=37dc7650-a334-409e-8d8a-b88d2596d510 step=15 latency_ms=4.7
+2026-10-26 16:40:51,570 INFO client_server.ws.model_server: infer received request_id=65e4b2e5-2774-4ee2-a5ea-28a3727d8350 step=16
+2026-10-26 16:40:51,574 INFO client_server.ws.model_server: infer completed request_id=65e4b2e5-2774-4ee2-a5ea-28a3727d8350 step=16 latency_ms=4.5
+2026-10-26 16:40:51,577 INFO client_server.ws.model_server: infer received request_id=17393713-4d5b-4554-88f6-79719c0a19df step=17
+2026-10-26 16:40:51,582 INFO client_server.ws.model_server: infer completed request_id=17393713-4d5b-4554-88f6-79719c0a19df step=17 latency_ms=4.4
+2026-10-26 16:40:51,585 INFO client_server.ws.model_server: infer received request_id=f4eb8ec0-ee4f-4c73-9900-859756fdc0bb step=18
+2026-10-26 16:40:51,589 INFO client_server.ws.model_server: infer completed request_id=f4eb8ec0-ee4f-4c73-9900-859756fdc0bb step=18 latency_ms=4.6
+2026-10-26 16:40:51,592 INFO client_server.ws.model_server: infer received request_id=e3c26215-888a-45b6-a881-14e5d26a8a3a step=19
+2026-10-26 16:40:51,597 INFO client_server.ws.model_server: infer completed request_id=e3c26215-888a-45b6-a881-14e5d26a8a3a step=19 latency_ms=4.8
+
+[TestEnv] Check Episode End: True
+[TestEnv] Check Episode End: True
+[TestEnv] Episode finished
+[94m🚀 Running Episode 7[0m
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 0 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 1 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 2 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 3 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 4 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 5 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 6 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 7 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 8 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 9 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 10 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 11 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 12 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 13 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 14 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 15 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 16 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 17 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 18 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 19 / 20 (step_limit)
+[TestEnv] Check Episode End: True
+[TestEnv] Check Episode End: True
+[TestEnv] Episode finished
+[94m🚀 Running Episode 8[0m
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 0 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 1 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 2 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 3 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 4 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 5 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 6 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 7 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 8 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 9 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 10 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 11 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 12 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 13 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 14 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 15 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 16 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 17 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 18 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 19 / 20 (step_limit)
+[TestEnv] Check Episode End: True
+[TestEnv] Check Episode End: True
+[TestEnv] Episode finished
+[94m🚀 Running Episode 9[0m
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 0 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 1 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 2 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 3 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 4 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 5 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 6 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 7 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 8 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 9 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 10 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 11 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 12 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 13 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 14 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 15 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 16 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 17 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 18 / 20 (step_limit)
+[TestEnv] Check Episode End: False
+[TestEnv] Check Episode End: False
+[TestEnv] Action Step: 19 / 20 (step_limit)
+[TestEnv] Check Episode End: True
+[TestEnv] Check Episode End: True
+[TestEnv] Episode finished
+[MAIN] eval finished
+[MAIN] kill server 664497

@@ -1,0 +1,203 @@
+{
+  "adapters.XQAUX8Z9.deploy": {
+    "file": "capabilities/control/deploy_for_plug_in_charger.py",
+    "resource": "resources/plug_in_charger/coap/adapter/deploy.py",
+    "package": false,
+    "sha256": "44b9c0580502ee530b591381ab80890eed7771bbb344da4879d93cca459dd29f"
+  },
+  "b88r42wq.contracts": {
+    "file": "capabilities/observation/contracts_for_press_by_number.py",
+    "resource": "resources/plug_in_charger/coap/contracts.py",
+    "package": false,
+    "sha256": "4bf9c1cbeaeb0424994cc2e3b5038f7a6872fb66b8c906e29ad88282d8e3a7f2"
+  },
+  "b88r42wq": {
+    "file": "capabilities/control/robot_for_press_by_number.py",
+    "resource": "resources/plug_in_charger/coap/__init__.py",
+    "package": true,
+    "sha256": "3859b6dbbc42e387cd4dcb849ed7b15b57b12d99b60f36f82da688fc0f4a09ca"
+  },
+  "adapters.XQAUX8Z9": {
+    "file": "capabilities/control/xqaux8z9.py",
+    "resource": "resources/plug_in_charger/coap/adapter/__init__.py",
+    "package": true,
+    "sha256": "a096d4d8cc35a6447231c03ba3cf17a39979dd6aa1b80f07a8069557d57427ab"
+  },
+  "b88r42wq.lxm6wuec_adapter": {
+    "file": "capabilities/control/native_adapter_for_plug_in_charger.py",
+    "resource": "resources/plug_in_charger/coap/lxm6wuec_adapter.py",
+    "package": false,
+    "sha256": "4edf9db88cd2f60c8917132ea808a9407bbb244900365c5e37adcafe695b5da8"
+  },
+  "rdj_rgb_adapters.plug_in_charger": {
+    "file": "capabilities/perception/plug_in_charger.py",
+    "resource": "resources/plug_in_charger/coap/native_adapter/plug_in_charger.py",
+    "package": false,
+    "sha256": "173992d90c22c2c4a2b09b4bdc2263d04cbbf06da4f0e64f831e8b621b736176"
+  },
+  "rdj_master.evaluation.robot_frames": {
+    "file": "capabilities/motion/robot_frames.py",
+    "resource": "resources/plug_in_charger/coap/native/evaluation/robot_frames.py",
+    "package": false,
+    "sha256": "71226d83bb5ad1ca4b87c79e53a6bcb7ae7e5e24dac123426bb04f724f38d113"
+  },
+  "rdj_master.evaluation.policy_ik": {
+    "file": "capabilities/motion/policy_ik.py",
+    "resource": "resources/plug_in_charger/coap/native/evaluation/policy_ik.py",
+    "package": false,
+    "sha256": "53c9445869e051034662a7ee32e10197c748fdc06e8c96b303c4337c42168621"
+  },
+  "rdj_master.evaluation": {
+    "file": "capabilities/control/evaluation.py",
+    "resource": "resources/plug_in_charger/coap/native/evaluation/__init__.py",
+    "package": true,
+    "sha256": "8ac960692046a39d7291b2ffbd9517c56003fff55959c503c8187f83baf5ed6f"
+  },
+  "rdj_master": {
+    "file": "capabilities/control/rdj_master.py",
+    "resource": "resources/plug_in_charger/coap/native/__init__.py",
+    "package": true,
+    "sha256": "613cc1b1eae9fdaa52473b0ce0522abc5f668d1f2604f6748bfe4776a459ea89"
+  },
+  "rdj_master.evaluation.charger_server_backend": {
+    "file": "capabilities/control/charger_server_backend.py",
+    "resource": "resources/plug_in_charger/coap/native/evaluation/charger_server_backend.py",
+    "package": false,
+    "sha256": "4b97d5653f0bcfc6c86f57ceee5a0e982927bf138730c7e111af1cc42f1216e1"
+  },
+  "rdj_master.evaluation.charger_live_socket": {
+    "file": "capabilities/control/charger_live_socket.py",
+    "resource": "resources/plug_in_charger/coap/native/evaluation/charger_live_socket.py",
+    "package": false,
+    "sha256": "f457147d234495783af0250d15dd9ee8a67f6dad30dda71eef40c65a999fc858"
+  },
+  "rdj_master.tasks.plug_in_charger.rgb_perception": {
+    "file": "capabilities/perception/rgb_perception_for_plug_in_charger.py",
+    "resource": "resources/plug_in_charger/coap/native/tasks/plug_in_charger/rgb_perception.py",
+    "package": false,
+    "sha256": "5743f9c1e25a4ea610fb2e91fa035b516c9589b4687755a58a0f1057e165fbb9"
+  },
+  "rdj_master.tasks.plug_in_charger.contract": {
+    "file": "capabilities/observation/contract_for_plug_in_charger.py",
+    "resource": "resources/plug_in_charger/coap/native/tasks/plug_in_charger/contract.py",
+    "package": false,
+    "sha256": "c104b596f3fc519f7b822d0115f91a84e0115dffdc684179006d26e5a7b7dae1"
+  },
+  "rdj_master.tasks.plug_in_charger": {
+    "file": "capabilities/control/plug_in_charger.py",
+    "resource": "resources/plug_in_charger/coap/native/tasks/plug_in_charger/__init__.py",
+    "package": true,
+    "sha256": "a54c7401b2861b6f2f5e153b02ae0629ac6edd63c44c0db38c9dbafee073f178"
+  },
+  "rdj_master.tasks.plug_in_charger.rgb_cap": {
+    "file": "capabilities/perception/rgb_cap.py",
+    "resource": "resources/plug_in_charger/coap/native/tasks/plug_in_charger/rgb_cap.py",
+    "package": false,
+    "sha256": "8f8f970150a5bb6b5af35d12a6413903e0c7b1a81935322b3396091caee6c407"
+  },
+  "rdj_master.tasks.plug_in_charger.stage_controller": {
+    "file": "capabilities/control/stage_controller_for_plug_in_charger.py",
+    "resource": "resources/plug_in_charger/coap/native/tasks/plug_in_charger/stage_controller.py",
+    "package": false,
+    "sha256": "c9f682f71996862f36bc530e882a1ef39a0113df0f28413205a1bc889f548c90"
+  },
+  "rdj_master.tasks": {
+    "file": "capabilities/control/tasks_for_plug_in_charger.py",
+    "resource": "resources/plug_in_charger/coap/native/tasks/__init__.py",
+    "package": true,
+    "sha256": "50ac3a479d3065e64a9b13575805c183312e7966eb869916f6db51c1907cb965"
+  },
+  "rdj_master.tasks.general_pickup.rgb_perception": {
+    "file": "capabilities/perception/rgb_perception_for_plug_in_charger_helper_2.py",
+    "resource": "resources/plug_in_charger/coap/native/tasks/general_pickup/rgb_perception.py",
+    "package": false,
+    "sha256": "31ed657afb869971d9f5dda45a1c8d215479faaed946599bc03c56a24a574e25"
+  },
+  "rdj_master.tasks.general_pickup": {
+    "file": "capabilities/control/general_pickup.py",
+    "resource": "resources/plug_in_charger/coap/native/tasks/general_pickup/__init__.py",
+    "package": true,
+    "sha256": "1ae98d0f7b2f1aa9103d6f1ef0e25a92fa6d51999b0115995305cff9a9c9da57"
+  },
+  "rdj_master.state": {
+    "file": "capabilities/control/state.py",
+    "resource": "resources/plug_in_charger/coap/native/state/__init__.py",
+    "package": true,
+    "sha256": "af21b4afe2f065eab56d4d337bc1570243d6b8bc5bac841f696162b41f11f21f"
+  },
+  "rdj_master.state.common": {
+    "file": "capabilities/control/common.py",
+    "resource": "resources/plug_in_charger/coap/native/state/common.py",
+    "package": false,
+    "sha256": "409883900a60cd1dad9dc9e635f75ab3afcf059848d7103116a1e42ce9ac4d8c"
+  },
+  "rdj_master.core": {
+    "file": "capabilities/control/core.py",
+    "resource": "resources/plug_in_charger/coap/native/core/__init__.py",
+    "package": true,
+    "sha256": "714597ddbb4979f690af8fbdd64412caffb166bc2471e3f78f4695b6373094e1"
+  },
+  "rdj_master.core.types": {
+    "file": "capabilities/control/types.py",
+    "resource": "resources/plug_in_charger/coap/native/core/types.py",
+    "package": false,
+    "sha256": "e9fa3426f2b7c7c7e3104e713aea6e81aa31578f47405f2c2732ffdb02e31558"
+  },
+  "rdj_master.evaluation.plug_in_charger_simulator_bridge": {
+    "file": "capabilities/control/plug_in_charger_simulator_bridge.py",
+    "resource": "resources/plug_in_charger/coap/native/evaluation/plug_in_charger_simulator_bridge.py",
+    "package": false,
+    "sha256": "6686996457f9b66eba1519b5d3dd5cc06bde7efa642df588957339a6d71cedbd"
+  },
+  "rdj_master.evaluation.deposit_coin_simulator_bridge": {
+    "file": "capabilities/control/deposit_coin_simulator_bridge.py",
+    "resource": "resources/plug_in_charger/coap/native/evaluation/deposit_coin_simulator_bridge.py",
+    "package": false,
+    "sha256": "8e61fc72de99ae95400e3f4e7bee2640879b0e639738d034cc6f71a53e4581fb"
+  },
+  "rdj_master.tasks.deposit_coin.contract": {
+    "file": "capabilities/observation/contract_for_plug_in_charger_helper_2.py",
+    "resource": "resources/plug_in_charger/coap/native/tasks/deposit_coin/contract.py",
+    "package": false,
+    "sha256": "4975854535ee9f8d657e4c28db0659a2148292daba155b4a0a51591c989bb7cf"
+  },
+  "rdj_master.tasks.deposit_coin": {
+    "file": "capabilities/control/deposit_coin.py",
+    "resource": "resources/plug_in_charger/coap/native/tasks/deposit_coin/__init__.py",
+    "package": true,
+    "sha256": "f629d5d407e1e1676d6955e55714286811b0320166d86504e90a53cfe89c74c4"
+  },
+  "rdj_master.evaluation.pose_geometry": {
+    "file": "capabilities/geometry/pose_geometry.py",
+    "resource": "resources/plug_in_charger/coap/native/evaluation/pose_geometry.py",
+    "package": false,
+    "sha256": "7ea423bd3243baa1c69c8781b00b1957b47406574595d8279105a51b1b5c2dc4"
+  },
+  "lxm6wuec_skill_library.pose_skills": {
+    "file": "capabilities/geometry/pose_skills.py",
+    "resource": "resources/plug_in_charger/coap/runtime/skills/pose_skills.py",
+    "package": false,
+    "sha256": "53b5bffdc36b4560c92d01ed45d64859909f9704a650ac949d4c1a597451fdce"
+  },
+  "lxm6wuec_skill_library": {
+    "file": "capabilities/planning/native_skill_library_for_plug_in_charger.py",
+    "resource": "resources/plug_in_charger/coap/runtime/skills/__init__.py",
+    "package": true,
+    "sha256": "b42f4095c345ed2181f4ecb996f72dae373ef425c5d8cb78809cdbd6270c123f"
+  },
+  "rdj_master.tasks.general_pickup.envelope": {
+    "file": "capabilities/control/envelope.py",
+    "resource": "resources/plug_in_charger/coap/native/tasks/general_pickup/envelope.py",
+    "package": false,
+    "sha256": "bfff430c6a7ac496306090f7b6e0ca6b0f0510807e090e0eb1e360c180f28d26"
+  },
+  "rdj_rgb_adapters": {
+    "file": "capabilities/control/insert_key.py",
+    "resource": "resources/plug_in_charger/coap/native_adapter/__init__.py",
+    "package": true,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "adapters": {
+    "namespace": true
+  }
+}

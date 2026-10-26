@@ -1,0 +1,10 @@
+{
+  "resource_entries": 794,
+  "entries_renamed": 301,
+  "task_module_maps": 39,
+  "conflicts": [],
+  "apply": true,
+  "all_resource_contents_preserved": true,
+  "algorithm_sources_unchanged": true,
+  "all_task_roots_have_coap": true
+}
