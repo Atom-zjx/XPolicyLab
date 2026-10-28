@@ -30,6 +30,8 @@ def configure(config):
     if route['driver'] != 'vla' and cfg.get('env_cfg_type') != 'arx_x5':
         raise ValueError('Selected scripted policies require env_cfg_type=arx_x5')
     cfg.update(action_type=route['action_type'], eval_batch=route['eval_batch'])
+    if 'request_timeout_s' in route:
+        cfg['request_timeout_s'] = route['request_timeout_s']
     return cfg, route
 
 
@@ -45,7 +47,10 @@ if __name__ == '__main__':
                                 action_type=args.action, env_cfg_type='arx_x5'))
     if args.write_config:
         content = (ROOT / 'deploy.yml').read_text()
-        for key, value in dict(action_type=route['action_type'], eval_batch=route['eval_batch'], me_brain_backend=args.backend).items():
+        overrides = dict(action_type=route['action_type'], eval_batch=route['eval_batch'], me_brain_backend=args.backend)
+        if 'request_timeout_s' in route:
+            overrides['request_timeout_s'] = route['request_timeout_s']
+        for key, value in overrides.items():
             line = key + ': ' + json.dumps(value)
             if re.search(r'^' + key + r':.*$', content, re.M):
                 content = re.sub(r'^' + key + r':.*$', line, content, flags=re.M)

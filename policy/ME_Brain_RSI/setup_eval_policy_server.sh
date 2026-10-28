@@ -25,6 +25,11 @@ backend="${ME_BRAIN_BACKEND:-auto}"
 action_type="$("${ROUTE_PYTHON}" "${SCRIPT_DIR}/routing.py" --task "${task_name}" --backend "${backend}" --action "${action_type}" --field action_type)"
 
 
+# Apply the coin descriptor before the policy interpreter imports NumPy.
+if [[ "${task_name}" == "deposit_coin" && "${backend}" == "auto" ]]; then
+    export OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
+fi
+
 policy_name="$(basename "${SCRIPT_DIR}")"
 
 yaml_file="$(mktemp "${TMPDIR:-/tmp}/me-brain-config.XXXXXX")"

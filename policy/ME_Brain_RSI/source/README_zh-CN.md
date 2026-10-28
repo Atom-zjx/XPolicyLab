@@ -51,7 +51,6 @@ src/focus_vlwa/
   inference/      # 分词器和本地推理策略
   post_training/  # PyTorch/DDP 后训练与检查点保存
   scripts/        # 命令行入口实现
-tests/                            # 回归测试
 ```
 
 公共 Python 包名为 `focus_vlwa`，安装包及命令名为 `focus-vlwa`，当前版本为 `1.0.0`。
@@ -160,7 +159,7 @@ result = policy.infer(observation)
 # Call history.reset() at every new episode.
 ```
 
-XPolicyLab 仓库 `policy/ME_Brain_1` 中的适配器会逐控制步收集完整头部历史，并为每个环境维护独立缓存。
+XPolicyLab 仓库 `policy/ME_Brain_RSI` 中的适配器会逐控制步收集完整头部历史，并为每个环境维护独立缓存。
 
 ## 后训练
 

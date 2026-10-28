@@ -3,7 +3,7 @@
 English | [简体中文](README_zh-CN.md)
 
 Focus-VLWA jointly models visual history, future world states, and robot actions for dual-arm manipulation.
-This release contains post-training, dataset processing, and local inference. This source copy is bundled with the RoboDojo/XPolicyLab adapter under `policy/ME_Brain_1`.
+This release contains post-training, dataset processing, and local inference. This source copy is bundled with the RoboDojo/XPolicyLab adapter under `policy/ME_Brain_RSI`.
 
 ## Demo
 
@@ -30,7 +30,6 @@ src/focus_vlwa/
   inference/      # Tokenizer and local inference policy
   post_training/  # PyTorch/DDP training and checkpoint export
   scripts/        # Command implementations
-tests/
 ```
 
 ## Installation
@@ -108,7 +107,7 @@ result = policy.infer(observation)
 # Call history.reset() at every new episode.
 ```
 
-For XPolicyLab, the adapter in `policy/ME_Brain_1` observes every control step and maintains a separate history buffer for each environment.
+For XPolicyLab, the adapter in `policy/ME_Brain_RSI` observes every control step and maintains a separate history buffer for each environment.
 
 ## Post-training
 

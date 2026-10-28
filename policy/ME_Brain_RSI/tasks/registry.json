@@ -529,11 +529,16 @@
       "aliases": []
     },
     "deposit_coin": {
-      "driver": "vla",
       "action_type": "joint",
       "eval_batch": true,
-      "max_envs": null,
-      "aliases": []
+      "aliases": [],
+      "max_envs": 1,
+      "driver": "native",
+      "model": "rdj_v1_deposit_coin.model:Model",
+      "deploy": "coin_deploy",
+      "numeric_ik": false,
+      "modules": "tasks/deposit_coin/modules.json",
+      "request_timeout_s": 1800
     },
     "build_tower": {
       "driver": "vla",

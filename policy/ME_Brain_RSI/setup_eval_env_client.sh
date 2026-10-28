@@ -24,6 +24,11 @@ backend="${ME_BRAIN_BACKEND:-auto}"
 action_type="$("${ROUTE_PYTHON}" "${SCRIPT_DIR}/routing.py" --task "${task_name}" --backend "${backend}" --action "${action_type}" --field action_type)"
 
 
+# The official simulator reads its request timeout from this environment key.
+if [[ "${task_name}" == "deposit_coin" && "${backend}" == "auto" ]]; then
+    export ROBODOJO_WS_REQUEST_TIMEOUT_S="${ROBODOJO_WS_REQUEST_TIMEOUT_S:-1800}"
+fi
+
 policy_name="$(basename "${SCRIPT_DIR}")"
 
 yaml_file="$(mktemp "${TMPDIR:-/tmp}/me-brain-config.XXXXXX")"

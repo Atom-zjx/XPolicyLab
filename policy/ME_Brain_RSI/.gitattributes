@@ -1,0 +1,9 @@
+# Preserve the pinned upstream byte identities across checkouts.
+capabilities/**/deposit_coin_*.py -text
+resources/deposit_coin/coap/vendor/code-skills/** -text
+
+# Keep original upstream formatting without relaxing checks on adapter code.
+capabilities/control/deposit_coin_controller.py whitespace=-blank-at-eof
+resources/deposit_coin/coap/vendor/code-skills/implementations/rdj_v1_deposit_coin/12fa351b9c54f64f/rdj_v1_deposit_coin/controller.py whitespace=-blank-at-eof
+resources/deposit_coin/coap/vendor/code-skills/implementations/rdj_v1_deposit_coin/12fa351b9c54f64f/rdj_v1_deposit_coin/assets/x5/X5A.urdf whitespace=cr-at-eol,-blank-at-eol
+resources/deposit_coin/coap/vendor/code-skills/implementations/rdj_v1_deposit_coin/12fa351b9c54f64f/rdj_v1_deposit_coin/assets/x5/robot_config.yml whitespace=-blank-at-eol

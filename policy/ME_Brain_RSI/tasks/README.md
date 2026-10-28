@@ -31,7 +31,7 @@
 | `plug_in_charger` | `charger` | `joint` | `true` |
 | `pour_balls_into_vase` | `vla` | `joint` | `true` |
 | `play_Xylophone` | `model` | `ee` | `false` |
-| `deposit_coin` | `vla` | `joint` | `true` |
+| `deposit_coin` | `native` | `joint` | `true` |
 | `insert_key` | `native` | `ee` | `true` |
 | `build_tower` | `vla` | `joint` | `true` |
 | `put_bottles_into_dustbin` | `vla` | `joint` | `true` |

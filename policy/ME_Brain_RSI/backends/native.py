@@ -25,6 +25,9 @@ def _external_dependencies(config, route):
 
 
 def create(config, route, scope, run):
+    if route['canonical_task'] == 'deposit_coin':
+        from .coin import create as create_coin
+        return create_coin(config, route, scope, run)
     driver = route['driver']
     if driver == 'native':
         os.environ.update(RDJ_OUTPUT_DIR=str(run), RDJ_V1_OUTPUT=str(run / 'runtime'), RDJ_CONFIG=route['canonical_task'], RDJ_SEED=str(route.get('defaults', {}).get('seed', 0)), IK_RESULT=str(run))
