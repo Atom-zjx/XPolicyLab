@@ -1,10 +1,8 @@
 """Prepare native dependencies while preserving their selected model classes."""
 import atexit
-import hashlib
 import json
 import os
 from pathlib import Path
-import shutil
 import socket
 import subprocess
 import sys
@@ -33,35 +31,10 @@ def create(config, route, scope, run):
         os.environ.update(RDJ_OUTPUT_DIR=str(run), RDJ_V1_OUTPUT=str(run / 'runtime'), RDJ_CONFIG=route['canonical_task'], RDJ_SEED=str(route.get('defaults', {}).get('seed', 0)), IK_RESULT=str(run))
         factory = scope.resolve(route['model'])
         return factory() if route.get('constructor') == 'empty' else factory(dict(route.get('defaults', {})))
-    if driver == 'charger':
-        _prepare_charger(config, run)
-        return scope.resolve(route['model'])(config)
     config = dict(config, equation_assets_root=config.get('equation_assets_root') or os.environ.get('ME_BRAIN_EQUATION_ASSETS'))
     _external_dependencies(config, route)
     return EquationModel(config, route, scope, run)
 
-
-def _prepare_charger(config, run):
-    assets = config.get('charger_assets_root') or os.environ.get('ME_BRAIN_CHARGER_ASSETS')
-    if not assets:
-        raise ValueError('charger_assets_root or ME_BRAIN_CHARGER_ASSETS is required')
-    assets = Path(assets).expanduser().resolve(strict=True)
-    pinned = json.loads((ROOT / 'tasks/plug_in_charger/dependencies.json').read_text())
-    robot_relative = 'implementations/rdj_plug_policy/eb0036595f3b1f25/rdj_plug_policy/assets/x5'
-    curobo_relative = 'dependencies/curobo/9077c9afff1c3fda/curobo'
-    for relative, expected in pinned.items():
-        if hashlib.sha256((assets / relative).read_bytes()).hexdigest() != expected:
-            raise ValueError('Charger dependency checksum mismatch: ' + relative)
-    private = run / 'native'
-    private.mkdir()
-    for relative, name in [(robot_relative, 'x5'), (curobo_relative, 'curobo')]:
-        shutil.copytree(assets / relative, private / name, ignore=shutil.ignore_patterns('__pycache__', '*.pyc', '.git'))
-    for name in ('torch_extensions', 'cache', 'tmp'):
-        (private / name).mkdir()
-    evidence = run / 'native_evidence'
-    evidence.mkdir()
-    os.environ.update(B88R42WQ_RSI_ROBOT_ASSETS=str(private / 'x5'), RDJ_RGB_EVIDENCE=str(evidence), RDJ_OUTPUT_DIR=str(private), RDJ_V1_OUTPUT=str(private), TORCH_EXTENSIONS_DIR=str(private / 'torch_extensions'), XDG_CACHE_HOME=str(private / 'cache'), TMPDIR=str(private / 'tmp'))
-    sys.path.insert(0, str(private / 'curobo'))
 
 
 class EquationModel:

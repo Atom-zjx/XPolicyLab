@@ -11,12 +11,12 @@ from ..core.runtime import ROOT
 
 class StepModel:
     def __init__(self, config, route, scope):
-        self.task = route['canonical_task']
+        self.task = route.get('policy_task', route['canonical_task'])
         self.factory = scope.resolve(route['model'])
         self.dimensions = get_robot_action_dim_info(config['env_cfg_type'])
         if len(self.dimensions['arm_dim']) != 2:
             raise ValueError('Step policies require two arms')
-        options_file = ROOT / 'tasks' / self.task / 'options.json'
+        options_file = ROOT / 'tasks' / route['canonical_task'] / 'options.json'
         options = json.loads(options_file.read_text())
         self.feedback_mode = 'stop'
         if self.task == 'swap_T':

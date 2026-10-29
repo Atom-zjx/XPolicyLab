@@ -28,6 +28,8 @@ action_type="$("${ROUTE_PYTHON}" "${SCRIPT_DIR}/routing.py" --task "${task_name}
 # Apply the coin descriptor before the policy interpreter imports NumPy.
 if [[ "${task_name}" == "deposit_coin" && "${backend}" == "auto" ]]; then
     export OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
+elif [[ "${backend}" == "auto" && ( "${task_name}" == "plug_in_charger" || "${task_name}" == "sort_nesting_dolls_by_size" ) ]]; then
+    export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
 fi
 
 policy_name="$(basename "${SCRIPT_DIR}")"

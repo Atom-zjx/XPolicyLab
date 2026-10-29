@@ -18,7 +18,7 @@ class ME_Brain_Adaptor:
         if driver == 'step':
             from .backends.step import StepModel
             self.core = StepModel(self.config, self.route, self.scope)
-        elif driver in ('native', 'charger', 'equation'):
+        elif driver in ('native', 'equation'):
             from .backends.native import create
             self.core = create(self.config, self.route, self.scope, self.run)
         else:

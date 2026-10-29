@@ -28,7 +28,6 @@ me_brain_backend: auto
 strategy_evidence_dir: null
 robot_static_path: null
 nesting_assets_root: null
-charger_assets_root: null
 stack_assets_root: null
 equation_assets_root: null
 perception_assets_root: null

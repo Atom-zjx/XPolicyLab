@@ -67,7 +67,7 @@ def prepare(config, route):
     run = Path(tempfile.mkdtemp(prefix=route['canonical_task'] + '-', dir=evidence))
     task = route['canonical_task']
     for prefix in ('B88R42WQ', 'COAP'):
-        os.environ.update({prefix + '_TASK': task, prefix + '_EVIDENCE_DIR': str(run), prefix + '_NUMERIC_IK': '1' if route.get('numeric_ik') else '0', prefix + '_PROBE_ONLY': '0', prefix + '_DEVELOPMENT_TRUTH': '0', prefix + '_PHYSICALRSI_NATIVE': '0', prefix + '_LXM6WUEC_NATIVE': '0'})
+        os.environ.update({prefix + '_TASK': route.get('policy_task', task), prefix + '_EVIDENCE_DIR': str(run), prefix + '_NUMERIC_IK': '1' if route.get('numeric_ik') else '0', prefix + '_PROBE_ONLY': '0', prefix + '_DEVELOPMENT_TRUTH': '0', prefix + '_PHYSICALRSI_NATIVE': '0', prefix + '_LXM6WUEC_NATIVE': '0'})
         os.environ.pop(prefix + '_DIAGNOSTIC_MODE', None)
     cfg = dict(config, task_name=task)
     for relative, external in cfg.get('source_assets', {}).items():

@@ -14,7 +14,7 @@ def policy_path(value):
 
 CONFIG_PATH_KEYS = {
     'model_path', 'checkpoint_path', 'tokenizer_path', 'robot_static_path',
-    'stack_assets_root', 'nesting_assets_root', 'charger_assets_root',
+    'stack_assets_root', 'nesting_assets_root',
     'equation_assets_root', 'perception_assets_root', 'zyr_assets_root',
     'strategy_evidence_dir', 'focus_vlwa_source', 'policy_uv_env_path',
     'coin_assets_root',
@@ -22,7 +22,7 @@ CONFIG_PATH_KEYS = {
 ENVIRONMENT_PATH_KEYS = {
     'CLASSIFY_CLIP_PATH', 'CLASSIFY_DINO_PATH', 'COAP_PUBLIC_RGB_MODELS',
     'FOCUS_VLWA_TOKENIZER_PATH', 'FOCUS_VLWA_SOURCE', 'ME_BRAIN_ROBOT_STATIC',
-    'ME_BRAIN_STACK_ASSETS', 'ME_BRAIN_NESTING_ASSETS', 'ME_BRAIN_CHARGER_ASSETS',
+    'ME_BRAIN_STACK_ASSETS', 'ME_BRAIN_NESTING_ASSETS',
     'ME_BRAIN_EQUATION_ASSETS', 'ME_BRAIN_PERCEPTION_ASSETS', 'ME_BRAIN_ZYR_ASSETS',
     'ME_BRAIN_COIN_ASSETS', 'COIN_TRACE_DIR',
     'ME_BRAIN_API_TOKEN_FILE', 'COAP_ASTRA_TOKEN_FILE', 'ME_BRAIN_EVIDENCE_DIR',
