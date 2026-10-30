@@ -1,1 +1,1 @@
-"""Registered random nesting task implementation."""
+"""Registered RGB nesting_random task implementation."""

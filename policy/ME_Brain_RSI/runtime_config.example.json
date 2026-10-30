@@ -6,7 +6,6 @@
       "tokenizer_path": "model_assets/tokenizer.model",
       "robot_static_path": "model_assets/robot_static.json",
       "stack_assets_root": "model_assets/stack",
-      "nesting_assets_root": "model_assets/nesting",
       "equation_assets_root": "model_assets/equation",
       "perception_assets_root": "model_assets/perception"
     },

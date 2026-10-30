@@ -23,4 +23,4 @@ GPU 参数和环境客户端环境名按实际部署选择。`action_type=auto` 
 
 任务模块映射在 `modules.json`，静态配置在 `resources/sort_nesting_dolls_by_size/configs/`。运行输出由 `strategy_evidence_dir` 或 `ME_BRAIN_EVIDENCE_DIR` 指定，建议放在策略目录之外。输入为服务端解码后的三路 RGB 与机器人自身状态。
 
-本入口仅处理标准套娃任务。`sort_nesting_dolls_by_size_random` 使用独立的 `joint` 实现及其模型资源配置，见 [随机套娃任务说明](../sort_nesting_dolls_by_size_random/README.md)。
+本入口仅处理标准套娃任务。`sort_nesting_dolls_by_size_random` 使用独立的纯 RGB `ee` 实现及其静态几何配置，见 [随机套娃任务说明](../sort_nesting_dolls_by_size_random/README.md)。

@@ -588,15 +588,16 @@
       "aliases": []
     },
     "sort_nesting_dolls_by_size_random": {
-      "action_type": "joint",
+      "action_type": "ee",
       "eval_batch": false,
       "aliases": [],
       "max_envs": 1,
-      "driver": "step",
-      "model": "policy.lxm6wuec_nesting_v3.adapter:create_policy",
-      "deploy": null,
-      "modules": "tasks/sort_nesting_dolls_by_size_random/modules.json",
-      "policy_task": "sort_nesting_dolls_by_size"
+      "driver": "model",
+      "model": "adapter.model:Model",
+      "deploy": "adapter.deploy",
+      "numeric_ik": false,
+      "calibrated": true,
+      "modules": "tasks/sort_nesting_dolls_by_size_random/modules.json"
     }
   }
 }
