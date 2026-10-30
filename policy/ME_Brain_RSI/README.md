@@ -16,9 +16,9 @@ bash install.sh code
 bash install.sh inference
 ```
 
-充电器和标准套娃只需脚本基础环境，无需 CuRobo、SAM3 或外部模型权重，分别见 [充电器任务说明](tasks/plug_in_charger/README.md) 与 [标准套娃任务说明](tasks/sort_nesting_dolls_by_size/README.md)。
+搭塔、充电器和标准套娃只需脚本基础环境，无需 CuRobo、SAM3 或外部模型权重，分别见 [搭塔任务说明](tasks/build_tower/README.md)、[充电器任务说明](tasks/plug_in_charger/README.md) 与 [标准套娃任务说明](tasks/sort_nesting_dolls_by_size/README.md)。
 
-插管和投币任务需要相应的 CuRobo 环境；堆叠、随机套娃和方程任务需要 SAM3、DINO、Pinocchio 及其资源。投币任务使用 CUDA 专用环境及 `websockets==14.2`，详见 [投币任务说明](tasks/deposit_coin/README.md)。
+插管、投币和拧螺丝任务需要相应的 CuRobo 环境；堆叠、随机套娃和方程任务需要 SAM3、DINO、Pinocchio 及其资源。投币任务使用 CUDA 专用环境及 `websockets==14.2`，详见 [投币任务说明](tasks/deposit_coin/README.md)。拧螺丝使用相同的专用环境版本要求，见 [拧螺丝任务说明](tasks/fasten_screws/README.md)。
 
 通过 `ME_BRAIN_POLICY_PYTHON` 指定策略解释器，通过 `ME_BRAIN_RUNTIME_CONFIG` 配置外部资源。权重、虚拟环境和机器配置不包含在源码中。
 
@@ -84,6 +84,7 @@ VLA 检查点通过 XPolicyLab 公共解析器定位。可以指定 `model_path`
 | `nesting_assets_root`、`stack_assets_root`             | 随机套娃、堆叠任务资源                    |
 | `equation_assets_root`                                 | 方程任务资源                              |
 | `coin_assets_root`                                     | 投币任务的外部 CuRobo`code-skills` 根目录 |
+| `screws_assets_root` | 拧螺丝任务的外部 CuRobo `code-skills` 根目录 |
 | `perception_assets_root`                               | 图像匹配任务的感知权重                    |
 | `focus_vlwa_source`、`policy_uv_env_path`              | VLA 源码与环境                            |
 | `model_path`、`tokenizer_path`、`asset_id`             | VLA 检查点、tokenizer 与机器人标识        |

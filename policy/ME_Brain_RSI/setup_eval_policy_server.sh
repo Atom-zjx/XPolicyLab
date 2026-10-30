@@ -25,10 +25,10 @@ backend="${ME_BRAIN_BACKEND:-auto}"
 action_type="$("${ROUTE_PYTHON}" "${SCRIPT_DIR}/routing.py" --task "${task_name}" --backend "${backend}" --action "${action_type}" --field action_type)"
 
 
-# Apply the coin descriptor before the policy interpreter imports NumPy.
-if [[ "${task_name}" == "deposit_coin" && "${backend}" == "auto" ]]; then
+# Apply task-specific thread settings before the policy interpreter imports NumPy.
+if [[ "${backend}" == "auto" && ( "${task_name}" == "deposit_coin" || "${task_name}" == "fasten_screws" ) ]]; then
     export OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
-elif [[ "${backend}" == "auto" && ( "${task_name}" == "plug_in_charger" || "${task_name}" == "sort_nesting_dolls_by_size" ) ]]; then
+elif [[ "${backend}" == "auto" && ( "${task_name}" == "plug_in_charger" || "${task_name}" == "sort_nesting_dolls_by_size" || "${task_name}" == "build_tower" ) ]]; then
     export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
 fi
 

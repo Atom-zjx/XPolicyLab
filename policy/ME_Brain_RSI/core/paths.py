@@ -17,7 +17,7 @@ CONFIG_PATH_KEYS = {
     'stack_assets_root', 'nesting_assets_root',
     'equation_assets_root', 'perception_assets_root', 'zyr_assets_root',
     'strategy_evidence_dir', 'focus_vlwa_source', 'policy_uv_env_path',
-    'coin_assets_root',
+    'coin_assets_root', 'screws_assets_root',
 }
 ENVIRONMENT_PATH_KEYS = {
     'CLASSIFY_CLIP_PATH', 'CLASSIFY_DINO_PATH', 'COAP_PUBLIC_RGB_MODELS',
@@ -25,6 +25,7 @@ ENVIRONMENT_PATH_KEYS = {
     'ME_BRAIN_STACK_ASSETS', 'ME_BRAIN_NESTING_ASSETS',
     'ME_BRAIN_EQUATION_ASSETS', 'ME_BRAIN_PERCEPTION_ASSETS', 'ME_BRAIN_ZYR_ASSETS',
     'ME_BRAIN_COIN_ASSETS', 'COIN_TRACE_DIR',
+    'ME_BRAIN_SCREWS_ASSETS', 'SCREWS_TRACE_DIR',
     'ME_BRAIN_API_TOKEN_FILE', 'COAP_ASTRA_TOKEN_FILE', 'ME_BRAIN_EVIDENCE_DIR',
 }
 

@@ -25,7 +25,7 @@ action_type="$("${ROUTE_PYTHON}" "${SCRIPT_DIR}/routing.py" --task "${task_name}
 
 
 # The official simulator reads its request timeout from this environment key.
-if [[ "${task_name}" == "deposit_coin" && "${backend}" == "auto" ]]; then
+if [[ "${backend}" == "auto" && ( "${task_name}" == "deposit_coin" || "${task_name}" == "fasten_screws" ) ]]; then
     export ROBODOJO_WS_REQUEST_TIMEOUT_S="${ROBODOJO_WS_REQUEST_TIMEOUT_S:-1800}"
 fi
 

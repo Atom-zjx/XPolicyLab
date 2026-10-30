@@ -26,14 +26,14 @@
 | `store_laptop_and_headphones_random` | `vla` | `joint` | `true` |
 | `stack_blocks` | `vla` | `joint` | `true` |
 | `stack_blocks_random` | `step` | `joint` | `false` |
-| `fasten_screws` | `vla` | `joint` | `true` |
+| `fasten_screws` | `native` | `joint` | `true` |
 | `insert_tubes` | `native` | `joint` | `true` |
 | `plug_in_charger` | `model` | `ee` | `false` |
 | `pour_balls_into_vase` | `vla` | `joint` | `true` |
 | `play_Xylophone` | `model` | `ee` | `false` |
 | `deposit_coin` | `native` | `joint` | `true` |
 | `insert_key` | `native` | `ee` | `true` |
-| `build_tower` | `vla` | `joint` | `true` |
+| `build_tower` | `model` | `ee` | `false` |
 | `put_bottles_into_dustbin` | `vla` | `joint` | `true` |
 | `play_tic_tac_toe` | `model` | `ee` | `false` |
 | `classify_objects` | `generator` | `ee` | `false` |

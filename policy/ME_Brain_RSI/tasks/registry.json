@@ -517,11 +517,16 @@
       "aliases": []
     },
     "fasten_screws": {
-      "driver": "vla",
       "action_type": "joint",
       "eval_batch": true,
-      "max_envs": null,
-      "aliases": []
+      "aliases": [],
+      "max_envs": 1,
+      "driver": "native",
+      "model": "rdj_v1_fasten_screws.model:Model",
+      "deploy": "screws_deploy",
+      "numeric_ik": false,
+      "modules": "tasks/fasten_screws/modules.json",
+      "request_timeout_s": 1800
     },
     "pour_balls_into_vase": {
       "driver": "vla",
@@ -543,11 +548,16 @@
       "request_timeout_s": 1800
     },
     "build_tower": {
-      "driver": "vla",
-      "action_type": "joint",
-      "eval_batch": true,
-      "max_envs": null,
-      "aliases": []
+      "action_type": "ee",
+      "eval_batch": false,
+      "aliases": [],
+      "max_envs": 1,
+      "driver": "model",
+      "model": "adapter.model:Model",
+      "deploy": "adapter.deploy",
+      "numeric_ik": false,
+      "calibrated": true,
+      "modules": "tasks/build_tower/modules.json"
     },
     "put_bottles_into_dustbin": {
       "driver": "vla",
